@@ -1,28 +1,69 @@
 @startuml
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+package models {
+    abstract class Profile {
+        -String name
+        -String userType
+        -String description
+        -String email
+        -String password
+        -String location
+        +void login()
+        +void logout()
+        +register()
+    }
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
+    class Admin {
+        -String gender
+        +void acceptEnterpriseRegister()
+        +searchEveryPortfolio()
+        +filterPortfoliyo(age, location)
+    }
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
+    class Enterprise {
+        -String enterpriseWebURL
+        -String enterpriseLogoURL
+        +watchVisibleUsers()
+        +filterPortfoliyo(age, location)
+    }
 
-class ArrayList {
-Object[] elementData
-size()
+    class User {
+        -workedLocations
+        -String username
+        -Date birthDate
+        -Integer age
+        -String gender
+        -offerSection
+        -portfolio
+        -friendList
+        -Boolean visibility
+        +void editRegister()
+        +void addWorkingLocation()
+        +void removeWorkingLocation()
+        +void addAcademicInfo()
+        +void removeAcademicInfo()
+        +void removeFriend()
+        +void makeFriendRequest()
+        +void acceptFriendRequest()
+        +void rejectFriendRequest()
+        +viewFriendList()
+        +viewPortfolio()
+    }
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+package controllers {
+    class Controller <<controller>> {
+    }
 }
 
-class Profil
+Controller *-- Profile
+Profile <|-- Admin
+Profile <|-- User
+Profile <|-- Enterprise
+
+
+
+
+
 
 @enduml
