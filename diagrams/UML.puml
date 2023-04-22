@@ -3,39 +3,41 @@
 package models {
     abstract class Profile {
         -String name
-        -String userType
+        -String userType /'Isto deve ser uma classe'/
         -String description
         -String email
         -String password
         -String location
-        +void login()
+        +void login(email, password) /'Deve dar return a algo'/
         +void logout()
-        +register()
+        +Boolean register(email, password, username) /'Deve receber mais coisas, deve dar return a User'/
     }
 
     class Admin {
-        -String gender
-        +void acceptEnterpriseRegister()
-        +searchEveryPortfolio()
-        +filterPortfoliyo(age, location)
+        -String gender /'Pode ser Char'/
+        +Boolean acceptEnterpriseRegister()
+        +Collection<Portfolio> searchEveryPortfolio() /'Talvez uma collection de Portfolios'/
+        +Collection<Portfolio> filterPortfoliyo(age, location)
     }
 
     class Enterprise {
         -String enterpriseWebURL
         -String enterpriseLogoURL
-        +watchVisibleUsers()
-        +filterPortfoliyo(age, location)
+        +Collection<Users> watchVisibleUsers()
+        +Collection<Portfolio> filterPortfoliyo(age, location) /'Portfolio deve ser uma classe'/
+        +void makeOffer()
+        +Boolean registerEnterprise(email, password)
     }
 
     class User {
-        -workedLocations
+        -Collection<Location> workedLocations
         -String username
         -Date birthDate
         -Integer age
         -String gender
-        -offerSection
-        -portfolio
-        -friendList
+        -Collection<Offer> offerSection /'Offer deve ser uma classe'/
+        -portfolio /'Isto deve ser uma classe'/
+        -friendList /'Isto deve ser uma classe'/
         -Boolean visibility
         +void editRegister()
         +void addWorkingLocation()
@@ -43,11 +45,11 @@ package models {
         +void addAcademicInfo()
         +void removeAcademicInfo()
         +void removeFriend()
-        +void makeFriendRequest()
+        +void makeFriendRequest() /'Talvez não é void'/
         +void acceptFriendRequest()
         +void rejectFriendRequest()
-        +viewFriendList()
-        +viewPortfolio()
+        +Collection<Users> viewFriendList()
+        +Portfolio viewPortfolio()
     }
 }
 
@@ -60,10 +62,5 @@ Controller *-- Profile
 Profile <|-- Admin
 Profile <|-- User
 Profile <|-- Enterprise
-
-
-
-
-
 
 @enduml
