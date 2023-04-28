@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfoliyo</title>
     <link rel="stylesheet" href="css/style.css"> <!--IMPORT CSS-->
+    <link rel="stylesheet" href="css/login.css">
     <link rel="icon" type="image/x-icon" href="/images/briefcase.png">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
@@ -28,7 +31,38 @@
             <h1>Portfoliyo</h1>
         </div>
     </div>
+
+    <div class="loginPopUp">
+        <div class="formBox login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+    
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+    
+                <div class="rememberForgot">
+                    <label><input type="checkbox">Remember Me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+    
+                <button type="submit" class="submitButton">Login</button>
+    
+                <div class="loginRegister">
+                    <p>Not registered yet?<a href="#" class="registerLink">Register</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
 
 <!-----------------ABOUT---------------->
 <div id="about">
