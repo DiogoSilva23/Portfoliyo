@@ -19,7 +19,7 @@ body{
 }
 
 .container{
-    padding: 10px 10%;
+    padding: 10px 7%;
 }
 
 nav{
@@ -27,10 +27,17 @@ nav{
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    border-radius: 15px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    backdrop-filter: blur(20px);
+    display: flex;
+    overflow: hidden;
 }
 
 .logo{
     width: 80px;
+    margin-left: 20px;
 }
 
 nav ul li{
