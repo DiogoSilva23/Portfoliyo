@@ -9,8 +9,6 @@
     <link rel="icon" type="image/x-icon" href="/images/briefcase.png">
     <link rel="stylesheet" href="css/style.css"> <!--IMPORT CSS-->
     <link rel="stylesheet" href="css/login.css">
-    <script src="scripts/login.js"></script>
-    <script src="scripts/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
@@ -26,7 +24,7 @@
                     <li><a href="#">About us</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Contacts</a></li>
-                    <li><button class="login" onclick="loginPopUp()">Login</button></li>
+                    <li><button class="loginPopUpButton" onclick="loginPopUp()">Login</button></li>
                 </ul>
             </nav>
             <div class="header-text"> <!--SITE SLOGAN/DESCRIPTION-->
@@ -35,8 +33,8 @@
             </div>
         </div>
 
-        <div class="loginPopUp" id="loginPopUp">
-            <span class="closeIcon" onclick="closePopUp()">
+        <div class="loginRegisterPopUp" id="loginPopUp">
+            <span class="closeIcon">
                 <ion-icon name="close-outline"></ion-icon>
             </span>
 
@@ -60,10 +58,43 @@
                         <a href="#">Forgot Password?</a>
                     </div>
 
-                    <button type="submit" class="loginButton">Login</button>
+                    <button type="submit" class="loginRegisterButton">Login</button>
 
                     <div class="loginToRegister">
-                        <p>Not registered yet?<a href="#" class="registerLink"> Register now!</a></p>
+                        <p>Not registered yet?<a href="#" class="registerLink">Sign up now!</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="formBox register">
+                <h2>Sign Up</h2>
+                <form action="#">
+                    <div class="inputBox">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" required>
+                        <label>Username</label>
+                    </div>
+
+                    <div class="inputBox">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="email" required>
+                        <label>Email</label>
+                    </div>
+
+                    <div class="inputBox">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" required>
+                        <label>Password</label>
+                    </div>
+
+                    <div class="rememberForgot">
+                        <label><input type="checkbox">I agree to terms & conditions.</label>
+                    </div>
+
+                    <button type="submit" class="loginRegisterButton">Sign Up</button>
+
+                    <div class="loginToRegister">
+                        <p>Already have an account?<a href="#" class="loginLink">Login now!</a></p>
                     </div>
                 </form>
             </div>
@@ -194,6 +225,7 @@
             </div>
         </div>
     </div>
-
+    <script src="scripts/login.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>

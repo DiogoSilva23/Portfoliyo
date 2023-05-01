@@ -1,8 +1,8 @@
-#loginPopUp {
+/*#loginPopUp {
     display: none;
-}
+}*/
 
-nav ul li button{
+.loginPopUpButton{
     cursor: pointer;
     background: none;
     color: white;
@@ -16,7 +16,7 @@ nav ul li button{
     transition: 0.5s;
 }
 
-nav ul li button::after{
+.loginPopUpButton::after{
     content: '';
     position: absolute;
     left: 0;
@@ -27,13 +27,13 @@ nav ul li button::after{
     bottom: 0;
 }
 
-nav ul li button:hover{
+.loginPopUpButton:hover{
     background: white;
     color: black;
     transition: 0.5s;
 }
 
-.loginPopUp {
+.loginRegisterPopUp {
     position: relative;
     width: 20%;
     height: 35%;
@@ -46,17 +46,48 @@ nav ul li button:hover{
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
     left: 40%;
     bottom: 20%;
     z-index: 2;
 }
 
-.loginPopUp .formBox {
+.loginRegisterPopUp.activePopUp {
+    transform: scale(1);
+}
+
+.loginRegisterPopUp.active {
+    height: 520px;
+}
+
+.loginRegisterPopUp .formBox {
     width: 100%;
     padding: 10%;
 }
 
-.loginPopUp .closeIcon {
+.loginRegisterPopUp .formBox.login {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.loginRegisterPopUp.active .formBox.login {
+    transition: none;
+    transform: translateX(-100%);
+}
+
+.loginRegisterPopUp .formBox.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(100%);
+}
+
+.loginRegisterPopUp.active .formBox.register {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.loginRegisterPopUp .closeIcon {
     position: absolute;
     top: 0;
     right: 0;
@@ -145,7 +176,7 @@ nav ul li button:hover{
     text-decoration: underline;
 }
 
-.loginButton {
+.loginRegisterButton {
     width: 100%;
     height: 45px;
     background: black;
