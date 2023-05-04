@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devStart": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -17,11 +17,16 @@
   },
   "homepage": "https://github.com/DiogoSilva23/Portfoliyo#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
     "request": "^2.88.2",
     "require": "^0.4.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
