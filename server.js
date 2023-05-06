@@ -24,6 +24,13 @@ app.get('/index.html', function(req, res, next) {
     res.sendFile('/index.html')
 })
 
+//Https
+/*
+app.use((req, res, next) => {
+    req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
+})
+*/
+
 /*
 app.get('/users', (req, res) => {
     res.json(users)
