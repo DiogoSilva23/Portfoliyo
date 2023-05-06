@@ -8,8 +8,10 @@ const bcrypt = require('bcrypt')
 const fs = require('fs')
 const app = express()
 const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
 
 let users = require("./db/users.json")
+let refreshTokens = require("./db/refreshTokens.json")
 
 app.use(express.static('public'))
 app.use(express.json())
@@ -27,6 +29,28 @@ app.get('/users', (req, res) => {
     res.json(users)
 })
 */
+
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers["autorization"]
+    const token = authHeader && authHeader.split(" ")[1]
+    if (token == null) {
+        return res.sendStatus(401)
+    }
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        if (err) {
+            return res.sendStatus(403)
+        }
+        req.user = user
+        next()
+    })
+}
+
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "300s"
+    })
+}
 
 function existingUser(email) {
     for (user of users) {
@@ -47,6 +71,27 @@ function write(fich, db) {
         }
     })
 }
+
+app.post('/token', (req, res) => {
+    const refreshToken = req.body.token
+    if (refreshToken == null) {
+        return res.sendStatus(401)
+    }
+    if (!refreshTokens.includes(refreshToken)) {
+        return res.sendStatus(403)
+    }
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) {
+            return res.sendStatus(403)
+        }
+        const accessToken = generateAccessToken({email: user.email})
+        res.json({accessToken: accessToken})
+    })
+})
+
+app.get("/posts", authenticateToken, (req, res) => {
+    res.json(posts.filter(post => post.email === req.user.email))
+})
 
 app.post('/signUp', async (req, res) => {
     try {
@@ -77,6 +122,38 @@ app.post('/signUp', async (req, res) => {
     } catch {
         res.status(500).send()
     }
+})
+
+// Verificar o Login mais tarde
+app.post('/login', async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    try {
+        for (user of users) {
+            if (user.email === email) {
+                if (await bcrypt.compare(password, user.password)) {
+                    const accessToken = generateAccessToken(user)
+                    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+                    res.json({ accessToken: accessToken, refreshToken: refreshToken })
+                    token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+                    return res.status(201).json({
+                        auth: true,
+                        token: token
+                    })
+                } else {
+                    return res.status(401).json({ msg: "Invalid Password!" })
+                }
+            }
+        }
+    } catch {
+        res.status(500).send();
+    }
+    return res.status(404).json({ msg: "User not found!" })
+});
+
+app.delete('/logout', (req, res) => {
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+    res.sendStatus
 })
 
 app.listen(8000)
