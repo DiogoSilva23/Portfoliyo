@@ -9,6 +9,8 @@ const fs = require('fs')
 const app = express()
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
+require('dotenv').config()
 
 let users = require("./db/users.json")
 let refreshTokens = require("./db/refreshTokens.json")
@@ -19,6 +21,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
 }))
+app.use(cookieParser())
 
 app.get('/index.html', function(req, res, next) {
     res.sendFile('/index.html')
@@ -145,17 +148,17 @@ app.post('/login', async (req, res) => {
                     token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
                     return res.status(201).json({
                         auth: true,
-                        token: token
+                        token: token,
                     })
                 } else {
-                    return res.status(401).json({ msg: "Invalid Password!" })
+                    return res.status(401).json({ msg: `Invalid Password!` })
                 }
             }
         }
+        return res.status(404).json({ msg: `User not found!` })
     } catch {
         res.status(500).send();
     }
-    return res.status(404).json({ msg: "User not found!" })
 });
 
 app.delete('/logout', (req, res) => {
