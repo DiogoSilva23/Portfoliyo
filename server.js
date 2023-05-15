@@ -104,7 +104,8 @@ app.get("/posts", authenticateToken, (req, res) => {
 })
 
 app.post('/signUp', async (req, res) => {
-    const salt = await bcrypt.genSalt()
+    try {
+        const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(req.body.password, salt)
         if (!existingUser(req.body.email)) {
             const newUser = {
@@ -121,15 +122,13 @@ app.post('/signUp', async (req, res) => {
             users.push(newUser)
             write("./db/users.json", users);
             return res.status(201).send ({
-                msg: `${newUser.username} was created.`
+                msg: `${username} was created.`
             });
         } else {
             return res.status(409).send({
                 msg: `The user already exists. Try again.`
             })
         }
-    try {
-        
     } catch {
         res.status(500).send()
     }
@@ -139,25 +138,23 @@ app.post('/signUp', async (req, res) => {
 app.post('/login', async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    for (user of users) {
-        if (user.email === email) {
-            if (await bcrypt.compare(password, user.password)) {
-                const accessToken = generateAccessToken(user)
-                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-                res.json({ accessToken: accessToken, refreshToken: refreshToken })
-                token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-                return res.status(201).json({
-                    auth: true,
-                    token: token,
-                })
-            } else {
-                return res.status(401).json({ msg: `Invalid Password!` })
+    try {
+        for (user of users) {
+            if (user.email === email) {
+                if (await bcrypt.compare(password, user.password)) {
+                    const accessToken = generateAccessToken(user)
+                    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+                    res.json({ accessToken: accessToken, refreshToken: refreshToken })
+                    token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+                    return res.status(201).json({
+                        auth: true,
+                        token: token,
+                    })
+                } else {
+                    return res.status(401).json({ msg: `Invalid Password!` })
+                }
             }
         }
-    }
-    return res.status(404).json({ msg: `User not found!` })
-    try {
-       
         return res.status(404).json({ msg: `User not found!` })
     } catch {
         res.status(500).send();
