@@ -102,8 +102,10 @@ loginLink.addEventListener("click", ()=> {
 
 loginPopUpButton.addEventListener('click', ()=> {
     loginRegisterPopUp.classList.add('activePopUp');
+    document.getElementById("html").style.overflowY = "hidden";
 });
 
 closeIcon.addEventListener('click', ()=> {
     loginRegisterPopUp.classList.remove('activePopUp');
+    document.getElementById("html").style.overflowY = "scroll";
 });

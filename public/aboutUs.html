@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html id="html" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfoliyo</title>
+    <link rel="icon" type="image/x-icon" href="/images/briefcase.png">
+    <link rel="stylesheet" href="css/style.css"> <!--IMPORT CSS-->
+    <link rel="stylesheet" href="css/login.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav> <!--NAVIGATION MENU WITH LOGO-->
+                <img src="/images/briefcase.png" class="logo">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="../aboutUs.html">About us</a></li>
+                    <li><a href="../FAQ.html">FAQ</a></li>
+                    <li><a href="../contacts.html">Contacts</a></li>
+                    <li><button class="loginPopUpButton">Login</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="loginRegisterPopUp" id="loginPopUp">
+        <span class="closeIcon">
+            <ion-icon name="close-outline"></ion-icon>
+        </span>
+
+        <div class="formBox login">
+            <h2>Login</h2>
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                <input type="email" name="email" id="email" required>
+                <label for="email">Email</label>
+            </div>
+
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" name="password" id="password" required>
+                <label for="password">Password</label>
+            </div>
+
+            <div class="rememberForgot">
+                <label><input type="checkbox">Remember Me</label>
+                <a>Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="loginRegisterButton" onclick="login()">Login</button>
+
+            <div class="loginToRegister">
+                <p>Not registered yet?<a class="registerLink">Sign up now!</a></p>
+            </div>
+            <p id="loginMessage"></p>
+        </div>
+
+        <div class="formBox register">
+            <h2>Sign Up</h2>
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="person"></ion-icon></span>
+                <input type="text" name="registerUsername" id="registerUsername" required>
+                <label for="registerUsername">Username</label>
+            </div>
+
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                <input type="email" name="registerEmail" id="registerEmail" required>
+                <label for="registerEmail">Email</label>
+            </div>
+
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" name="registerPassword" id="registerPassword" required>
+                <label for="registerPassword">Password</label>
+            </div>
+
+            <div class="rememberForgot">
+                <label><input type="checkbox">I agree to terms & conditions.</label>
+            </div>
+
+            <button type="submit" class="loginRegisterButton" onclick="signUp()">Sign Up</button>
+
+            <div class="loginToRegister">
+                <p>Already have an account?<a class="loginLink">Login now!</a></p>
+            </div>
+            <p id="registerMessage"></p>
+        </div>
+    </div>
+
+    <div id="about">
+        <div class="container">
+            <h1 class="subtitle">About us</h1>
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="/images/te.png">
+                </div>
+                <div class="about-col-2">
+                    <h3 class="about-name">André Santos</h3>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem asperiores earum hic ipsa nihil
+                        perspiciatis dolor deleniti numquam, molestiae ratione eligendi voluptas quod aut placeat
+                        dolores tenetur possimus ut est.</p>
+
+                    <div class="tabtitles">
+                        <p class="tablinks activelink" onclick="opentab('skills')">Skills</p>
+                        <p class="tablinks" onclick="opentab('experience')">Experience</p>
+                        <p class="tablinks" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tabcontents activetab" id="skills">
+                        <ul>
+                            <li><span>UI/UX</span><br>Designing Web/App interfaces</li>
+                            <li><span>Web Development</span><br>Web/App Development</li>
+                            <li><span>App Development</span><br>Building Android/iOS apps</li>
+                        </ul>
+                    </div>
+                    <div class="tabcontents" id="experience">
+                        <ul>
+                            <li><span>2021 - Current</span><br>UI/UX Design Training at ET Insitute.</li>
+                            <li><span>2019 - 2021</span><br>Team lead at StarApp LLC.</li>
+                            <li><span>2017 - 2019</span><br>UI/UX Design Executive at Coin Digital Ltd.</li>
+                            <li><span>2016 - 2017</span><br>Internship at ekart eCommerce.</li>
+                        </ul>
+                    </div>
+                    <div class="tabcontents" id="education">
+                        <ul>
+                            <li><span>2016</span><br>UI/UX Design Training at ET Institute.</li>
+                            <li><span>2016</span><br>MBA from MIT Bangalore.</li>
+                            <li><span>2014</span><br>BBA from ISM Bangalore.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="about-col-2">
+                    <h3 class="about-name">Diogo Silva</h3>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem asperiores earum hic ipsa nihil
+                        perspiciatis dolor deleniti numquam, molestiae ratione eligendi voluptas quod aut placeat
+                        dolores tenetur possimus ut est.</p>
+
+                    <div class="tabtitles">
+                        <p class="tablinks activelink" onclick="opentab('skills')">Skills</p>
+                        <p class="tablinks" onclick="opentab('experience')">Experience</p>
+                        <p class="tablinks" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tabcontents activetab" id="skills">
+                        <ul>
+                            <li><span>UI/UX</span><br>teste1</li>
+                            <li><span>Web Development</span><br>teste2</li>
+                            <li><span>App Development</span><br>teste3</li>
+                        </ul>
+                    </div>
+                    <div class="tabcontents" id="experience">
+                        <ul>
+                            <li><span>2021 - Current</span><br>UI/UX Design Training at ET Insitute.</li>
+                            <li><span>2019 - 2021</span><br>Team lead at StarApp LLC.</li>
+                            <li><span>2017 - 2019</span><br>UI/UX Design Executive at Coin Digital Ltd.</li>
+                            <li><span>2016 - 2017</span><br>Internship at ekart eCommerce.</li>
+                        </ul>
+                    </div>
+                    <div class="tabcontents" id="education">
+                        <ul>
+                            <li><span>2016</span><br>UI/UX Design Training at ET Institute.</li>
+                            <li><span>2016</span><br>MBA from MIT Bangalore.</li>
+                            <li><span>2014</span><br>BBA from ISM Bangalore.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-col-1">
+                    <img src="images/te.png">
+                </div>
+            </div>
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/te.png">
+                </div>
+                <div class="about-col-2">
+                    <h3 class="about-name">Armando Brandão</h3>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem asperiores earum hic ipsa nihil
+                        perspiciatis dolor deleniti numquam, molestiae ratione eligendi voluptas quod aut placeat
+                        dolores tenetur possimus ut est.</p>
+
+                    <div class="tabtitles">
+                        <p class="tablinks activelink" onclick="opentab('skills')">Skills</p>
+                        <p class="tablinks" onclick="opentab('experience')">Experience</p>
+                        <p class="tablinks" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tabcontents activetab" id="skills">
+                        <ul>
+                            <li><span>UI/UX</span><br>Designing Web/App interfaces</li>
+                            <li><span>Web Development</span><br>Web/App Development</li>
+                            <li><span>App Development</span><br>Building Android/iOS apps</li>
+                        </ul>
+                    </div>
+                    <div class="tabcontents" id="experience">
+                        <ul>
+                            <li><span>2021 - Current</span><br>UI/UX Design Training at ET Insitute.</li>
+                            <li><span>2019 - 2021</span><br>Team lead at StarApp LLC.</li>
+                            <li><span>2017 - 2019</span><br>UI/UX Design Executive at Coin Digital Ltd.</li>
+                            <li><span>2016 - 2017</span><br>Internship at ekart eCommerce.</li>
+                        </ul>
+                    </div>
+                    <div class="tabcontents" id="education">
+                        <ul>
+                            <li><span>2016</span><br>UI/UX Design Training at ET Institute.</li>
+                            <li><span>2016</span><br>MBA from MIT Bangalore.</li>
+                            <li><span>2014</span><br>BBA from ISM Bangalore.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/loginSignUp.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>
