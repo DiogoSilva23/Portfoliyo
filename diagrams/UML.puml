@@ -14,7 +14,7 @@ package models {
     }
 
     class Admin {
-        -String gender /'Pode ser Char'/
+        -String gender /'Pode ser Male, Female, Other'/
         +Boolean acceptEnterpriseRegister()
         +Collection<Portfolio> searchEveryPortfolio() /'Talvez uma collection de Portfolios'/
         +Collection<Portfolio> filterPortfoliyo(age, location)
@@ -45,7 +45,7 @@ package models {
         +void addAcademicInfo()
         +void removeAcademicInfo()
         +void removeFriend()
-        +void makeFriendRequest() /'Talvez não é void'/
+        +Boolean makeFriendRequest() /'true foi enviado com sucesso, false não foi enviado'/
         +void acceptFriendRequest()
         +void rejectFriendRequest()
         +Collection<Users> viewFriendList()

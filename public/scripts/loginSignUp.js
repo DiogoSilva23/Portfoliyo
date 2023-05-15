@@ -41,12 +41,12 @@ async function signUp() {
 
     json = await reply.json();
     switch (reply.status) {
-        case 404:
+        case 409:
             {
                 document.getElementById("registerMessage").innerHTML = json.msg;
                 break;
             }
-        case 401:
+        case 400:
             {
                 document.getElementById("registerMessage").innerHTML = json.msg;
                 break;

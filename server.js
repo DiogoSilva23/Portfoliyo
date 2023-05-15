@@ -105,11 +105,12 @@ app.get("/posts", authenticateToken, (req, res) => {
 
 app.post('/signUp', async (req, res) => {
     try {
+        const username = req.body.username
         const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(req.body.password, salt)
         if (!existingUser(req.body.email)) {
             const newUser = {
-                username: req.body.username,
+                username: username,
                 email: req.body.email,
                 password: hashedPassword
             }
@@ -136,9 +137,9 @@ app.post('/signUp', async (req, res) => {
 
 // Verificar o Login mais tarde
 app.post('/login', async (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
     try {
+        const email = req.body.email;
+        const password = req.body.password;
         for (user of users) {
             if (user.email === email) {
                 if (await bcrypt.compare(password, user.password)) {
@@ -147,15 +148,17 @@ app.post('/login', async (req, res) => {
                     res.json({ accessToken: accessToken, refreshToken: refreshToken })
                     token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
                     return res.status(201).json({
+                        msg: `Lezgooo`,
                         auth: true,
-                        token: token,
+                        token: token
                     })
                 } else {
                     return res.status(401).json({ msg: `Invalid Password!` })
                 }
+            } else {
+                return res.status(404).json({ msg: `User not found!` })
             }
         }
-        return res.status(404).json({ msg: `User not found!` })
     } catch {
         res.status(500).send();
     }
