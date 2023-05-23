@@ -13,6 +13,7 @@ const loginLink = document.querySelector('.loginLink');
 const registerLink = document.querySelector('.registerLink');
 const loginPopUpButton = document.querySelector('.loginPopUpButton')
 const closeIcon = document.querySelector('.closeIcon');
+const loginSubmit = document.querySelector('.loginSubmit');
 
 async function makeRequest(url, options) {
     try {
@@ -109,3 +110,7 @@ closeIcon.addEventListener('click', ()=> {
     loginRegisterPopUp.classList.remove('activePopUp');
     document.getElementById("html").style.overflowY = "scroll";
 });
+
+loginSubmit.addEventListener('click', ()=> {
+    loginRegisterPopUp.classList.remove('activePopUp');
+})

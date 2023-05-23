@@ -141,17 +141,13 @@ app.post('/login', async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
         for (user of users) {
-            if (user.email === email) {
+            if (existingUser(email)) {
                 if (await bcrypt.compare(password, user.password)) {
                     const accessToken = generateAccessToken(user)
                     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
                     res.json({ accessToken: accessToken, refreshToken: refreshToken })
                     token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-                    return res.status(201).json({
-                        msg: `Lezgooo`,
-                        auth: true,
-                        token: token
-                    })
+                    return res.status(201).json({ msg: `Lezgooo` })
                 } else {
                     return res.status(401).json({ msg: `Invalid Password!` })
                 }
