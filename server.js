@@ -3,6 +3,8 @@ const http = require('http')
 const port = 8000
 */
 
+const router = require("./routes/routes")
+
 const express = require('express')
 const bcrypt = require('bcrypt')
 const fs = require('fs')
@@ -14,6 +16,9 @@ require('dotenv').config()
 
 let users = require("./db/users.json")
 let refreshTokens = require("./db/refreshTokens.json")
+
+
+app.use(router)
 
 app.use(express.static('public'))
 app.use(express.json())
@@ -103,6 +108,7 @@ app.get("/posts", authenticateToken, (req, res) => {
     res.json(posts.filter(post => post.email === req.user.email))
 })
 
+/*
 app.post('/signUp', async (req, res) => {
     try {
         const username = req.body.username
@@ -134,6 +140,7 @@ app.post('/signUp', async (req, res) => {
         res.status(500).send()
     }
 })
+*/
 
 // Verificar o Login mais tarde
 app.post('/login', async (req, res) => {
@@ -165,7 +172,22 @@ app.delete('/logout', (req, res) => {
     res.sendStatus
 })
 
-app.listen(8000)
+
+app.listen(8000, () => {
+    console.log("STARTED PORT: 8000");
+  });
+
+/*
+const connection = require('./config');
+
+app.use(connection);
+connection.query("SELECT * FROM users", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+connection.end()
+*/
+
 
 // Might be usefull
 /*
