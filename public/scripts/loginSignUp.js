@@ -34,6 +34,8 @@ async function signUp() {
         password: password
     }
 
+    console.log(username, email, password)
+    
     const reply = await makeRequest("http://localhost:8000/signUp", {
         method: "POST",
         body: JSON.stringify(user),
