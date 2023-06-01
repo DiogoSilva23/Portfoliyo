@@ -1,10 +1,6 @@
-/*
-const http = require('http')
-const port = 8000
-*/
-
 const router = require("./routes/routes")
 
+const https = require('https')
 const express = require('express')
 const bcrypt = require('bcrypt')
 const fs = require('fs')
@@ -16,7 +12,6 @@ require('dotenv').config()
 
 let users = require("./db/users.json")
 let refreshTokens = require("./db/refreshTokens.json")
-
 
 app.use(router)
 
@@ -32,18 +27,16 @@ app.get('/index.html', function(req, res, next) {
     res.sendFile('/index.html')
 })
 
-//Https
-/*
+const sslServer = https.createServer({
+    key: fs.readFileSync('cert/key.pem'),
+    cert:fs.readFileSync('cert/certificate.pem')
+}, app)
+
 app.use((req, res, next) => {
     req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
 })
-*/
 
-/*
-app.get('/users', (req, res) => {
-    res.json(users)
-})
-*/
+sslServer.listen(8000, () => console.log("O servidor está a correr na porta 8000."))
 
 function authenticateToken(req, res, next) {
     const authHeader = req.headers["autorization"]
@@ -171,11 +164,6 @@ app.delete('/logout', (req, res) => {
     refreshTokens = refreshTokens.filter(token => token !== req.body.token)
     res.sendStatus
 })
-
-
-app.listen(8000, () => {
-    console.log("STARTED PORT: 8000");
-  });
 
 /*
 const connection = require('./config');
