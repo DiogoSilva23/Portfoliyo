@@ -1,6 +1,18 @@
 const bcrypt = require('bcrypt')
+const connection = require('../config')
 
 exports.getUsers = async (req, res) => {
+    console.log("TESTE2")
+    connection.query("SELECT * FROM users", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+        res.json(result);
+      });
+    connection.end()
+
+    
+
+    /*
     const items = [
         { id: 1, name: 'Item 1', price: 123321 },
         { id: 2, name: 'Item 2', price: 20 },
@@ -9,6 +21,7 @@ exports.getUsers = async (req, res) => {
         { id: 9, name: 'Item 3', price: 30 },
       ];
       res.json(items);
+      */
 };
 
 exports.signUp = async (req, res) => {

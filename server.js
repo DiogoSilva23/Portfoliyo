@@ -10,10 +10,8 @@ const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
 
-let users = require("./db/users.json")
-let refreshTokens = require("./db/refreshTokens.json")
 
-app.use(router)
+
 
 app.use(express.static('public'))
 app.use(express.json())
@@ -70,15 +68,6 @@ function existingUser(email) {
     return false;
 }
 
-function write(fich, db) {
-    fs.writeFile(fich, JSON.stringify(db, null, 4), 'utf8', err => {
-        if (err) {
-            console.log(`Error writing file: ${err}`)
-        } else {
-            console.log('Wrote on file ' + fich); 
-        }
-    })
-}
 
 app.post('/token', (req, res) => {
     const refreshToken = req.body.token
@@ -101,6 +90,7 @@ app.get("/posts", authenticateToken, (req, res) => {
     res.json(posts.filter(post => post.email === req.user.email))
 })
 
+app.use(router)
 /*
 app.post('/signUp', async (req, res) => {
     try {
@@ -165,15 +155,13 @@ app.delete('/logout', (req, res) => {
     res.sendStatus
 })
 
-/*
-const connection = require('./config');
+console.log("--------TESTE-----------")
+console.log("--------TESTE-----------")
 
-app.use(connection);
-connection.query("SELECT * FROM users", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-  });
-connection.end()
+//connection.query("INSERT INTO users VALUES (1, 'a', 'a@a', 'pass', 'html://1', 'html://2')")
+//connection.query("INSERT INTO users (1, 'a', 'a@a', 'aaa')");
+/*
+
 */
 
 
