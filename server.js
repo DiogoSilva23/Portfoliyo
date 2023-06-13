@@ -2,15 +2,13 @@ const router = require("./routes/routes")
 
 const https = require('https')
 const express = require('express')
-const bcrypt = require('bcrypt')
+
 const fs = require('fs')
 const app = express()
 const bodyParser = require('body-parser')
-const jwt = require('jsonwebtoken')
+
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
-
-
 
 
 app.use(express.static('public'))
@@ -21,9 +19,8 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(cookieParser())
 
-app.get('/index.html', function(req, res, next) {
-    res.sendFile('/index.html')
-})
+
+console.log('ahfusahauifasuf', process.env.REFRESH_TOKEN_SECRET)
 
 const sslServer = https.createServer({
     key: fs.readFileSync('cert/key.pem'),
@@ -52,21 +49,7 @@ function authenticateToken(req, res, next) {
     })
 }
 
-function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "300s"
-    })
-}
 
-function existingUser(email) {
-    for (user of users) {
-        if (user.email === email) {
-            return true;
-        }
-        
-    }
-    return false;
-}
 
 
 app.post('/token', (req, res) => {
@@ -126,6 +109,7 @@ app.post('/signUp', async (req, res) => {
 */
 
 // Verificar o Login mais tarde
+/*
 app.post('/login', async (req, res) => {
     try {
         const email = req.body.email;
@@ -149,14 +133,13 @@ app.post('/login', async (req, res) => {
         res.status(500).send();
     }
 });
+*/
 
 app.delete('/logout', (req, res) => {
     refreshTokens = refreshTokens.filter(token => token !== req.body.token)
     res.sendStatus
 })
 
-console.log("--------TESTE-----------")
-console.log("--------TESTE-----------")
 
 //connection.query("INSERT INTO users VALUES (1, 'a', 'a@a', 'pass', 'html://1', 'html://2')")
 //connection.query("INSERT INTO users (1, 'a', 'a@a', 'aaa')");

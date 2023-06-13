@@ -24,7 +24,8 @@ async function makeRequest(url, options) {
     }
 }
 
-async function signUp() {
+async function register() {
+    console.log("TESTE")
     const username = document.getElementById("registerUsername").value;
     const email = document.getElementById("registerEmail").value;
     const password = document.getElementById("registerPassword").value;
@@ -36,7 +37,7 @@ async function signUp() {
 
     console.log(username, email, password)
     
-    const reply = await makeRequest("http://localhost:8000/signUp", {
+    const reply = await makeRequest("https://localhost:8000/api/user/register", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -70,7 +71,7 @@ async function login() {
         password: password
     }
 
-    const reply = await makeRequest("http://localhost:8000/login", {
+    const reply = await makeRequest("https://localhost:8000/api/user/login", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
