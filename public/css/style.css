@@ -8,10 +8,11 @@
 body{
     width: 100%;
     height: 100vh;
-    background: rgb(65, 65, 65);
-    background-image: url(../images/backgroundT.jpg);
+    background: #3c096c;
+    /*background-image: url(../images/backgroundT.jpg);
     background-size: cover;
     background-position: center;
+    */
     color: #fff;
 }
 
@@ -20,17 +21,19 @@ body{
 }
 
 nav{
+    width:100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    background: transparent;
+    background: #240046;
     backdrop-filter: blur(20px);
     overflow: hidden;
 }
 
 .logo{
     width: 50px;
+    margin-right: 10px;
 }
 
 nav ul li{
@@ -50,7 +53,7 @@ nav ul li a::after{
     content: '';
     width: 0;
     height: 3px;
-    background: #b54769;
+    background: #9d4edd;
     position: absolute;
     left: 0;
     bottom: -6px;
@@ -64,6 +67,7 @@ nav ul li a:hover::after{
 .header-text{
     margin-top: 18.5%;
     font-size: 30px;
+    text-align: center;
     height: 60%
 }
 
@@ -73,98 +77,16 @@ nav ul li a:hover::after{
 }
 
 .header-text p span{
-    color: rgb(209, 20, 20);
-}
-
-/* <<<<<<<<<<<<<<<<ABOUT>>>>>>>>>>>>>>>>> */
-
-#about{
-    padding: 80px 0;
-    color: #ababab;
-}
-
-.row{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding-top: 80px;
-}
-
-.about-col-1{
-    flex-basis: 35%;
-}
-
-.about-col-1 img {
-    width: 100%;
-    border-radius: 15px;
-}
-
-.about-col-2{
-    flex-basis: 60%;
-}
-
-.subtitle{
-    text-align: center;
-    font-size: 60px;
-    font-weight: 600;
-    color: white;
-}
-
-.about-name{
-    font-size: 25px;
-    font-weight: 300;
-    color: #b54769;
-}
-
-.tabtitles{
-    display: flex;
-    margin: 20px 0 40px;
-}
-
-.tablinks{
-    margin-right: 50px;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
-}
-
-.tablinks::after{
-    content: '';
-    width: 0;
-    height: 3px;
-    background: #b54769;
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    transition: 0.5s;
-}
-
-.tablinks.activelink::after{
-    width:50%
-}
-
-.tabcontents ul li{
-    list-style: none;
-    margin: 10px 0;
-}
-
-.tabcontents ul li span{
-    color: #b54769;
-    font-size: 14px;
-}
-
-.tabcontents{
-    display: none;
-}
-
-.tabcontents.activetab{
-    display: block;
+    color: #9d4edd;
 }
 
 .copyright {
+    position: fixed;
     width: 100%;
     text-align: center;
-    padding: 25px 0;
-    background: #262626;
+    padding: 18px 0;
+    background: #240046;
+    backdrop-filter: blur(20px);
+    left:0;
+    bottom:0;
 }

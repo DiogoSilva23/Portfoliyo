@@ -49,9 +49,6 @@ function authenticateToken(req, res, next) {
     })
 }
 
-
-
-
 app.post('/token', (req, res) => {
     const refreshToken = req.body.token
     if (refreshToken == null) {
@@ -74,6 +71,11 @@ app.get("/posts", authenticateToken, (req, res) => {
 })
 
 app.use(router)
+
+app.delete('/logout', (req, res) => {
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+    res.sendStatus
+})
 /*
 app.post('/signUp', async (req, res) => {
     try {
@@ -134,12 +136,6 @@ app.post('/login', async (req, res) => {
     }
 });
 */
-
-app.delete('/logout', (req, res) => {
-    refreshTokens = refreshTokens.filter(token => token !== req.body.token)
-    res.sendStatus
-})
-
 
 //connection.query("INSERT INTO users VALUES (1, 'a', 'a@a', 'pass', 'html://1', 'html://2')")
 //connection.query("INSERT INTO users (1, 'a', 'a@a', 'aaa')");
