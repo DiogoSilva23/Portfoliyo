@@ -20,23 +20,25 @@
                 <img src="/images/briefcase.png" class="logo">
                 <ul>
                     <li><a href="../index.html">Home</a></li>
-                    <li><a href="#">Portfolio</a></li>
+                    <li><a id="Portfolio" href="#">Portfolio</a></li>
                     <li><a href="../aboutUs.html">About us</a></li>
                     <li><a href="../FAQ.html">FAQ</a></li>
                     <li><a href="../contacts.html">Contacts</a></li>
-                    <li><button class="loginPopUpButton">Login</button></li>
+                    <li><button class="loginPopUpButton" onclick="moveHeaderTextOpen()">Login</button></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <div class="header-text"> <!--SITE SLOGAN/DESCRIPTION-->
-        <p>The place where <span>you</span> build your career</p>
-        <h1>Portfoliyo</h1>
+    <div class="containerMove">
+        <div class="header-text"> <!--SITE SLOGAN/DESCRIPTION-->
+            <p>The place where <span>you</span> build your career</p>
+            <h1>Portfoliyo</h1>
+        </div>
     </div>
     
     <div class="loginRegisterPopUp" id="loginPopUp">
-        <span class="closeIcon">
+        <span class="closeIcon" onclick="moveHeaderTextClose()">
             <ion-icon name="close-outline"></ion-icon>
         </span>
 

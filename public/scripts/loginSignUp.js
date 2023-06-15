@@ -94,6 +94,8 @@ async function login() {
                 break;
             }
     }
+    document.getElementById("login").style.display = "none";
+    document.getElementById("logout").style.display = "inline";
 }
 
 registerLink.addEventListener('click', ()=> {
@@ -117,3 +119,19 @@ closeIcon.addEventListener('click', ()=> {
 loginSubmit.addEventListener('click', ()=> {
     loginRegisterPopUp.classList.remove('activePopUp');
 })
+
+
+// MOVER TEXTO QUANDO O FORM ABRE/FECHA
+
+function moveHeaderTextOpen() {
+    const headerTextElement = document.querySelector('.header-text');
+    headerTextElement.classList.add('moveOpen');
+    headerTextElement.classList.remove('moveClose');
+}
+  
+function moveHeaderTextClose() {
+    const headerTextElement = document.querySelector('.header-text');
+    headerTextElement.classList.add('moveClose');
+    headerTextElement.classList.remove('moveOpen');
+}
+  
