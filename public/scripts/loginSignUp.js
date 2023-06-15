@@ -11,7 +11,7 @@ function loginPopUp() {
 const loginRegisterPopUp = document.querySelector('.loginRegisterPopUp');
 const loginLink = document.querySelector('.loginLink');
 const registerLink = document.querySelector('.registerLink');
-const loginPopUpButton = document.querySelector('.loginPopUpButton')
+const loginPopUpButton = document.querySelector('.loginPopUpButton');
 const closeIcon = document.querySelector('.closeIcon');
 const loginSubmit = document.querySelector('.loginSubmit');
 
@@ -94,8 +94,10 @@ async function login() {
                 break;
             }
     }
-    document.getElementById("login").style.display = "none";
-    document.getElementById("logout").style.display = "inline";
+    document.getElementById("loginPopUp").classList.remove('activePopUp');
+    document.getElementById("loginPopUpButton").style.display = "none";
+    document.getElementById("logoutPopUpButton").style.display = "inline";
+    document.getElementById("portfolio").style.display = "inline";
 }
 
 registerLink.addEventListener('click', ()=> {
@@ -115,10 +117,6 @@ closeIcon.addEventListener('click', ()=> {
     loginRegisterPopUp.classList.remove('activePopUp');
     document.getElementById("html").style.overflowY = "scroll";
 });
-
-loginSubmit.addEventListener('click', ()=> {
-    loginRegisterPopUp.classList.remove('activePopUp');
-})
 
 
 // MOVER TEXTO QUANDO O FORM ABRE/FECHA

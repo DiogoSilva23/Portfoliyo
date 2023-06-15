@@ -56,7 +56,8 @@
 }
 
 .loginRegisterPopUp.active {
-    height: 550px;
+    height: 650px;
+    margin-bottom: 10000px;
 }
 
 .loginRegisterPopUp .formBox {
