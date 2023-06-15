@@ -29,7 +29,7 @@
     transition: 0.5s;
 }
 
-.loginRegisterPopUp {
+.loginPopUp {
     position: absolute;
     width: 425px;
     height: 450px;
@@ -51,42 +51,31 @@
     z-index: 2;
 }
 
-.loginRegisterPopUp.activePopUp {
+.loginPopUp.activePopUp {
     transform: scale(1);
 }
 
-.loginRegisterPopUp.active {
+.loginPopUp.active {
     height: 650px;
     margin-bottom: 10000px;
 }
 
-.loginRegisterPopUp .formBox {
+.loginPopUp .formBox {
     width: 100%;
     padding: 10%;
 }
 
-.loginRegisterPopUp .formBox.login {
+.loginPopUp .formBox.login {
     transition: transform .18s ease;
     transform: translateX(0);
 }
 
-.loginRegisterPopUp.active .formBox.login {
+.loginPopUp.active .formBox.login {
     transition: none;
     transform: translateX(-100%);
 }
 
-.loginRegisterPopUp .formBox.register {
-    position: absolute;
-    transition: none;
-    transform: translateX(100%);
-}
-
-.loginRegisterPopUp.active .formBox.register {
-    transition: transform .18s ease;
-    transform: translateX(0);
-}
-
-.loginRegisterPopUp .closeIcon {
+.loginPopUp .closeIcon {
     position: absolute;
     top: 0;
     right: 0;
@@ -209,7 +198,7 @@
 /*Responsividade*/
 
 @media screen and (max-width: 750px) {
-    .loginRegisterPopUp {
+    .loginPopUp {
         top: 50%; 
         left: 50%;
         width: 300px;
@@ -219,7 +208,7 @@
         margin-left: -150px; 
     }
 
-    .loginRegisterPopUp.active {
+    .loginPopUp.active {
         height: 500px;
     }
 }
