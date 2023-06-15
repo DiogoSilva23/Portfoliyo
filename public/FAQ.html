@@ -16,22 +16,21 @@
 
 <body>
     <header>
-        <div class="container">
-            <nav> <!--NAVIGATION MENU WITH LOGO-->
-                <img src="/images/briefcase.png" class="logo">
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li id="Portfolio"><a href="#">Portfolio</a></li>
-                    <li><a href="../aboutUs.html">About us</a></li>
-                    <li><a href="../FAQ.html">FAQ</a></li>
-                    <li><a href="../contacts.html">Contacts</a></li>
-                    <li id="loginPopUpButton"><button class="loginPopUpButton">Login</button></li>
-                    <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logout(); moveHeaderTextClose()">Logout</button></li>
-                </ul>
-            </nav>
-        </div>
+        <nav> <!--NAVIGATION MENU WITH LOGO-->
+            <img src="/images/briefcase.png" class="logo">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li id="portfolio"><a href="#">Portfolio</a></li>
+                <li><a href="../aboutUs.html">About us</a></li>
+                <li><a href="../FAQ.html">FAQ</a></li>
+                <li><a href="../contacts.html">Contacts</a></li>
+                <li id="loginPopUpButton"><button class="loginPopUpButton">Login</button></li>
+                <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logout(); moveHeaderTextClose()">Logout</button></li>
+            </ul>
+        </nav>
     </header>
-    <div class="loginRegisterPopUp" id="loginPopUp">
+
+    <div class="loginPopUp" id="loginPopUp">
         <span class="closeIcon">
             <ion-icon name="close-outline"></ion-icon>
         </span>
@@ -82,6 +81,10 @@
             </div>
         </div>
     </div>
+
+    <footer class="copyright">
+        <p>Copyright © Portfoliyo</p>
+    </footer>
 
     <script src="scripts/loginSignUp.js"></script>
     <script src="scripts/script.js"></script>
