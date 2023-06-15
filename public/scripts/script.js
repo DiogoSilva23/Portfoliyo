@@ -1,17 +1,26 @@
-var tablinks = document.getElementsByClassName("tablinks");
-var tabcontents = document.getElementsByClassName("tabcontents");
-var rows = document.getElementsByClassName("row");
+function opentab(tabId, link) {
+    // Obter o container parent do link clicado
+    var container = link.parentNode;
 
-function opentab(tabname) { /*FUNCTION TO SWITCH BETWEEN TABS IN SAME PAGE*/
-    for (row in rows) {
+    // Obter o container tabtitle parent do link clicado
+    var tabTitlesContainer = container.parentNode;
 
+    // Remover o activelink de todos os tablinks dentro do container tabtitle
+    var tabLinks = tabTitlesContainer.getElementsByClassName('tablinks');
+    for (var i = 0; i < tabLinks.length; i++) {
+      tabLinks[i].classList.remove('activelink');
     }
-    for (tablink of tablinks) {
-        tablink.classList.remove("activelink")
+
+    // Adicionar o activelink ao link clicado
+    link.classList.add('activelink');
+
+    // Remover o activetab de todos os tabcontents dentro do container
+    var tabContents = container.parentNode.getElementsByClassName('tabcontents');
+    for (var i = 0; i < tabContents.length; i++) {
+      tabContents[i].classList.remove('activetab');
     }
-    for (tabcontent of tabcontents) {
-        tabcontent.classList.remove("activetab")
-    }
-    event.currentTarget.classList.add("activelink");
-    document.getElementById(tabname).classList.add('activetab')
+
+    // Adicionar o activetab ao tabcontent respetivo
+    var tabContent = document.getElementById(tabId);
+    tabContent.classList.add('activetab');
 }

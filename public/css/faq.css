@@ -1,0 +1,32 @@
+#faq{
+    padding: 2% 20%;
+    color: #ababab;
+}
+
+.faq-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.faq-subtitle{
+    text-align: center;
+    font-size: 60px;
+    font-weight: 600;
+    color: white;
+}
+  
+.faq-item {
+    margin-bottom: 20px;
+}
+  
+.faq-question {
+    cursor: pointer;
+}
+  
+.faq-answer {
+    display: none;
+}
+  
+.faq-answer p {
+    margin-top: 5px;
+}
