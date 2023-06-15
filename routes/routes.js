@@ -7,6 +7,7 @@ const usersController = require('../controllers/usersController');
 router.get('/api/users', usersController.getUsers);
 router.post('/api/user/register', usersController.register)
 router.post('/api/user/login', usersController.login)
+//router.post('/api/user/logout', usersController.logout)
 
 
 module.exports = router;

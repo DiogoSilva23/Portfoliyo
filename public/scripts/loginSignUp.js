@@ -88,9 +88,15 @@ async function login() {
                 document.getElementById("loginMessage").innerHTML = json.msg;
                 break;
             }
+        case 405:
+            {
+                document.getElementById("loginMessage").innerHTML = json.msg;
+                break;
+            }
         case 201:
             {
                 document.getElementById("loginMessage").innerHTML = json.msg;
+                //localStorage.setItem("token", json.token);
                 break;
             }
     }
