@@ -1,6 +1,6 @@
 #about{
     padding: 2% 20%;
-    color: #ababab;
+    color: white;
 }
 
 body {
@@ -38,7 +38,7 @@ body {
 .about-name{
     font-size: 25px;
     font-weight: 300;
-    color: #9d4edd;
+    color: #48cae4;
 }
 
 .tabtitles{
@@ -58,7 +58,7 @@ body {
     content: '';
     width: 0;
     height: 3px;
-    background: #9d4edd;
+    background: #48cae4;
     position: absolute;
     left: 0;
     bottom: -8px;
@@ -75,7 +75,7 @@ body {
 }
 
 .tabcontents ul li span{
-    color: #9d4edd;
+    color: #90e0ef;
     font-size: 14px;
 }
 

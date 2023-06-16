@@ -24,7 +24,7 @@
 }
 
 .loginPopUpButton:hover{
-    background: white;
+    background: #caf0f8;
     color: black;
     transition: 0.5s;
 }

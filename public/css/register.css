@@ -19,20 +19,88 @@
     margin: 25px 0 10px;
 }
 
-.registerToLogin p a {
+.registerToLogin a {
     color: black;
     text-decoration: none;
     font-weight: 600;
 }
 
-.registerToLogin p a:hover {
+.registerToLogin a:hover {
     text-decoration: underline;
+}
+
+.normalUserToEnterprise {
+    font-size: .9em;
+    color: black;
+    text-align: left;
+    font-weight: 500;
+    margin: 50px 0 10px;
+}
+
+.normalUserToEnterprise a {
+    color: black;
+    text-decoration: none;
+    padding-right: 50px;
+    font-weight: 600;
+}
+
+.normalUserToEnterprise p {
+    font-size: 1.3em;
+    color: black;
+    text-decoration: none;
+    padding-right: 50px;
+    font-weight: 600;
+    padding-bottom: 30px;
+}
+
+.normalUserToEnterprise a:hover {
+    text-decoration: underline;
+}
+
+.normalUserToEnterprise.icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: black;
+    line-height: 57px;
+}
+
+.birthdate.icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: black;
+    line-height: 57px;
 }
 
 .formBox.register{
     padding: 5%;
     padding-left: 35%;
     padding-right: 35%;
+}
+
+.rememberForgotRegister {
+    font-size: .9em;
+    color: black;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rememberForgotRegister label input {
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.rememberForgotRegister a {
+    color: black;
+    text-decoration: none;
+}
+
+.rememberForgotRegister a:hover {
+    text-decoration: underline;
 }
 
 .birthdate {
@@ -63,7 +131,7 @@
 }
 
 .gender {
-    margin :35px 10;
+    margin :35px 0;
     position: relative;
     width: 100%;
     height: 20px;
@@ -83,4 +151,55 @@
 
 .gender option {
     background: transparent;
+}
+
+.gender.icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: black;
+    line-height: 57px;
+}
+
+.description {
+    margin :30px 0;
+    position: relative;
+    width: 100%;
+    height: 60px;
+}
+
+.description label {
+    left: 5px;
+}
+
+.description.icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: black;
+    line-height: 57px;
+}
+
+textarea {
+    resize: none;
+    height: 30px;
+    padding: 5px;
+    width: 100%;
+    background: transparent;
+    border: 2px solid black;
+    border-radius: 3%;
+    outline: none;
+}
+
+::placeholder {
+    color: black;
+    text-align: center;
+}
+
+textarea::-webkit-scrollbar {
+    width: 0;
+}
+
+textarea:is(:focus, :valid) {
+    border: 3px solid;
 }

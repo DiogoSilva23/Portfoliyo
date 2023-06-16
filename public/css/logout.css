@@ -28,7 +28,7 @@
 }
 
 .logoutPopUpButton:hover{
-    background: white;
+    background: #90e0ef;
     color: black;
     transition: 0.5s;
 }

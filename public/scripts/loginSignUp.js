@@ -9,7 +9,6 @@ function loginPopUp() {
 }*/
 
 const loginPopUp = document.querySelector('.loginPopUp');
-const registerLink = document.querySelector('.registerLink');
 const loginPopUpButton = document.querySelector('.loginPopUpButton');
 const closeIcon = document.querySelector('.closeIcon');
 const loginSubmit = document.querySelector('.loginSubmit');
@@ -89,9 +88,7 @@ async function login() {
 
 }
 
-registerLink.addEventListener('click', ()=> {
-    loginPopUp.classList.add('active');
-});
+// EVENT LISTENERS DO LOGIN E DO SIGN UP
 
 loginPopUpButton.addEventListener('click', ()=> {
     loginPopUp.classList.add('activePopUp');
