@@ -24,17 +24,17 @@ async function makeRequest(url, options) {
 }
 
 async function register() {
-    console.log("TESTE")
     const username = document.getElementById("registerUsername").value;
     const email = document.getElementById("registerEmail").value;
     const password = document.getElementById("registerPassword").value;
+    console.log('1234112412412')
     const user = {
         username: username,
         email: email,
         password: password
     }
 
-    console.log(username, email, password)
+    console.log('THISSSSS', username, email, password)
     
     const reply = await makeRequest("https://localhost:8000/api/user/register", {
         method: "POST",
@@ -77,33 +77,14 @@ async function login() {
     });
     json = await reply.json();
     //mudar isto
-    switch (reply.status) {
-        case 404:
-            {
-                document.getElementById("loginMessage").innerHTML = json.msg;
-                break;
-            }
-        case 401:
-            {
-                document.getElementById("loginMessage").innerHTML = json.msg;
-                break;
-            }
-        case 405:
-            {
-                document.getElementById("loginMessage").innerHTML = json.msg;
-                break;
-            }
-        case 201:
-            {
-                document.getElementById("loginMessage").innerHTML = json.msg;
-                createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
-                createCookie('user', JSON.stringify(user), 0.5)
-                document.getElementById("loginPopUp").classList.remove('activePopUp');
-                document.getElementById("loginPopUpButton").style.display = "none";
-                document.getElementById("logoutPopUpButton").style.display = "inline";
-                document.getElementById("portfolio").style.display = "inline";
-                break;
-            }
+    if (reply.status === 201){
+        document.getElementById("loginMessage").innerHTML = json.msg;
+        createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
+        createCookie('user', JSON.stringify(user), 0.5)
+        logOn()
+    }
+    else{
+        document.getElementById("loginMessage").innerHTML = json.msg;
     }
 
 }
@@ -136,7 +117,7 @@ function moveHeaderTextClose() {
     headerTextElement.classList.remove('moveOpen');
 }
 
-async function checkSession() {
+async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO LOGIN
     const cookie = JSON.parse(readCookie('user'))
     const email = cookie.email
     const password = cookie.password
@@ -151,40 +132,32 @@ async function checkSession() {
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
     json = await reply.json();
-    //mudar isto
-    switch (reply.status) {
-        case 404:
-            {
-                document.getElementById("loginMessage").innerHTML = json.msg;
-                break;
-            }
-        case 401:
-            {
-                document.getElementById("loginMessage").innerHTML = json.msg;
-                break;
-            }
-        case 405:
-            {
-                document.getElementById("loginMessage").innerHTML = json.msg;
-                break;
-            }
-        case 201:
-            {
-                document.getElementById("loginMessage").innerHTML = json.msg;
-                document.getElementById("loginPopUp").classList.remove('activePopUp');
-                document.getElementById("loginPopUpButton").style.display = "none";
-                document.getElementById("logoutPopUpButton").style.display = "inline";
-                document.getElementById("portfolio").style.display = "inline";
-                break;
-            }
+    if (reply.status === 201){
+        document.getElementById("loginMessage").innerHTML = json.msg;
+        logOn()
+    }
+    else{
+        document.getElementById("loginMessage").innerHTML = json.msg;
     }
 }
 
 async function logOut(){
     eraseCookie('user')
     eraseCookie('userToken')
+    logOff()
+}
+
+function logOn(){
+    document.getElementById("loginPopUp").classList.remove('activePopUp');
+    document.getElementById("loginPopUpButton").style.display = "none";
+    document.getElementById("logoutPopUpButton").style.display = "inline";
+    document.getElementById("portfolio").style.display = "inline";
+}
+
+function logOff(){
     document.getElementById("loginPopUp").classList.add('activePopUp');
     document.getElementById("loginPopUpButton").style.display = "inline";
     document.getElementById("logoutPopUpButton").style.display = "none";
     document.getElementById("portfolio").style.display = "none";
 }
+

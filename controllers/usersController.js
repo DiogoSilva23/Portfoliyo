@@ -14,19 +14,25 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-    console.log("RESPOSTA:");
-    const username = req.body.username;
-    console.log(username);
+    console.log('NAO SEIIII')
+    const username = req.body.registerUsername;
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await bcrypt.hash(req.body.registerPassword, salt);
     const userExists = await existingUser(req.body.email);
     
     if (!userExists) {
+      console.log('teste', newUser);
       const newUser = {
         username: username,
-        email: req.body.email,
-        password: hashedPassword
+        email: req.body.registerEmail,
+        password: hashedPassword,
+        location: req.body.registerLocation,
+        description: req.body.registerDescription,
+        gender: req.body.gender,
+        birtdate: req.body.registerDate,
+        visibleProfile: req.body.visibleProfile
       };
+      console.log('teste2', newUser);
   
       try {
         await createUser(newUser.email, newUser.username, newUser.password); // Call the newUser function to insert the user into the database
