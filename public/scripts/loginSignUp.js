@@ -76,6 +76,7 @@ async function login() {
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
     json = await reply.json();
+    //mudar isto
     switch (reply.status) {
         case 404:
             {
@@ -95,14 +96,16 @@ async function login() {
         case 201:
             {
                 document.getElementById("loginMessage").innerHTML = json.msg;
-                //localStorage.setItem("token", json.token);
+                createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
+                createCookie('user', JSON.stringify(user), 0.5)
+                document.getElementById("loginPopUp").classList.remove('activePopUp');
+                document.getElementById("loginPopUpButton").style.display = "none";
+                document.getElementById("logoutPopUpButton").style.display = "inline";
+                document.getElementById("portfolio").style.display = "inline";
                 break;
             }
     }
-    document.getElementById("loginPopUp").classList.remove('activePopUp');
-    document.getElementById("loginPopUpButton").style.display = "none";
-    document.getElementById("logoutPopUpButton").style.display = "inline";
-    document.getElementById("portfolio").style.display = "inline";
+
 }
 
 registerLink.addEventListener('click', ()=> {
@@ -132,4 +135,56 @@ function moveHeaderTextClose() {
     headerTextElement.classList.add('moveClose');
     headerTextElement.classList.remove('moveOpen');
 }
-  
+
+async function checkSession() {
+    const cookie = JSON.parse(readCookie('user'))
+    const email = cookie.email
+    const password = cookie.password
+    const user = {
+        email: email,
+        password: password
+    }
+
+    const reply = await makeRequest("https://localhost:8000/api/user/login", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    json = await reply.json();
+    //mudar isto
+    switch (reply.status) {
+        case 404:
+            {
+                document.getElementById("loginMessage").innerHTML = json.msg;
+                break;
+            }
+        case 401:
+            {
+                document.getElementById("loginMessage").innerHTML = json.msg;
+                break;
+            }
+        case 405:
+            {
+                document.getElementById("loginMessage").innerHTML = json.msg;
+                break;
+            }
+        case 201:
+            {
+                document.getElementById("loginMessage").innerHTML = json.msg;
+                document.getElementById("loginPopUp").classList.remove('activePopUp');
+                document.getElementById("loginPopUpButton").style.display = "none";
+                document.getElementById("logoutPopUpButton").style.display = "inline";
+                document.getElementById("portfolio").style.display = "inline";
+                break;
+            }
+    }
+}
+
+async function logOut(){
+    eraseCookie('user')
+    eraseCookie('userToken')
+    document.getElementById("loginPopUp").classList.add('activePopUp');
+    document.getElementById("loginPopUpButton").style.display = "inline";
+    document.getElementById("logoutPopUpButton").style.display = "none";
+    document.getElementById("portfolio").style.display = "none";
+}

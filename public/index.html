@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/logout.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
 </head>
 
 <body>
@@ -26,7 +27,7 @@
                     <li><a href="../FAQ.html">FAQ</a></li>
                     <li><a href="../contacts.html">Contacts</a></li>
                     <li id="loginPopUpButton"><button class="loginPopUpButton" onclick="moveHeaderTextOpen()">Login</button></li>
-                    <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logout(); moveHeaderTextClose()">Logout</button></li>
+                    <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logOut(); moveHeaderTextClose()">Logout</button></li>
                 </ul>
             </nav>
         </div>
@@ -78,5 +79,7 @@
 
     <script src="scripts/loginSignUp.js"></script>
     <script src="scripts/script.js"></script>
+    <script src="scripts/cookie.js"></script>
+    <script> checkSession() </script>
 </body>
 </html>

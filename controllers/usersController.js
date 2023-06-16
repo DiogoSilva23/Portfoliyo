@@ -114,11 +114,11 @@ function createUser(email, username, password) {
       if (!samePassword){
           return res.status(401).json({ msg: `Password invalida!` })
       }
-      const accessToken = generateAccessToken(user) 
+      //const accessToken = generateAccessToken(user) 
       const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-      //res.json({ accessToken: accessToken, refreshToken: refreshToken })
-      token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-      return res.status(201).json({ msg: `Logado com sucesso` })
+      //token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+      return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken})
+
   })
 }
 
