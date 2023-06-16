@@ -26,14 +26,22 @@ async function register() {
     const username = document.getElementById("registerUsername").value;
     const email = document.getElementById("registerEmail").value;
     const password = document.getElementById("registerPassword").value;
-    console.log('1234112412412')
+    const location =  document.getElementById("registerLocation").value;
+    const description = document.getElementById("registerDescription").value;
+    const gender = document.getElementById("gender").value;
+    const birtdate = document.getElementById("registerDate").value;
+    const visibleProfile = document.getElementById("visibleProfile").value;
     const user = {
         username: username,
         email: email,
-        password: password
+        password: password,
+        location: location,
+        description: description,
+        gender: gender,
+        birtdate: birtdate,
+        visibleProfile: visibleProfile
     }
-
-    console.log('THISSSSS', username, email, password)
+    console.log(user, 'user')
     
     const reply = await makeRequest("https://localhost:8000/api/user/register", {
         method: "POST",
@@ -42,22 +50,14 @@ async function register() {
     })
 
     json = await reply.json();
-    switch (reply.status) {
-        case 409:
-            {
-                document.getElementById("registerMessage").innerHTML = json.msg;
-                break;
-            }
-        case 400:
-            {
-                document.getElementById("registerMessage").innerHTML = json.msg;
-                break;
-            }
-        case 201:
-            {
-                document.getElementById("registerMessage").innerHTML = json.msg;
-                break;
-            }
+    if (reply.status === 201){
+        document.getElementById("registerMessage").innerHTML = json.msg;
+        //Mandar para a home page
+        console.log('registado com sucesso')
+    }
+    else{
+        document.getElementById("registerMessage").innerHTML = json.msg;
+        console.log('problema no registo')
     }
 }
 
@@ -88,8 +88,11 @@ async function login() {
 
 }
 
+<<<<<<< Updated upstream
 // EVENT LISTENERS DO LOGIN E DO SIGN UP
 
+=======
+>>>>>>> Stashed changes
 loginPopUpButton.addEventListener('click', ()=> {
     loginPopUp.classList.add('activePopUp');
     document.getElementById("html").style.overflowY = "hidden";

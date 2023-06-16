@@ -14,44 +14,66 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-    console.log('NAO SEIIII')
-    const username = req.body.registerUsername;
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(req.body.registerPassword, salt);
-    const userExists = await existingUser(req.body.email);
-    
-    if (!userExists) {
-      console.log('teste', newUser);
-      const newUser = {
-        username: username,
-        email: req.body.registerEmail,
-        password: hashedPassword,
-        location: req.body.registerLocation,
-        description: req.body.registerDescription,
-        gender: req.body.gender,
-        birtdate: req.body.registerDate,
-        visibleProfile: req.body.visibleProfile
-      };
-      console.log('teste2', newUser);
+  const user = req.body;
+  const username = user.username;
+  const password = user.password;
+  const email = user.email;
+
   
-      try {
-        await createUser(newUser.email, newUser.username, newUser.password); // Call the newUser function to insert the user into the database
-  
-        return res.status(201).send({
-          msg: `${username} was created.`
-        });
-      } catch (error) {
-        console.log(error);
-        return res.status(500).send({
-          msg: "An error occurred while creating the user."
-        });
-      }
-    } else {
-      return res.status(409).send({
-        msg: `The user already exists. Try again.`
+
+  if (checkVariables(username, password, email)){
+    return res.status(500).send({
+      msg: "É necessario preencher todos os campos"
+    });
+  }
+
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+
+  const userExists = await existingUser(email);
+
+  if (!userExists) {
+    const newUser = {
+      username: username,
+      email: req.body.registerEmail,
+      password: hashedPassword,
+      location: req.body.registerLocation,
+      description: req.body.registerDescription,
+      gender: req.body.gender,
+      birtdate: req.body.registerDate,
+      visibleProfile: req.body.visibleProfile
+    };
+    console.log('teste2', newUser);
+
+    try {
+      await createUser(newUser.email, newUser.username, newUser.password); // Call the newUser function to insert the user into the database
+
+      return res.status(201).send({
+        msg: `${username} was created.`
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        msg: "An error occurred while creating the user."
       });
     }
-  };
+  } else {
+    return res.status(409).send({
+      msg: `The user already exists. Try again.`
+    });
+  }
+};
+
+function checkVariables(...variables) {
+  for (let i = 0; i < variables.length; i++) {
+    if (typeof variables[i] === 'undefined' || variables[i].trim() == '') {
+      return true; // At least one variable is undefined
+    }
+  }
+  return false; // All variables are defined
+}
+
 
 function existingUser(email) {
     // Query to check if the user exists
