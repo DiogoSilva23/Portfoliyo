@@ -24,15 +24,17 @@ async function makeRequest(url, options) {
 
 async function register() {
     const username = document.getElementById("registerUsername").value;
+    const name = document.getElementById("registerName").value;
     const email = document.getElementById("registerEmail").value;
     const password = document.getElementById("registerPassword").value;
     const location =  document.getElementById("registerLocation").value;
     const description = document.getElementById("registerDescription").value;
     const gender = document.getElementById("gender").value;
     const birtdate = document.getElementById("registerDate").value;
-    const visibleProfile = document.getElementById("visibleProfile").value;
+    const visibleProfile = document.getElementById("visibleProfile").checked;
     const user = {
         username: username,
+        name: name,
         email: email,
         password: password,
         location: location,
@@ -88,11 +90,8 @@ async function login() {
 
 }
 
-<<<<<<< Updated upstream
 // EVENT LISTENERS DO LOGIN E DO SIGN UP
 
-=======
->>>>>>> Stashed changes
 loginPopUpButton.addEventListener('click', ()=> {
     loginPopUp.classList.add('activePopUp');
     document.getElementById("html").style.overflowY = "hidden";

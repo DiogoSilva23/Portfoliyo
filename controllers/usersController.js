@@ -16,8 +16,15 @@ exports.getUsers = async (req, res) => {
 exports.register = async (req, res) => {
   const user = req.body;
   const username = user.username;
+  const name = user.name;
   const password = user.password;
   const email = user.email;
+  const location = user.location;
+  const description = user.description;
+  const gender = user.gender;
+  const birtdate = user.birtdate;
+  const visibleProfile = user.visibleProfile;
+
 
   
 
@@ -36,18 +43,18 @@ exports.register = async (req, res) => {
   if (!userExists) {
     const newUser = {
       username: username,
-      email: req.body.registerEmail,
+      name: name,
+      email: email,
       password: hashedPassword,
-      location: req.body.registerLocation,
-      description: req.body.registerDescription,
-      gender: req.body.gender,
-      birtdate: req.body.registerDate,
-      visibleProfile: req.body.visibleProfile
+      location: location,
+      description: description,
+      gender: gender,
+      birtdate: birtdate,
+      visibleProfile: visibleProfile
     };
-    console.log('teste2', newUser);
 
     try {
-      await createUser(newUser.email, newUser.username, newUser.password); // Call the newUser function to insert the user into the database
+      await createUser(newUser); // Call the newUser function to insert the user into the database
 
       return res.status(201).send({
         msg: `${username} was created.`
@@ -90,10 +97,15 @@ function existingUser(email) {
     });
   }
 
-function createUser(email, username, password) {
-    id = generateRandomId(email)
+async function createUser(user) {
+    id = await generateRandomId(user.email)
+    if (user.visibleProfile == true){
+      visibleProfile = 1;
+    } else{
+      visibleProfile = 0;
+    }
     // Query to insert a new user
-    const query = `INSERT INTO users (id, email, username, pword) VALUES ('${id}', '${email}', '${username}', '${password}')`;
+    const query = `INSERT INTO users (id, nick, email, userName, pword, birthDate, gender, userDescription, location, companiesView) VALUES ('${id}', '${user.username}', '${user.email}', '${user.name}', '${user.password}', '${user.birtdate}', '${user.gender}', '${user.description}', '${user.location}', '${visibleProfile}')`;
   
     return new Promise((resolve, reject) => {
       connection.query(query, function (err, result) {
@@ -107,6 +119,7 @@ function createUser(email, username, password) {
   }
 
   function generateRandomId(email) {
+    console.log('TESTEEEEE')
     const randomString = Math.random().toString(36).substring(2); // Generate a random string 
     console.log(randomString)
     const data = email + randomString; // Combine email with random string
@@ -115,7 +128,7 @@ function createUser(email, username, password) {
     const hashedData = hash.update(data).digest('hex'); // Generate the hash of the combined data
   
     const id = hashedData.substr(0, 20); // Take the first 20 characters as the ID
-  
+    
     return id;
   }
 
