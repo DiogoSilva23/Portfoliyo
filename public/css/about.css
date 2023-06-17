@@ -22,6 +22,12 @@ body {
 .about-col-1 img {
     width: 50%;
     border-radius: 100%;
+    transition: 0.5s;
+}
+
+.about-col-1 img:hover{
+    transform: scale(1.10);
+    transition: 0.5s;
 }
 
 .about-col-2{
