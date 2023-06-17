@@ -18,7 +18,7 @@
             <img src="/images/briefcase.png" class="logo">
             <ul>
                 <li><a href="../index.html">Home</a></li>
-                <li id="portfolio"><a href="#">Portfolio</a></li>
+                <li id="portfolio"><a href="">Portfolio</a></li>
                 <li><a href="../aboutUs.html">About us</a></li>
                 <li><a href="../FAQ.html">FAQ</a></li>
                 <li><a href="../contacts.html">Contacts</a></li>
@@ -27,13 +27,12 @@
         </nav>
     </header>
 
-    <div class="register" id="register">
+    <div class="registerPopUp" id="registerPopUp">
         <div class="formBox register">
-            <h2>Sign Up</h2>
+            <h2>Professional User Sign Up</h2>
 
             <div class="normalUserToEnterprise">
-                <span class="icon"><ion-icon name="help-circle"></ion-icon></span>
-                <p>Which type of account do you want to create?</p>
+                <p><span class="icon"><ion-icon name="help-circle"></ion-icon></span>Which type of account do you want to create?</p>
                 <a class="loginLink" href="../index.html">Professional User</a>
                 <a class="loginLink" href="../index.html">Enterprise</a>
             </div>
@@ -104,11 +103,68 @@
             <div class="registerToLogin">
                 <p>Already have an account?<a class="loginLink" href="../index.html">Login now!</a></p>
             </div>
+
+            <p id="registerMessage" style="color: blue;"></p>
+        </div>
+
+        <div class="formBox registerEnterprise">
+            <h2>Enterprise Sign Up</h2>
+
+            <div class="normalUserToEnterprise">
+                <p><span class="icon"><ion-icon name="help-circle"></ion-icon></span>Which type of account do you want to create?</p>
+                <a class="loginLink" href="../index.html">Professional User</a>
+                <a class="loginLink" href="../index.html">Enterprise</a>
+            </div>
+
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="person-circle"></ion-icon></span>
+                <input type="text" name="registerEnterpriseName" id="registerEnterpriseName" required>
+                <label for="registerEnterpriseName">Name</label>
+            </div>
+
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                <input type="email" name="registerEnterpriseEmail" id="registerEnterpriseEmail" required>
+                <label for="registerEnterpriseEmail">Email</label>
+            </div>
+
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" name="registerEnterprisePassword" id="registerEnterprisePassword" required>
+                <label for="registerEnterprisePassword">Password</label>
+            </div>
+
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="link"></ion-icon></span>
+                <input type="text" name="registerEnterpriseURL" id="registerEnterpriseURL" required>
+                <label for="registerEnterpriseURL">Website URL</label>
+            </div>
+
+            <div class="inputBox">
+                <span class="icon"><ion-icon name="image"></ion-icon></span>
+                <input type="text" name="registerEnterpriseLogoURL" id="registerEnterpriseLogoURL" required>
+                <label for="registerEnterpriseLogoURL">Logo URL</label>
+            </div>
+
+            <div class="descriptionEnterprise">
+                <span class="icon"><ion-icon name="information-circle"></ion-icon></span>
+                <label for="registerEnterpriseDescription">Description</label><br><br>
+                <textarea type="text" placeholder="Type your profile Description here..." name="registerEnterpriseDescription" id="registerEnterpriseDescription" required></textarea>
+            </div>>
+
+            <div class="rememberForgotRegister">
+                <label><input type="checkbox">I agree to terms & conditions.</label>
+            </div>
+
+            <button type="submit" class="loginRegisterButton" onclick="register()">Sign Up</button>
+
+            <div class="registerToLogin">
+                <p>Already have an account?<a class="loginLink" href="../index.html">Login now!</a></p>
+            </div>
+
             <p id="registerMessage" style="color: blue;"></p>
         </div>
     </div> 
-        <p id="registerMessage" style="color: blue;"></p>
-    </div>
 
     <footer class="copyright">
         <p>Copyright © Portfoliyo</p>
