@@ -27,14 +27,68 @@
         </nav>
     </header>
 
+    <div class="loginPopUp" id="loginPopUp">
+        <span class="closeIcon">
+          <ion-icon name="close-outline" onclick="moveHeaderTextClose()"></ion-icon>
+        </span>
+      
+        <div class="formBox login">
+            <h2>Login</h2>
+            <div class="loginTabs">
+                <a class="loginTab active" id="professionalTab" onclick="switchLoginTab('professional')" style="display: none;">I'm a Professional User</a>
+                <a class="loginTab" id="enterpriseTab" onclick="switchLoginTab('enterprise')">We are an Enterprise</a>
+            </div>
+      
+            <div id="professionalLoginForm" class="loginForm active">
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" name="professionalEmail" id="professionalEmail" required>
+                    <label for="professionalEmail">Email</label>
+                </div>
+      
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="professionalPassword" id="professionalPassword" required>
+                    <label for="professionalPassword">Password</label>
+                </div>
+            </div>
+      
+            <div id="enterpriseLoginForm" class="loginForm" style="display: none;">
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" name="enterpriseEmail" id="enterpriseEmail" required>
+                    <label for="enterpriseEmail">EmailEnterprise</label>
+                </div>
+      
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="enterprisePassword" id="enterprisePassword" required>
+                    <label for="enterprisePassword">PasswordEnterprise</label>
+                </div>
+            </div>
+      
+            <div class="rememberForgot">
+                <label><input type="checkbox">Remember Me</label>
+                <a>Forgot Password?</a>
+            </div>
+      
+            <button type="submit" class="loginRegisterButton" onclick="login()">Login</button>
+      
+            <div class="loginToRegister">
+                <p>Not registered yet?<a class="registerLink" href="../register.html">Sign up now!</a></p>
+            </div>
+            <p id="loginMessage"></p>
+        </div>
+    </div>
+
     <div class="registerPopUp" id="registerPopUp">
-        <div class="formBox register">
+        <div class="formBox register" id="register">
             <h2>Professional User Sign Up</h2>
 
             <div class="normalUserToEnterprise">
                 <p><span class="icon"><ion-icon name="help-circle"></ion-icon></span>Which type of account do you want to create?</p>
-                <a class="loginLink" href="../index.html">Professional User</a>
-                <a class="loginLink" href="../index.html">Enterprise</a>
+                <a class="switchTabs" onclick="showtab('register')">Professional User</a>
+                <a class="switchTabs" onclick="showtab('registerEnterprise')">Enterprise</a>
             </div>
 
             <div class="inputBox">
@@ -101,19 +155,19 @@
             <button type="submit" class="loginRegisterButton" onclick="register()">Sign Up</button>
 
             <div class="registerToLogin">
-                <p>Already have an account?<a class="loginLink" href="../index.html">Login now!</a></p>
+                <p>Already have an account?<a class="loginLink" onclick="openLoginPopup()">Login now!</a></p>
             </div>
 
             <p id="registerMessage" style="color: blue;"></p>
         </div>
 
-        <div class="formBox registerEnterprise">
+        <div class="formBox registerEnterprise" id="registerEnterprise" style="display: none;">
             <h2>Enterprise Sign Up</h2>
 
             <div class="normalUserToEnterprise">
                 <p><span class="icon"><ion-icon name="help-circle"></ion-icon></span>Which type of account do you want to create?</p>
-                <a class="loginLink" href="../index.html">Professional User</a>
-                <a class="loginLink" href="../index.html">Enterprise</a>
+                <a class="switchTabs" onclick="showtab('register')">Professional User</a>
+                <a class="switchTabs" onclick="showtab('registerEnterprise')">Enterprise</a>
             </div>
 
             <div class="inputBox">
@@ -159,7 +213,7 @@
             <button type="submit" class="loginRegisterButton" onclick="register()">Sign Up</button>
 
             <div class="registerToLogin">
-                <p>Already have an account?<a class="loginLink" href="../index.html">Login now!</a></p>
+                <p>Already have an account?<a class="loginLink" onclick="openLoginPopup()">Login now!</a></p>
             </div>
 
             <p id="registerMessage" style="color: blue;"></p>

@@ -160,3 +160,54 @@ function logOff(){
     document.getElementById("portfolio").style.display = "none";
 }
 
+function switchLoginTab(tab) {
+    // Remove active class from all tabs
+    var loginTabs = document.getElementsByClassName('loginTab');
+    for (var i = 0; i < loginTabs.length; i++) {
+      loginTabs[i].classList.remove('active');
+    }
+  
+    // Hide all login forms
+    var loginForms = document.getElementsByClassName('loginForm');
+    for (var i = 0; i < loginForms.length; i++) {
+      loginForms[i].classList.remove('active');
+    }
+  
+    // Show the selected login form and mark the corresponding tab as active
+    document.getElementById(tab + 'LoginForm').classList.add('active');
+  
+    // Update tab text
+    if (tab === 'professional') {
+        document.getElementById('professionalTab').style.display = 'none';
+        document.getElementById('enterpriseTab').style.display = 'block';
+        document.getElementById('enterpriseLoginForm').style.display = 'none';
+        document.getElementById('professionalLoginForm').style.display = 'block';
+    } else if (tab === 'enterprise') {
+        document.getElementById('enterpriseTab').style.display = 'none';
+        document.getElementById('professionalTab').style.display = 'block';
+        document.getElementById('professionalLoginForm').style.display = 'none';
+        document.getElementById('enterpriseLoginForm').style.display = 'block';
+    }
+  }
+
+function openLoginPopup() {
+    loginPopUp.classList.add('activePopUp');
+    document.getElementById("html").style.overflowY = "hidden";
+}
+  
+window.onload = function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('login')) {
+      openLoginPopup();
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    var loginLink = document.querySelector('.loginLink');
+    if (loginLink) {
+      loginLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        openLoginPopup();
+      });
+    }
+  });

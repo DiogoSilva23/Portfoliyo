@@ -9,3 +9,16 @@ textarea.addEventListener('keyup', e => {
     let sHeight = e.target.scrollHeight;
     textarea.style.height = `${sHeight}px`;
 });
+
+function showtab(tab) {
+    var professionalTab = document.getElementById('register');
+    var enterpriseTab = document.getElementById('registerEnterprise');
+
+    if (tab === 'register') {
+        professionalTab.style.display = 'block';
+        enterpriseTab.style.display = 'none';
+    } else if (tab === 'registerEnterprise') {
+        professionalTab.style.display = 'none';
+        enterpriseTab.style.display = 'block';
+    }
+}

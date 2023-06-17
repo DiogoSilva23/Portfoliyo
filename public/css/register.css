@@ -118,6 +118,7 @@ body {
     position: relative;
     width: 100%;
     height: 35px;
+    font-weight: 550;
 }
 
 .birthdate label {
@@ -145,6 +146,7 @@ body {
     position: relative;
     width: 100%;
     height: 20px;
+    font-weight: 550;
 }
 
 .gender label {
@@ -176,6 +178,7 @@ body {
     position: relative;
     width: 100%;
     height: 60px;
+    font-weight: 550;
 }
 
 .description label {
@@ -219,6 +222,7 @@ textarea:is(:focus, :valid) {
     position: relative;
     width: 100%;
     height: 60px;
+    font-weight: 550;
 }
 
 .descriptionEnterprise label {
@@ -255,4 +259,25 @@ textarea:is(:focus, :valid) {
 
 .descriptionEnterprise :is(:focus, :valid) {
     border: 3px solid;
+}
+
+.switchTabs {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(90deg,#0b57bb,#0077b6);
+    color: #333;
+    left: 100px;
+    width: 49%;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+  
+.switchTabs:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.loginLink {
+    cursor: pointer;
 }

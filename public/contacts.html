@@ -30,30 +30,51 @@
 
     <div class="loginPopUp" id="loginPopUp">
         <span class="closeIcon">
-            <ion-icon name="close-outline"></ion-icon>
+          <ion-icon name="close-outline" onclick="moveHeaderTextClose()"></ion-icon>
         </span>
-
+      
         <div class="formBox login">
             <h2>Login</h2>
-            <div class="inputBox">
-                <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                <input type="email" name="email" id="email" required>
-                <label for="email">Email</label>
+            <div class="loginTabs">
+                <a class="loginTab active" id="professionalTab" onclick="switchLoginTab('professional')" style="display: none;">I'm a Professional User</a>
+                <a class="loginTab" id="enterpriseTab" onclick="switchLoginTab('enterprise')">We are an Enterprise</a>
             </div>
-
-            <div class="inputBox">
-                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                <input type="password" name="password" id="password" required>
-                <label for="password">Password</label>
+      
+            <div id="professionalLoginForm" class="loginForm active">
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" name="professionalEmail" id="professionalEmail" required>
+                    <label for="professionalEmail">Email</label>
+                </div>
+      
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="professionalPassword" id="professionalPassword" required>
+                    <label for="professionalPassword">Password</label>
+                </div>
             </div>
-
+      
+            <div id="enterpriseLoginForm" class="loginForm" style="display: none;">
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" name="enterpriseEmail" id="enterpriseEmail" required>
+                    <label for="enterpriseEmail">EmailEnterprise</label>
+                </div>
+      
+                <div class="inputBox">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="enterprisePassword" id="enterprisePassword" required>
+                    <label for="enterprisePassword">PasswordEnterprise</label>
+                </div>
+            </div>
+      
             <div class="rememberForgot">
                 <label><input type="checkbox">Remember Me</label>
                 <a>Forgot Password?</a>
             </div>
-
+      
             <button type="submit" class="loginRegisterButton" onclick="login()">Login</button>
-
+      
             <div class="loginToRegister">
                 <p>Not registered yet?<a class="registerLink" href="../register.html">Sign up now!</a></p>
             </div>
