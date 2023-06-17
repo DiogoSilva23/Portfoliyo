@@ -13,7 +13,7 @@ exports.getUsers = async (req, res) => {
     connection.end()
 };
 
-exports.register = async (req, res) => {
+exports.registerUser = async (req, res) => {
   const user = req.body;
   const username = user.username;
   const name = user.name;
@@ -25,10 +25,8 @@ exports.register = async (req, res) => {
   const birtdate = user.birtdate;
   const visibleProfile = user.visibleProfile;
 
-
-  
-
-  if (checkVariables(username, password, email)){
+  //Mudar alguns checks (gender nao pode ser gender)
+  if (checkVariables(username, name, password, email, location, description, gender, birtdate, visibleProfile)){
     return res.status(500).send({
       msg: "É necessario preencher todos os campos"
     });
@@ -37,7 +35,7 @@ exports.register = async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(password, salt);
 
-
+  //Verificar se existe o nome ou o email associados a uma empresa ou a um utilizador
   const userExists = await existingUser(email);
 
   if (!userExists) {
@@ -105,8 +103,7 @@ async function createUser(user) {
       visibleProfile = 0;
     }
     // Query to insert a new user
-    const query = `INSERT INTO users (id, nick, email, userName, pword, birthDate, gender, userDescription, location, companiesView) VALUES ('${id}', '${user.username}', '${user.email}', '${user.name}', '${user.password}', '${user.birtdate}', '${user.gender}', '${user.description}', '${user.location}', '${visibleProfile}')`;
-  
+    const query = `INSERT INTO users (id, nick, email, userName, pword, birthDate, gender, userDescription, location, companiesView, userAdmin) VALUES ('${id}', '${user.username}', '${user.email}', '${user.name}', '${user.password}', '${user.birtdate}', '${user.gender}', '${user.description}', '${user.location}', '${visibleProfile}', 0)`;
     return new Promise((resolve, reject) => {
       connection.query(query, function (err, result) {
         if (err) {
@@ -168,4 +165,86 @@ function generateAccessToken(user) {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "300s"
     })
+}
+
+exports.registerCompany = async (req, res) => {
+  const company = req.body;
+  const companyName = company.companyName
+  const email = company.email
+  const password = company.password
+  const websiteURL =  company.websiteURL
+  const logoURL = company.logoURL
+  const description = company.description
+  
+
+  if (checkVariables(companyName, email, password, websiteURL, logoURL, description)){
+    return res.status(500).send({
+      msg: "É necessario preencher todos os campos"
+    });
+  }
+
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  //Verificar se existe o nome ou o email associados a uma empresa ou a um utilizador
+  const companyExists = await existingCompany(email);
+
+  if (!companyExists) {
+    const newCompany = {
+      companyName: companyName,
+      email: email,
+      password: hashedPassword,
+      websiteURL: websiteURL,
+      logoURL: logoURL,
+      description: description
+    };
+
+    try {
+      await createCompany(newCompany); // Call the newUser function to insert the user into the database
+
+      return res.status(201).send({
+        msg: `${companyName} was created.`
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        msg: "An error occurred while creating the user."
+      });
+    }
+  } else {
+    return res.status(409).send({
+      msg: `The user already exists. Try again.`
+    });
+  }
+};
+
+
+function existingCompany(email) {
+  // Query to check if the user exists
+  const query = `SELECT COUNT(*) AS count FROM companies WHERE email = '${email}'`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        const count = result[0].count;
+        resolve(count > 0); // Returns true if the count is greater than 0
+      }
+    });
+  });
+}
+
+async function createCompany(company) {
+  id = await generateRandomId(company.email)
+  // Query to insert a new user
+  const query = `INSERT INTO companies (id, companieName, companieDescription, siteUrl, email, pword, logoUrl, validated) VALUES ('${id}', '${company.companyName}', '${company.description}', '${company.websiteURL}', '${company.email}', '${company.password}', '${company.logoURL}', 0)`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
 }

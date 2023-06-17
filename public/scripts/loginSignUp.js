@@ -22,7 +22,7 @@ async function makeRequest(url, options) {
     }
 }
 
-async function register() {
+async function registerUser() {
     const username = document.getElementById("registerUsername").value;
     const name = document.getElementById("registerName").value;
     const email = document.getElementById("registerEmail").value;
@@ -45,7 +45,7 @@ async function register() {
     }
     console.log(user, 'user')
     
-    const reply = await makeRequest("https://localhost:8000/api/user/register", {
+    const reply = await makeRequest("https://localhost:8000/api/user/registerUser", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -211,3 +211,37 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   });
+  
+async function registerCompany() {
+    const companyName = document.getElementById("registerEnterpriseName").value;
+    const email = document.getElementById("registerEnterpriseEmail").value;
+    const password = document.getElementById("registerEnterprisePassword").value;
+    const websiteURL =  document.getElementById("registerEnterpriseURL").value;
+    const logoURL = document.getElementById("registerEnterpriseLogoURL").value;
+    const description = document.getElementById("registerEnterpriseDescription").value;
+    const company = {
+        companyName: companyName,
+        email: email,
+        password: password,
+        websiteURL: websiteURL,
+        logoURL: logoURL,
+        description: description,
+    }
+    
+    const reply = await makeRequest("https://localhost:8000/api/company/registerCompany", {
+        method: "POST",
+        body: JSON.stringify(company),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+
+    json = await reply.json();
+    if (reply.status === 201){
+        document.getElementById("registerMessage").innerHTML = json.msg;
+        //Mandar para a home page
+        console.log('registado com sucesso')
+    }
+    else{
+        document.getElementById("registerMessage").innerHTML = json.msg;
+        console.log('problema no registo')
+    }
+}

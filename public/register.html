@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="css/register.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script src="scripts/loginSignUp.js"></script>
+    <script src="scripts/register.js"></script>
 </head>
 <body>
     <header id="header">
@@ -152,7 +155,7 @@
                 <label><input type="checkbox">I agree to terms & conditions.</label>
             </div>
 
-            <button type="submit" class="loginRegisterButton" onclick="register()">Sign Up</button>
+            <button type="submit" class="loginRegisterButton" onclick="registerUser()">Sign Up</button>
 
             <div class="registerToLogin">
                 <p>Already have an account?<a class="loginLink" onclick="openLoginPopup()">Login now!</a></p>
@@ -210,7 +213,7 @@
                 <label><input type="checkbox">I agree to terms & conditions.</label>
             </div>
 
-            <button type="submit" class="loginRegisterButton" onclick="register()">Sign Up</button>
+            <button type="submit" class="loginRegisterButton" onclick="registerCompany()">Sign Up</button>
 
             <div class="registerToLogin">
                 <p>Already have an account?<a class="loginLink" onclick="openLoginPopup()">Login now!</a></p>
@@ -224,7 +227,6 @@
         <p>Copyright © Portfoliyo</p>
     </footer>
 
-    <script src="scripts/loginSignUp.js"></script>
-    <script src="scripts/register.js"></script>
+
 </body>
 </html>
