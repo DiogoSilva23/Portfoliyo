@@ -15,12 +15,10 @@ body {
     background: linear-gradient(90deg,#0077b6,#0096c7);
 }
 
-#header{
+header {
+    top: 0;
     width: 100%;
-}
-
-.container {
-    display: fixed;
+    z-index: 2;
 }
 
 nav{

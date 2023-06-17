@@ -10,27 +10,31 @@
     <link rel="stylesheet" href="css/style.css"> <!--IMPORT CSS-->
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/logout.css">
+    <link rel="stylesheet" href="css/friendsList.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
-    <header id="header">
-        <div id="container">
-            <nav> <!--NAVIGATION MENU WITH LOGO-->
-                <img src="/images/briefcase.png" class="logo">
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li id="portfolio"><a href="#">Portfolio</a></li>
-                    <li><a href="../aboutUs.html">About us</a></li>
-                    <li><a href="../FAQ.html">FAQ</a></li>
-                    <li><a href="../contacts.html">Contacts</a></li>
-                    <li id="loginPopUpButton"><button class="loginPopUpButton" onclick="moveHeaderTextOpen()">Login</button></li>
-                    <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logOut(); moveHeaderTextClose()">Logout</button></li>
-                </ul>
-            </nav>
-        </div>
+    <header>
+        <nav> <!--NAVIGATION MENU WITH LOGO-->
+            <img src="/images/briefcase.png" class="logo">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li id="portfolio"><a href="#">Portfolio</a></li>
+                <li><a href="../aboutUs.html">About us</a></li>
+                <li><a href="../FAQ.html">FAQ</a></li>
+                <li><a href="../contacts.html">Contacts</a></li>
+                <li id="loginPopUpButton"><button class="loginPopUpButton" onclick="moveHeaderTextOpen()">Login</button></li>
+                <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logOut(); moveHeaderTextClose()">Logout</button></li>
+                <li id="friendsListButton"><button class="friendsListButton">Friends</button></li>
+            </ul>
+        </nav>
     </header>
+
+    <div class="friendsList">
+        <h2>Friends List<ion-icon class="closeFriendsList" name="close-outline"></ion-icon></h2>
+    </div>
 
     <div class="containerMove">
         <div class="header-text"> <!--SITE SLOGAN/DESCRIPTION-->

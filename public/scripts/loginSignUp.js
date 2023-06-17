@@ -12,6 +12,9 @@ const loginPopUp = document.querySelector('.loginPopUp');
 const loginPopUpButton = document.querySelector('.loginPopUpButton');
 const closeIcon = document.querySelector('.closeIcon');
 const loginSubmit = document.querySelector('.loginSubmit');
+const friendsList = document.querySelector('.friendsList');
+const friendsListButton = document.querySelector('.friendsListButton');
+const closeFriendsList = document.querySelector('.closeFriendsList');
 
 async function makeRequest(url, options) {
     try {
@@ -101,6 +104,14 @@ closeIcon.addEventListener('click', ()=> {
     loginPopUp.classList.remove('activePopUp');
     document.getElementById("html").style.overflowY = "scroll";
 });
+
+friendsListButton.addEventListener('click', ()=> {
+    friendsList.classList.add('active');
+})
+
+closeFriendsList.addEventListener('click', ()=> {
+    friendsList.classList.remove('active');
+})
 
 // MOVER TEXTO QUANDO O FORM ABRE/FECHA
 
