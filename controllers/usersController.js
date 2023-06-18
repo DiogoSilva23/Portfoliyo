@@ -129,9 +129,10 @@ async function createUser(user) {
     return id;
   }
 
-  exports.login = async (req, res) => {
+  exports.loginUser = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+    console.log(email, password)
     if (email.length == 0){
       return res.status(405).json({ msg: `Email não inserido!` })   //verificar se pode ser 405
     }

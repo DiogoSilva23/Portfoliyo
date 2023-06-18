@@ -66,14 +66,14 @@ async function registerUser() {
     }
 }
 
-async function login() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+async function loginUser() {
+    const email = document.getElementById("professionalEmail").value;
+    const password = document.getElementById("professionalPassword").value;
     const user = {
         email: email,
         password: password
     }
-
+    console.log(user)
     const reply = await makeRequest("https://localhost:8000/api/user/login", {
         method: "POST",
         body: JSON.stringify(user),
