@@ -195,10 +195,12 @@
 
 .loginTabs {
     display: flex;
+    margin-right: 50px;
+    margin-left: 50px;
 }
   
 .loginTab {
-    padding: 10px 20px;
+    padding: 10px 10px;
     cursor: pointer;
     background-color: #023e8a;
     color: white;
