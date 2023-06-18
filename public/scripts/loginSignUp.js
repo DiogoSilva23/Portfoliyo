@@ -193,11 +193,17 @@ function switchLoginTab(tab) {
         document.getElementById('enterpriseTab').style.display = 'block';
         document.getElementById('enterpriseLoginForm').style.display = 'none';
         document.getElementById('professionalLoginForm').style.display = 'block';
+        document.getElementById('loginUser').style.display = 'block';
+        document.getElementById('loginCompany').style.display = 'none';
+
     } else if (tab === 'enterprise') {
         document.getElementById('enterpriseTab').style.display = 'none';
         document.getElementById('professionalTab').style.display = 'block';
         document.getElementById('professionalLoginForm').style.display = 'none';
         document.getElementById('enterpriseLoginForm').style.display = 'block';
+        document.getElementById('loginUser').style.display = 'none';
+        document.getElementById('loginCompany').style.display = 'block';
+
     }
   }
 
@@ -255,4 +261,32 @@ async function registerCompany() {
         document.getElementById("registerMessage").innerHTML = json.msg;
         console.log('problema no registo')
     }
+}
+
+async function loginCompany() {
+    console.log('DEU CERTO')
+    const email = document.getElementById("professionalEmail").value;
+    const password = document.getElementById("professionalPassword").value;
+    const user = {
+        email: email,
+        password: password
+    }
+    console.log(user)
+    const reply = await makeRequest("https://localhost:8000/api/user/login", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    json = await reply.json();
+    //mudar isto
+    if (reply.status === 201){
+        document.getElementById("loginMessage").innerHTML = json.msg;
+        createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
+        createCookie('user', JSON.stringify(user), 0.5)
+        logOn()
+    }
+    else{
+        document.getElementById("loginMessage").innerHTML = json.msg;
+    }
+
 }
