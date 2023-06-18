@@ -106,6 +106,7 @@ nav ul li a:hover::after{
     bottom:0;
 }
 
+/*
 .copyrightFlex {
     position: flex;
     width: 100%;
@@ -116,7 +117,7 @@ nav ul li a:hover::after{
     backdrop-filter: blur(20px);
     left:0;
     bottom:0;
-}
+}*/
 
 .fixed-nav ul {
     display: flex;
