@@ -92,8 +92,15 @@ async function loginUser() {
         document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
     }
-
 }
+  
+document.addEventListener('keypress', function (event) {
+if (event.key === 'Enter') {
+    if (document.activeElement.id === 'professionalEmail' || document.activeElement.id === 'professionalPassword') {
+        loginUser(); // Call the loginUser function when Enter key is pressed on the email or password input fields
+    }
+}
+});
 
 // EVENT LISTENERS DO LOGIN E DO SIGN UP
 
@@ -289,9 +296,18 @@ async function loginCompany() {
         createCookie('companyToken', json.token, 0.5)  //VERIFICAR ESTA CENA
         createCookie('company', JSON.stringify(company), 0.5)
         logOn()
+        document.getElementById("portfolio").style.display = "none";
     }
     else{
         document.getElementById("loginMessage").innerHTML = json.msg;
     }
 
 }
+  
+document.addEventListener('keypress', function (event) {
+if (event.key === 'Enter') {
+    if (document.activeElement.id === 'enterpriseEmail' || document.activeElement.id === 'enterprisePassword') {
+    loginCompany(); // Call the loginUser function when Enter key is pressed on the email or password input fields
+    }
+}
+});
