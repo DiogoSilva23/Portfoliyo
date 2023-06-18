@@ -82,12 +82,14 @@ async function loginUser() {
     json = await reply.json();
     //mudar isto
     if (reply.status === 201){
+        document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
         createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
         createCookie('user', JSON.stringify(user), 0.5)
         logOn()
     }
     else{
+        document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
     }
 
@@ -143,10 +145,12 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
     });
     json = await reply.json();
     if (reply.status === 201){
+        document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
         logOn()
     }
     else{
+        document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
     }
 }
@@ -162,6 +166,7 @@ function logOn(){
     document.getElementById("loginPopUpButton").style.display = "none";
     document.getElementById("logoutPopUpButton").style.display = "inline";
     document.getElementById("portfolio").style.display = "inline";
+    document.getElementById("loginMessage").style.display = "none";
 }
 
 function logOff(){
@@ -169,6 +174,7 @@ function logOff(){
     document.getElementById("loginPopUpButton").style.display = "inline";
     document.getElementById("logoutPopUpButton").style.display = "none";
     document.getElementById("portfolio").style.display = "none";
+    window.location.href = "../index.html";
 }
 
 function switchLoginTab(tab) {
