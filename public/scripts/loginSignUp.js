@@ -270,25 +270,24 @@ async function registerCompany() {
 }
 
 async function loginCompany() {
-    console.log('DEU CERTO')
-    const email = document.getElementById("professionalEmail").value;
-    const password = document.getElementById("professionalPassword").value;
-    const user = {
+    const email = document.getElementById("enterpriseEmail").value;
+    const password = document.getElementById("enterprisePassword").value;
+    const company = {
         email: email,
         password: password
     }
-    console.log(user)
-    const reply = await makeRequest("https://localhost:8000/api/user/login", {
+    console.log(company)
+    const reply = await makeRequest("https://localhost:8000/api/company/login", {
         method: "POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(company),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
     json = await reply.json();
     //mudar isto
     if (reply.status === 201){
         document.getElementById("loginMessage").innerHTML = json.msg;
-        createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
-        createCookie('user', JSON.stringify(user), 0.5)
+        createCookie('companyToken', json.token, 0.5)  //VERIFICAR ESTA CENA
+        createCookie('company', JSON.stringify(company), 0.5)
         logOn()
     }
     else{

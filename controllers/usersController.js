@@ -249,3 +249,50 @@ async function createCompany(company) {
     });
   });
 }
+
+exports.loginCompany = async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  console.log(email, password)
+  if (email.length == 0){
+    return res.status(405).json({ msg: `Email não inserido!` })   //verificar se pode ser 405
+  }
+  if (password.length == 0){
+    return res.status(405).json({ msg: `Password não inserida!` })  //verificar se pode ser 405
+  }
+  const companyExist = await existingCompany(email)
+  if (!companyExist) {
+      return res.status(404).json({ msg: `Email não correspondente a nenhuma conta` })
+  };
+  const query = `SELECT * FROM companies WHERE email = '${email}'`;
+  connection.query(query, async function (err, result) {
+    if (err) {
+        return res.status(500).send({msg: "Erro no Log in"});
+    }
+    const company = result[0];
+    const samePassword = await bcrypt.compare(password, company.pword)
+    if (!samePassword){
+        return res.status(401).json({ msg: `Password invalida!` })
+    }
+    //const accessToken = generateAccessToken(user) 
+    const refreshToken = jwt.sign(company, process.env.REFRESH_TOKEN_SECRET)
+    //token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+    return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken})
+
+})
+}
+
+function existingCompany(email) {
+  // Query to check if the user exists
+  const query = `SELECT COUNT(*) AS count FROM companies WHERE email = '${email}'`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        const count = result[0].count;
+        resolve(count > 0); // Returns true if the count is greater than 0
+      }
+    });
+  });
+}
