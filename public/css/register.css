@@ -17,14 +17,14 @@ body {
 
 .registerToLogin {
     font-size: .9em;
-    color: black;
+    color: white;
     text-align: center;
     font-weight: 500;
     margin: 25px 0 10px;
 }
 
 .registerToLogin a {
-    color: black;
+    color: white;
     text-decoration: none;
     font-weight: 600;
 }
@@ -35,22 +35,23 @@ body {
 
 .normalUserToEnterprise {
     font-size: .9em;
-    color: black;
+    color: white;
     text-align: left;
     font-weight: 500;
-    margin: 50px 0 10px;
+    margin: 50px 0px 20px;
 }
 
 .normalUserToEnterprise a {
-    color: black;
+    color: white;
     text-decoration: none;
     padding-right: 50px;
+    margin-bottom: 30px;
     font-weight: 600;
 }
 
 .normalUserToEnterprise p {
     font-size: 1.3em;
-    color: black;
+    color: white;
     text-decoration: none;
     padding-right: 50px;
     font-weight: 600;
@@ -65,7 +66,7 @@ body {
     position: absolute;
     right: 8px;
     font-size: 1.2em;
-    color: black;
+    color: white;
     line-height: 57px;
 }
 
@@ -73,7 +74,7 @@ body {
     position: absolute;
     right: 8px;
     font-size: 1.2em;
-    color: black;
+    color: white;
     line-height: 57px;
 }
 
@@ -91,7 +92,7 @@ body {
 
 .rememberForgotRegister {
     font-size: .9em;
-    color: black;
+    color: white;
     font-weight: 500;
     margin: -15px 0 15px;
     padding-bottom: 10px;
@@ -100,12 +101,12 @@ body {
 }
 
 .rememberForgotRegister label input {
-    accent-color: black;
+    accent-color: white;
     margin-right: 3px;
 }
 
 .rememberForgotRegister a {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 
@@ -129,14 +130,14 @@ body {
     position: absolute;
     right: 8px;
     font-size: 1.2em;
-    color: black;
+    color: white;
     line-height: 57px;
 }
 
 .birthdate input {
     padding: 5px;
     background: transparent;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 2%;
     outline: none;
 }
@@ -156,7 +157,7 @@ body {
 .gender select {
     padding: 5px;
     background: transparent;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 2%;
     outline: none;
 }
@@ -169,7 +170,7 @@ body {
     position: absolute;
     right: 8px;
     font-size: 1.2em;
-    color: black;
+    color: white;
     line-height: 57px;
 }
 
@@ -189,7 +190,7 @@ body {
     position: absolute;
     right: 8px;
     font-size: 1.2em;
-    color: black;
+    color: white;
     line-height: 57px;
 }
 
@@ -199,13 +200,13 @@ textarea {
     padding: 5px;
     width: 100%;
     background: transparent;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 3%;
     outline: none;
 }
 
 ::placeholder {
-    color: black;
+    color: white;
     text-align: center;
 }
 
@@ -233,7 +234,7 @@ textarea:is(:focus, :valid) {
     position: absolute;
     right: 8px;
     font-size: 1.2em;
-    color: black;
+    color: white;
     line-height: 57px;
 }
 
@@ -243,13 +244,13 @@ textarea:is(:focus, :valid) {
     padding: 5px;
     width: 100%;
     background: transparent;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 3%;
     outline: none;
 }
 
 .descriptionEnterprise textarea::placeholder {
-    color: black;
+    color: white;
     text-align: center;
 }
 
@@ -265,7 +266,7 @@ textarea:is(:focus, :valid) {
     display: inline-block;
     padding: 10px 20px;
     background: linear-gradient(90deg,#0b57bb,#0077b6);
-    color: #333;
+    color: white;
     left: 100px;
     width: 49%;
     text-decoration: none;
@@ -280,4 +281,20 @@ textarea:is(:focus, :valid) {
 
 .loginLink {
     cursor: pointer;
+}
+
+.icon {
+    color: white;
+}
+
+label {
+    color: white;
+}
+
+select {
+    color: white;
+}
+
+input {
+    color: white;
 }

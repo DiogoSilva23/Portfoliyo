@@ -73,15 +73,16 @@ nav ul li a:hover::after{
     text-align: center;
     height: 60%;
     position: relative;
-    transition: 0.5s ease;
 }
 
 .moveOpen {
-    right: 480px;
+    transform: translateX(-500px);
+    transition: transform 0.5s ease;
 }
 
 .moveClose {
-    left: 0px;
+    transform: translateX(0px);
+    transition: transform 0.5s ease;
 }
 
 .header-text h1{

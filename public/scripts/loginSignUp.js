@@ -174,6 +174,7 @@ function logOn(){
     document.getElementById("logoutPopUpButton").style.display = "inline";
     document.getElementById("portfolio").style.display = "inline";
     document.getElementById("loginMessage").style.display = "none";
+    document.getElementById("")
 }
 
 function logOff(){
