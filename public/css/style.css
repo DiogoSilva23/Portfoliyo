@@ -18,7 +18,8 @@ h1 {
 
 body {
     background: linear-gradient(90deg,#0077b6,#0096c7);
-    background-image: url("../images/893.jpg")
+    background-image: url("../images/893.jpg");
+    color: white;
 }
 
 header {
@@ -42,6 +43,7 @@ nav{
 }
 
 .logo{
+    position: relative;
     width: 50px;
     margin-right: 10px;
 }
@@ -125,6 +127,58 @@ nav ul li a:hover::after{
     backdrop-filter: blur(20px);
     left:0;
     bottom:0;
+}
+
+.openMenuButtonResponsive {
+    color: white;
+    display: none;
+}
+
+@media screen and (max-width: 750px) {
+    .openMenuButtonResponsive {
+        font-size: 30px;
+        margin-top: -40px;
+        margin-right: 10px;
+        display: block;
+        float: right;
+        cursor: pointer;
+    }
+
+    nav {
+        top: 0;
+        position: fixed;
+        width: 100%;
+        display: block;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        background: linear-gradient(90deg,#023e8a,#0077b6);
+        backdrop-filter: blur(20px);
+        overflow: hidden;
+        z-index: 2;
+        padding: 10px;
+
+    }
+
+    nav ul li{
+        display: block;
+        text-align: center;
+        padding: 5px;
+    }
+
+    nav img {
+        text-align: center;
+        display: block;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+    }
+
+    nav ul {
+        display: none;
+        transform: scale(0);
+        transition: transform 1s ease;
+    }
 }
 
 /*

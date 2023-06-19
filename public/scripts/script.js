@@ -24,3 +24,38 @@ function opentab(tabId, link) {
     var tabContent = document.getElementById(tabId);
     tabContent.classList.add('activetab');
 }
+
+function showMenu() {
+  var menu = document.getElementById("menu");
+
+  if (menu.style.display === "none") {
+    menu.style.display = "block";
+  } else {
+    menu.style.display = "none";
+  }
+}
+
+/* Responsive Menu BackUp
+function toggleMenu() {
+  var regularMenu = document.getElementById("regularMenu");
+  var responsiveMenu = document.getElementById("responsiveMenu");
+
+  if (regularMenu.style.display === "none") {
+    regularMenu.style.display = "block";
+    responsiveMenu.classList.remove("show");
+  } else {
+    regularMenu.style.display = "none";
+    responsiveMenu.classList.add("show");
+  }
+}
+
+window.addEventListener("resize", function() {
+  var screenWidth = window.innerWidth;
+  var regularMenu = document.getElementById("regularMenu");
+  var responsiveMenu = document.getElementById("responsiveMenu");
+
+  if (screenWidth > 750) {
+    regularMenu.style.display = "block";
+    responsiveMenu.classList.remove("show");
+  }
+});*/
