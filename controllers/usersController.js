@@ -14,11 +14,12 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.registerUser = async (req, res) => {
+  console.log('AQUIIII')
   const user = req.body;
-  const username = user.username;
+  const username = user.username.trim();
   const name = user.name;
   const password = user.password;
-  const email = user.email;
+  const email = user.email.trim();
   const location = user.location;
   const description = user.description;
   const gender = user.gender;
@@ -36,7 +37,19 @@ exports.registerUser = async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt);
 
   //Verificar se existe o nome ou o email associados a uma empresa ou a um utilizador
-  const userExists = await existingUser(email);
+  const userExists = await existingUser(username);
+  
+  if (userExists){
+    return res.status(409).send({
+      msg: `Username em uso!`
+    });
+  }
+  const emailExists = await existingEmail(email);
+  if (emailExists){
+    return res.status(409).send({
+      msg: `Email ja registado!`
+    });
+  }
 
   if (!userExists) {
     const newUser = {
@@ -72,28 +85,45 @@ exports.registerUser = async (req, res) => {
 
 function checkVariables(...variables) {
   for (let i = 0; i < variables.length; i++) {
-    if (typeof variables[i] === 'undefined' || variables[i].trim() == '') {
-      return true; // At least one variable is undefined
+    if (typeof variables[i] === 'undefined') {
+      if(variables[i].trim() === ''){
+        return true; // At least one variable is undefined
+      }
     }
   }
   return false; // All variables are defined
 }
 
-
-function existingUser(email) {
-    // Query to check if the user exists
-    const query = `SELECT COUNT(*) AS count FROM users WHERE email = '${email}'`;
-    return new Promise((resolve, reject) => {
-      connection.query(query, function (err, result) {
-        if (err) {
-          reject(err);
-        } else {
-          const count = result[0].count;
-          resolve(count > 0); // Returns true if the count is greater than 0
-        }
-      });
+function existingEmail(email) {
+  const query = `SELECT COUNT(*) AS count FROM users WHERE email = '${email}'`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        const count = result[0].count;
+        resolve(count > 0); // Returns true if the count is greater than 0
+      }
     });
-  }
+  });
+}
+
+function existingUser(user) {
+  console.log(user)
+  // Query to check if the user exists
+  const query = `SELECT COUNT(*) AS count FROM users WHERE nick = '${user}'`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        const count = result[0].count;
+        console.log('NUMERO', count)
+        resolve(count > 0); // Returns true if the count is greater than 0
+      }
+    });
+  });
+}
 
 async function createUser(user) {
     id = await generateRandomId(user.email)
@@ -296,3 +326,4 @@ function existingCompany(email) {
     });
   });
 }
+
