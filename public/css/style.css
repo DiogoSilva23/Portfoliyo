@@ -173,12 +173,6 @@ nav ul li a:hover::after{
         align-items: center;
         justify-content: center;
     }
-
-    nav ul {
-        display: none;
-        transform: scale(0);
-        transition: transform 1s ease;
-    }
 }
 
 /*
