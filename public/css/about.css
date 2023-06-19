@@ -7,16 +7,26 @@ body {
     height: 100%;
 }
 
+h1 {
+    margin-top: 50px;
+}
+
 .row{
     background-color: #0077b6;
-    margin-top: 70px;
+    margin-top: 50px;
     margin-bottom: 40px;
     display: flex;
     flex-wrap: wrap;
     padding: 50px;
+    transform: scale(1);
+    transition: transform 0.5s ease;
     border: 3px solid rgba(255, 255, 255, .5);
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
     border-radius: 10px;
+}
+
+.row:after {
+    transition: 0.5s ease;
 }
 
 .row:hover {
@@ -43,13 +53,6 @@ body {
     flex-basis: 60%;
 }
 
-.subtitle{
-    text-align: center;
-    font-size: 60px;
-    font-weight: 600;
-    color: white;
-}
-
 .about-name{
     font-size: 25px;
     font-weight: 300;
@@ -67,6 +70,7 @@ body {
     font-weight: 500;
     cursor: pointer;
     position: relative;
+    transition: 0.5s ease;
 }
 
 .tablinks::after{
@@ -81,7 +85,7 @@ body {
 }
 
 .tablinks.activelink::after{
-    width:50%
+    width:50%;
 }
 
 .tabcontents ul li{
