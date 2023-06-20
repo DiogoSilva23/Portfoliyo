@@ -12,9 +12,9 @@ h1 {
     color: white;
 }
 
-/*#portfolio {
+#portfolio {
     display: none;
-}*/
+}
 
 body {
     background: linear-gradient(90deg,#0077b6,#0096c7);

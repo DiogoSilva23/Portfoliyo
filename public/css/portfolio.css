@@ -1,57 +1,58 @@
 :root {
-    /* gradient */
-    --bg-gradient-jet: linear-gradient(
-      to bottom right, 
-      hsla(224, 73%, 40%, 0.251) 0%, 
-      hsla(224, 73%, 40%, 0) 100%
-    ), hsl(240, 2%, 13%);
-    --border-gradient-onyx: linear-gradient(
-      to bottom right, 
-      hsl(0, 0%, 25%) 0%, 
-      hsla(0, 0%, 25%, 0) 50%
-    );
-  
-    /* solid */
-    --jet: hsl(224, 73%, 40%);
-    --onyx: hsl(224, 73%, 40%);
-    --eerie-black-1: hsl(224, 73%, 40%);
-    --eerie-black-2: hsl(224, 73%, 40%);
-    --smoky-black: hsl(224, 73%, 40%);
-    --white-1: hsl(0, 0%, 100%);
-    --white-2: hsl(0, 0%, 98%);
-    --orange-yellow-crayola: hsl(0, 0%, 0%);
-    --light-gray: hsl(0, 0%, 84%);
-    --light-gray-70: hsla(0, 0%, 84%, 0.7);
-  
-    /* font-family */
-    --ff-poppins: 'Poppins', sans-serif;
-  
-    /* font-size */
-    --fs-1: 24px;
-    --fs-2: 18px;
-    --fs-3: 17px;
-    --fs-4: 16px;
-    --fs-5: 15px;
-    --fs-6: 14px;
-    --fs-7: 13px;
-    --fs-8: 11px;
-  
-    /* font-weight */
-    --fw-300: 300;
-    --fw-400: 400;
-    --fw-500: 500;
-    --fw-600: 600;
-  
-    /* shadow */
-    --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
-    --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
-    --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25);
-    --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.15);
-    --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.25);
-  
-    /* transition */
-    --transition-1: 0.25s ease;
-    --transition-2: 0.5s ease-in-out;
+  /* gradient */
+  --bg-gradient-jet: linear-gradient(
+    to bottom right,
+    #0077b6 0%,
+    rgba(0, 119, 182, 0) 100%
+  ), hsl(240, 2%, 13%);
+  --border-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 25%) 0%,
+    hsla(0, 0%, 25%, 0) 50%
+  );
+
+  /* solid */
+  --jet: #0077b6;
+  --onyx: #0077b6;
+  --eerie-black-1: #0077b6;
+  --eerie-black-2: #0077b6;
+  --smoky-black: #0077b6;
+  --white-1: #ffffff;
+  --white-2: #f9f9f9;
+  --orange-yellow-crayola: #000000;
+  --light-gray: #d6d6d6;
+  --light-gray-70: hsla(0, 0%, 84%, 0.7);
+
+
+  /* font-family */
+  --ff-poppins: 'Poppins', sans-serif;
+
+  /* font-size */
+  --fs-1: 24px;
+  --fs-2: 18px;
+  --fs-3: 17px;
+  --fs-4: 16px;
+  --fs-5: 15px;
+  --fs-6: 14px;
+  --fs-7: 13px;
+  --fs-8: 11px;
+
+  /* font-weight */
+  --fw-300: 300;
+  --fw-400: 400;
+  --fw-500: 500;
+  --fw-600: 600;
+
+  /* shadow */
+  --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
+  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
+  --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25);
+  --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.15);
+  --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.25);
+
+  /* transition */
+  --transition-1: 0.25s ease;
+  --transition-2: 0.5s ease-in-out;
 }
   
 a { text-decoration: none; }
@@ -129,6 +130,9 @@ img, ion-icon, a, button, time, span { display: block; }
   max-height: 112px;
   overflow: hidden;
   transition: var(--transition-2);
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 
 .sidebar.active { max-height: 405px; }
@@ -258,6 +262,12 @@ img, ion-icon, a, button, time, span { display: block; }
 /*-----------------------------------*\
   #ABOUT
 \*-----------------------------------*/
+.about {
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
 .about .article-title { margin-bottom: 15px; }
 
 .about-text {
