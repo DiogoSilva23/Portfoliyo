@@ -183,8 +183,9 @@ function logOn(){
     document.getElementById("loginMessage").style.display = "none";
     document.getElementById("friendsListButton").style.display = "inline-block";
     document.getElementById("userSearch").style.display = "inline-block";
+    document.getElementById("jobOffers").style.display = "inline-block";
     document.getElementById("html").style.overflowY = "scroll";
-    document.getElementById("")
+    document.getElementById("");
 }
 
 function logOff(){
@@ -193,6 +194,7 @@ function logOff(){
     document.getElementById("logoutPopUpButton").style.display = "none";
     document.getElementById("friendsListButton").style.display = "none";
     document.getElementById("portfolio").style.display = "none";
+    document.getElementById("jobOffers").style.display = "none";
     document.getElementById("userSearch").style.display = "none";
     window.location.href = "../index.html";
 }

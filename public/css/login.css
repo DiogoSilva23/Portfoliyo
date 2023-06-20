@@ -90,7 +90,14 @@
     border-bottom-left-radius: 20px;
     cursor: pointer;
     z-index: 1;
+    transition: .5s;
 }
+
+.loginPopUp .closeIcon:hover {
+    background-color: #155ebd;
+    transition: .3s;
+}
+
 
 .formBox h2 {
     font-size: 2em;
@@ -131,6 +138,13 @@
     padding: 0 7px 0 5px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+}
 .inputBox .icon {
     position: absolute;
     right: 8px;
@@ -173,6 +187,12 @@
     font-size: 1em;
     color: white;
     font-weight: 500;
+    transition: .3s;
+}
+
+.loginRegisterButton:hover {
+    background-color: #155ebd;
+    transition: .3s;
 }
 
 .loginToRegister {
@@ -207,6 +227,12 @@
     width: 100%;
     text-align: center;
     border-radius: 7px;
+    transition: .3s
+}
+
+.loginTab:hover {
+    background-color: #155ebd;
+    transition: .3s
 }
 
 /*Responsividade*/

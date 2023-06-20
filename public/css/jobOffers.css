@@ -1,0 +1,27 @@
+.jobs {
+    margin-top: 30px;
+    padding: 3% 20%;
+    text-align: center;
+}
+
+.noJobOffers {
+    background-color: #0077b6;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    padding: 50px;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+    border: 3px solid rgba(255, 255, 255, .5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+}
+
+.noJobOffers:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
+
+.noJobOffers p {
+    text-align: center;
+    font-size: 25px;
+}
