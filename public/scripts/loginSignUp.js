@@ -68,10 +68,10 @@ async function registerUser() {
 
 async function loginUser() {
     const email = document.getElementById("professionalEmail").value;
-    const password = document.getElementById("professionalPassword").value;
+    const pword = document.getElementById("professionalPassword").value;
     const user = {
         email: email,
-        password: password
+        pword: pword
     }
     console.log(user)
     const reply = await makeRequest("https://localhost:8000/api/user/login", {
@@ -80,12 +80,13 @@ async function loginUser() {
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
     json = await reply.json();
+    console.log(json.user)
     //mudar isto
     if (reply.status === 201){
         document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
         createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
-        createCookie('user', JSON.stringify(user), 0.5)
+        createCookie('user', JSON.stringify(json.user), 0.5)
         logOn()
     }
     else{
@@ -138,12 +139,8 @@ function moveHeaderTextClose() {
 
 async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO LOGIN
     const cookie = JSON.parse(readCookie('user'))
-    const email = cookie.email
-    const password = cookie.password
-    const user = {
-        email: email,
-        password: password
-    }
+    const user = cookie
+    console.log('COOKIE', cookie)
 
     const reply = await makeRequest("https://localhost:8000/api/user/login", {
         method: "POST",
@@ -282,7 +279,8 @@ async function loginCompany() {
     const password = document.getElementById("enterprisePassword").value;
     const company = {
         email: email,
-        password: password
+        password: password,
+        type: "company"
     }
     console.log(company)
     const reply = await makeRequest("https://localhost:8000/api/company/login", {
@@ -294,8 +292,8 @@ async function loginCompany() {
     //mudar isto
     if (reply.status === 201){
         document.getElementById("loginMessage").innerHTML = json.msg;
-        createCookie('companyToken', json.token, 0.5)  //VERIFICAR ESTA CENA
-        createCookie('company', JSON.stringify(company), 0.5)
+        createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
+        createCookie('user', JSON.stringify(company), 0.5)
         logOn()
         document.getElementById("portfolio").style.display = "none";
     }
