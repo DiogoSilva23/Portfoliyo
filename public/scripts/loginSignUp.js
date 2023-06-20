@@ -96,11 +96,11 @@ async function loginUser() {
 }
   
 document.addEventListener('keypress', function (event) {
-if (event.key === 'Enter') {
-    if (document.activeElement.id === 'professionalEmail' || document.activeElement.id === 'professionalPassword') {
-        loginUser(); // Call the loginUser function when Enter key is pressed on the email or password input fields
+    if (event.key === 'Enter') {
+        if (document.activeElement.id === 'professionalEmail' || document.activeElement.id === 'professionalPassword') {
+            loginUser(); // Call the loginUser function when Enter key is pressed on the email or password input fields
+        }
     }
-}
 });
 
 // EVENT LISTENERS DO LOGIN E DO SIGN UP
@@ -167,9 +167,6 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
             logOn()
         }
     }
-
-   
-
 }
 
 async function logOut(){
@@ -181,15 +178,15 @@ async function logOut(){
 function logOn(){
     document.getElementById("loginPopUp").classList.remove('activePopUp');
     document.getElementById("loginPopUpButton").style.display = "none";
-    document.getElementById("logoutPopUpButton").style.display = "inline";
-    document.getElementById("portfolio").style.display = "inline";
+    document.getElementById("logoutPopUpButton").style.display = "inline-block";
+    document.getElementById("portfolio").style.display = "inline-block";
     document.getElementById("loginMessage").style.display = "none";
     document.getElementById("")
 }
 
 function logOff(){
     document.getElementById("loginPopUp").classList.add('activePopUp');
-    document.getElementById("loginPopUpButton").style.display = "inline";
+    document.getElementById("loginPopUpButton").style.display = "inline-block";
     document.getElementById("logoutPopUpButton").style.display = "none";
     document.getElementById("portfolio").style.display = "none";
     window.location.href = "../index.html";
@@ -219,7 +216,6 @@ function switchLoginTab(tab) {
         document.getElementById('professionalLoginForm').style.display = 'block';
         document.getElementById('loginUser').style.display = 'block';
         document.getElementById('loginCompany').style.display = 'none';
-
     } else if (tab === 'enterprise') {
         document.getElementById('enterpriseTab').style.display = 'none';
         document.getElementById('professionalTab').style.display = 'block';
@@ -227,7 +223,6 @@ function switchLoginTab(tab) {
         document.getElementById('enterpriseLoginForm').style.display = 'block';
         document.getElementById('loginUser').style.display = 'none';
         document.getElementById('loginCompany').style.display = 'block';
-
     }
   }
 
@@ -316,9 +311,9 @@ async function loginCompany() {
 }
   
 document.addEventListener('keypress', function (event) {
-if (event.key === 'Enter') {
-    if (document.activeElement.id === 'enterpriseEmail' || document.activeElement.id === 'enterprisePassword') {
-    loginCompany(); // Call the loginUser function when Enter key is pressed on the email or password input fields
+    if (event.key === 'Enter') {
+        if (document.activeElement.id === 'enterpriseEmail' || document.activeElement.id === 'enterprisePassword') {
+        loginCompany(); // Call the loginUser function when Enter key is pressed on the email or password input fields
+        }
     }
-}
 });
