@@ -4,70 +4,92 @@ h1 {
     font-size: 60px;
     font-weight: 600;
     color: white;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
-h2 {
-    font-size: 27px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-h3 {
-    font-size: 17px;
-}
-
-.row {
-    padding: 2% 25%;
-}
-
-.contactCard{
-    padding: 30px 30px;
-    background-color: #0077b6;
-    width: 325px;
-    height: 500px;
-    margin-bottom: 40px;
+.contacts {
+    padding: 50px;
     text-align: center;
-    display: block;
-    transform: scale(1);
-    transition: transform 0.5s ease;
+}
+
+.contactInfo {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 100px;
+}
+
+.card {
     border: 3px solid rgba(255, 255, 255, .5);
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
     border-radius: 10px;
+    background: #0077b6;
+    padding: 0 20px;
+    margin: 0 20px;
+    width: calc(33% - 20px);
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.5s ease;
 }
 
-.contactCard:hover {
+.card:hover {
     transform: scale(1.05);
     transition: transform 0.5s ease;
 }
 
-.contactCard img {
-    width: 170px;
-    margin-top: 10px;
-    border-radius: 100%;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+.cardIcon {
+    font-size: 10px;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    line-height: 60px !important;
+    transition: 0.5s linear;
 }
 
-.contactInfo {
-    font-size: 14px;
-    margin-top: 50px;
-    text-align: left;
-    padding-left: 10px;
-    padding-right: 10px;
+.card:hover .cardIcon {
+    background: none;
+    color: rgb(90, 195, 255);
+    transform: scale(1.6);
 }
 
-.contactInfo ion-icon {
-    font-size: 13px;
-    padding-right: 5px;
+.card p {
+    margin-top: 40px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    max-height: 0;
+    opacity: 0;
+    transition: 0.5s linear;
 }
 
-.contactInfo i {
-    font-size: 13px;
-    padding-right: 6px;
-    padding-left: 2px;
+.card:hover p {
+    max-height: 40px;
+    opacity: 1;
 }
+
+@media screen and (max-width: 1200px) {
+    .contactInfo {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+}
+
 /*body {
     font-family: Arial, sans-serif;
     margin: 0;
