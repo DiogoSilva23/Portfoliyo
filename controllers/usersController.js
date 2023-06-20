@@ -288,12 +288,12 @@ async function createCompany(company) {
 
 exports.loginCompany = async (req, res) => {
   const email = req.body.email;
-  const password = req.body.password;
-  console.log(email, password)
+  const pword = req.body.pword;
+  console.log('YOOOO', email, pword)
   if (email.length == 0){
     return res.status(405).json({ msg: `Email não inserido!` })   //verificar se pode ser 405
   }
-  if (password.length == 0){
+  if (pword.length == 0){
     return res.status(405).json({ msg: `Password não inserida!` })  //verificar se pode ser 405
   }
   const companyExist = await existingCompany(email)
@@ -306,15 +306,18 @@ exports.loginCompany = async (req, res) => {
         return res.status(500).send({msg: "Erro no Log in"});
     }
     const company = result[0];
-    const samePassword = await bcrypt.compare(password, company.pword)
+    if(pword === company.pword){
+      const refreshToken = jwt.sign(company, process.env.REFRESH_TOKEN_SECRET)
+      return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken, company: company})
+    }
+    const samePassword = await bcrypt.compare(pword, company.pword)
     if (!samePassword){
         return res.status(401).json({ msg: `Password invalida!` })
     }
     //const accessToken = generateAccessToken(user) 
     const refreshToken = jwt.sign(company, process.env.REFRESH_TOKEN_SECRET)
     //token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-    return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken})
-
+    return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken, company: company})
 })
 }
 

@@ -141,22 +141,35 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
     const cookie = JSON.parse(readCookie('user'))
     const user = cookie
     console.log('COOKIE', cookie)
+    console.log(typeof(cookie.nick))
+    if (typeof(cookie.nick) === "string"){
+        const reply = await makeRequest("https://localhost:8000/api/user/login", {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+        });
+        json = await reply.json();
+        document.getElementById("loginMessage").style.display = "block";
+        document.getElementById("loginMessage").innerHTML = json.msg;
+        if (reply.status === 201){
+            logOn()
+        }
+    }else{
+        const reply = await makeRequest("https://localhost:8000/api/company/login", {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+        });
+        json = await reply.json();
+        document.getElementById("loginMessage").style.display = "block";
+        document.getElementById("loginMessage").innerHTML = json.msg;
+        if (reply.status === 201){
+            logOn()
+        }
+    }
 
-    const reply = await makeRequest("https://localhost:8000/api/user/login", {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-    });
-    json = await reply.json();
-    if (reply.status === 201){
-        document.getElementById("loginMessage").style.display = "block";
-        document.getElementById("loginMessage").innerHTML = json.msg;
-        logOn()
-    }
-    else{
-        document.getElementById("loginMessage").style.display = "block";
-        document.getElementById("loginMessage").innerHTML = json.msg;
-    }
+   
+
 }
 
 async function logOut(){
@@ -243,14 +256,14 @@ document.addEventListener('DOMContentLoaded', function() {
 async function registerCompany() {
     const companyName = document.getElementById("registerEnterpriseName").value;
     const email = document.getElementById("registerEnterpriseEmail").value;
-    const password = document.getElementById("registerEnterprisePassword").value;
+    const pword = document.getElementById("registerEnterprisePassword").value;
     const websiteURL =  document.getElementById("registerEnterpriseURL").value;
     const logoURL = document.getElementById("registerEnterpriseLogoURL").value;
     const description = document.getElementById("registerEnterpriseDescription").value;
     const company = {
         companyName: companyName,
         email: email,
-        password: password,
+        pword: pword,
         websiteURL: websiteURL,
         logoURL: logoURL,
         description: description,
@@ -276,13 +289,12 @@ async function registerCompany() {
 
 async function loginCompany() {
     const email = document.getElementById("enterpriseEmail").value;
-    const password = document.getElementById("enterprisePassword").value;
+    const pword = document.getElementById("enterprisePassword").value;
     const company = {
         email: email,
-        password: password,
-        type: "company"
+        pword: pword,
     }
-    console.log(company)
+    console.log('jaun', company)
     const reply = await makeRequest("https://localhost:8000/api/company/login", {
         method: "POST",
         body: JSON.stringify(company),
@@ -293,7 +305,7 @@ async function loginCompany() {
     if (reply.status === 201){
         document.getElementById("loginMessage").innerHTML = json.msg;
         createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
-        createCookie('user', JSON.stringify(company), 0.5)
+        createCookie('user', JSON.stringify(json.company), 0.5)
         logOn()
         document.getElementById("portfolio").style.display = "none";
     }
