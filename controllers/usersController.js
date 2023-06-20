@@ -162,17 +162,18 @@ async function createUser(user) {
   exports.loginUser = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log(email, password)
+    console.log('TESTE123', email, password)
     if (email.length == 0){
       return res.status(405).json({ msg: `Email não inserido!` })   //verificar se pode ser 405
     }
     if (password.length == 0){
       return res.status(405).json({ msg: `Password não inserida!` })  //verificar se pode ser 405
     }
-    const userExist = await existingUser(email)
-    if (!userExist) {
+    const emailExist = await existingEmail(email)
+    if (!emailExist) {
         return res.status(404).json({ msg: `Email não correspondente a nenhuma conta` })
     };
+
     const query = `SELECT * FROM users WHERE email = '${email}'`;
     connection.query(query, async function (err, result) {
       if (err) {
