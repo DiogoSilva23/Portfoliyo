@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html id="html" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfoliyo</title>
     <link rel="icon" type="image/x-icon" href="/images/briefcase.png">
-    <link rel="stylesheet" href="css/style.css"> <!--IMPORT CSS-->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/logout.css">
-    <link rel="stylesheet" href="css/contacts.css">
+    <link rel="stylesheet" href="css/userSearch.css">
     <link rel="stylesheet" href="css/friendsList.css">
-    <script src="https://kit.fontawesome.com/1dae1470f1.js" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
@@ -31,8 +30,31 @@
                 <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logOut()">Logout</button></li>
                 <li id="friendsListButton"><button class="friendsListButton">Friends</button></li>
             </ul>
+
+            <!--Menu Responsivo Backup
+            <div class="teste">
+                <img src="/images/briefcase.png" class="logo">
+                <ion-icon name="menu" id="openMenuButtonResponsive" class="openMenuButtonResponsive" onclick="toggleMenu()"></ion-icon>
+              </div>
+            
+              <ul class="menuTabs" id="regularMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li id="portfolio"><a href="../portfolio.html">Portfolio</a></li>
+                <li><a href="../aboutUs.html">About us</a></li>
+                <li><a href="../FAQ.html">FAQ</a></li>
+                <li><a href="../contacts.html">Contacts</a></li>
+                <li id="loginPopUpButton"><button class="loginPopUpButton" onclick="moveHeaderTextOpen()">Login</button></li>
+                <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logOut(); moveHeaderTextClose()">Logout</button></li>
+                <li id="friendsListButton"><button class="friendsListButton">Friends</button></li>
+              </ul>
+
+            <div id="responsiveMenu"></div>-->
         </nav>
     </header>
+
+    <div class="friendsList">
+        <h2>Friends List<ion-icon class="closeFriendsList" name="close-outline"></ion-icon></h2>
+    </div>
 
     <div class="loginPopUp" id="loginPopUp">
         <span class="closeIcon">
@@ -79,8 +101,8 @@
                 <a>Forgot Password?</a>
             </div>
       
-            <button type="submit" class="loginRegisterButton" onclick="loginUser()" id="loginUser">Login</button>
-            <button type="submit" class="loginRegisterButton" onclick="loginCompany()" style= "display: none" id="loginCompany">Login</button>
+            <button type="submit" class="loginRegisterButton" onclick="loginUser();" id="loginUser">Login</button>
+            <button type="submit" class="loginRegisterButton" onclick="loginCompany();" style= "display: none" id="loginCompany">Login</button>
       
       
             <div class="loginToRegister">
@@ -89,46 +111,22 @@
             <p id="loginMessage"></p>
         </div>
     </div>
-
-    <div class="contacts">
-        <h1>Contacts</h1>
-        <div class="contactInfo">
-            
-            <div class="card">
-                <ion-icon class="cardIcon" name="mail"></ion-icon>
-                <p>email@domain.com</p>
-            </div>
-
-            <div class="card">
-                <ion-icon class="cardIcon" name="apps"></ion-icon>
-                <p>+99999999</p>
-            </div>
-
-            <div class="card">
-                <ion-icon class="cardIcon" name="location"></ion-icon>
-                <p>Lisboa, Portugal</p>
-            </div>
-        </div>
-    </div>
-
-    <!--
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search contacts...">
-    </div>
-    <ul id="contactList">
-    Contact items will be dynamically added here
-    </ul>-->
-    
-
+      
     <footer class="copyright">
         <p>Copyright © Portfoliyo</p>
     </footer>
 
+    <div class="searchUser">
+        <h1>Search User</h1>
+        <div class="searchBar">
+            <input text="text" placeholder="Pesquise o utilizador..." name="searchUser">
+            <button type="submit"><ion-icon name="search"></ion-icon></button>
+        </div>
+    </div>
+
     <script src="scripts/loginSignUp.js"></script>
     <script src="scripts/script.js"></script>
     <script src="scripts/cookie.js"></script>
-    <script src="scripts/contacts.js"></script>
     <script> checkSession() </script>
-
 </body>
 </html>

@@ -16,6 +16,10 @@ h1 {
     display: none;
 }
 
+#userSearch {
+    display: none;
+}
+
 body {
     background: linear-gradient(90deg,#0077b6,#0096c7);
     background-image: url("../images/893.jpg");
