@@ -9,7 +9,5 @@ router.post('/api/user/registerUser', usersController.registerUser)
 router.post('/api/user/login', usersController.loginUser)
 router.post('/api/company/registerCompany', usersController.registerCompany)
 router.post('/api/company/login', usersController.loginCompany)
-//router.delete('/api/user/logout', usersController.logout)
-
-
+router.post('/api/user/getPortfolio', usersController.portfolioGet)
 module.exports = router;

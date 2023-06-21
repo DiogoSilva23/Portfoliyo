@@ -139,10 +139,24 @@ async function createUser(user) {
         if (err) {
           reject(err);
         } else {
+          createPortfolio(id, user);
           resolve(result);
         }
       });
     });
+  }
+
+function createPortfolio(id, user){
+  const query = `INSERT INTO portfolios (id, nick, email, userName, birthDate, userDescription, location, companiesView) VALUES ('${id}', '${user.username}', '${user.email}', '${user.name}', '${user.birtdate}', '${user.description}', '${user.location}', '${visibleProfile}')`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
   }
 
   function generateRandomId(email) {
@@ -181,6 +195,7 @@ async function createUser(user) {
           return res.status(500).send({msg: "Erro no Log in"});
       }
       const user = result[0];
+      console.log(user)
       if (pword === user.pword){
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
         return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken, user: user})
@@ -336,3 +351,14 @@ function existingCompany(email) {
   });
 }
 
+exports.portfolioGet = async (req, res) => {
+  const email = req.body.email;  
+  const query = `SELECT * FROM portfolios WHERE email = '${email}'`;
+  connection.query(query, async function (err, result) {
+    if (err) {
+        return res.status(500).send({msg: "Erro ao tentar obter o portfolio"});
+    }
+    const portfolio = result[0];
+    return res.status(201).json({ msg: `Logado com sucesso`,  portfolio: portfolio})
+})
+}

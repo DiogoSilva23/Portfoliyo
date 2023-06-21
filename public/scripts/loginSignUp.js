@@ -66,6 +66,8 @@ async function registerUser() {
     }
 }
 
+
+
 async function loginUser() {
     const email = document.getElementById("professionalEmail").value;
     const pword = document.getElementById("professionalPassword").value;
@@ -168,6 +170,8 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
         }
     }
 }
+
+
 
 async function logOut(){
     eraseCookie('user')
