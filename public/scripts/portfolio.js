@@ -184,37 +184,29 @@ function drawAboutme(){
             <h2 class="h2 article-title">About me</h2>
             </header>
 
-            <section class="about-text">
+            <section class="about-section">
             <!--#Meter aqui a descricao-->
-            <p>
-                I'm Creative Director and UI/UX Designer from Sydney, Australia, working in web development and print media.
-                I enjoy
-                turning complex problems into simple, beautiful and intuitive designs.
-            </p>
+                <div class="about-text">
+                    <textarea class="editable-input" placeholder="Enter your text here" disabled></textarea>
 
-            <p>
-                My job is to build your website so that it is functional and user-friendly but at the same time attractive.
-                Moreover, I
-                add personal touch to your product and make sure that is eye-catching and easy to use. My aim is to bring
-                across your
-                message and identity in the most creative way. I created web design for many famous brand companies.
-            </p>
+                    <button class="edit-button" onclick="toggleEditMode()">Edit</button>
+                </div>
             </section>
-
+            <hr>
             <section>
             <div class="tabtitles">
-                <p class="tablinks activelink" onclick="opentab('skills1', this)">Skills</p>
-                <p class="tablinks" onclick="opentab('experience1', this)">Experience</p>
-                <p class="tablinks" onclick="opentab('education1', this)">Education</p>
+                <p class="tablinks activelink" onclick="opentab('skills4', this)">Skills</p>
+                <p class="tablinks" onclick="opentab('experience4', this)">Experience</p>
+                <p class="tablinks" onclick="opentab('education4', this)">Education</p>
             </div>
-            <div class="tabcontents activetab" id="skills1">
+            <div class="tabcontents activetab" id="skills4">
                 <ul>
                     <li><span>UI/UX</span><br>Designing Web/App interfaces</li>
                     <li><span>Web Development</span><br>Web/App Development</li>
                     <li><span>App Development</span><br>Building Android/iOS apps</li>
                 </ul>
             </div>
-            <div class="tabcontents" id="experience1">
+            <div class="tabcontents" id="experience4">
                 <ul>
                     <li><span>2021 - Current</span><br>UI/UX Design Training at ET Insitute.</li>
                     <li><span>2019 - 2021</span><br>Team lead at StarApp LLC.</li>
@@ -222,7 +214,7 @@ function drawAboutme(){
                     <li><span>2016 - 2017</span><br>Internship at ekart eCommerce.</li>
                     </ul>
                 </div>
-                <div class="tabcontents" id="education1">
+                <div class="tabcontents" id="education4">
                     <ul>
                         <li><span>2016</span><br>UI/UX Design Training at ET Institute.</li>
                         <li><span>2016</span><br>MBA from MIT Bangalore.</li>
@@ -234,7 +226,7 @@ function drawAboutme(){
             <!-- service-->
             <section class="service">
 
-            <h3 class="h3 service-title">What i'm doing</h3>
+            <h2 class="h2 service-title">Portfolio</h2>
 
             <ul class="service-list">
 
@@ -305,6 +297,41 @@ function drawAboutme(){
 
             </ul>
 
-            </section>`
+            </section>
+        </article>`
     return aboutme
 }
+
+// Function to check if any paragraph is in edit mode
+function isEditModeActive() {
+    var urlParams = new URLSearchParams(window.location.search);
+    return urlParams.has('edit') && urlParams.get('edit') === 'true';
+}
+
+function toggleEditMode() {
+    var inputField = document.querySelector('.editable-input');
+    var editButton = document.querySelector('.edit-button');
+  
+    if (inputField.disabled) {
+        inputField.disabled = false;
+        editButton.textContent = 'Save';
+    } else {
+        inputField.disabled = true;
+        editButton.textContent = 'Edit';
+        saveText();
+    }
+}
+  
+window.addEventListener('DOMContentLoaded', function() {
+    loadText();
+  
+    // Disable the input field initially
+    var inputField = document.querySelector('.editable-input');
+    inputField.disabled = true;
+  
+    if (isEditModeActive()) {
+      toggleEditMode();
+    }
+
+    loadText()
+});

@@ -291,7 +291,7 @@ textarea:is(:focus, :valid) {
 }
   
 .switchTabs:hover {
-    background: linear-gradient(90deg, yellow, red);
+    background: linear-gradient(90deg,#11577c,#2f8dc0);
     transition: .3s;
     cursor: pointer;
 }
