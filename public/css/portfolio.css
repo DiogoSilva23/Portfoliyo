@@ -313,7 +313,7 @@ img, ion-icon, a, button, time, span { display: block; }
   z-index: -1;
 }
   
-.service-icon-box { margin-bottom: 10px; }
+.service-icon-box { margin-bottom: 10px; border-style: solid; border-color: white; border-width: 3px; border-radius: 5px;}
 
 .service-icon-box img { margin: auto; }
 

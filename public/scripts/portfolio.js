@@ -25,6 +25,7 @@ async function getPortfolio(){
 }
 
 async function fillPortfolio(){
+    console.log('AHGFHSJAFYGFUYGYUTZX')
     const portfolio = await getPortfolio(); 
     /*
     const portfolio = {
@@ -44,136 +45,34 @@ async function fillPortfolio(){
         name: portfolio.userName,
         title: "@" + portfolio.nick,
         email: portfolio.email,
-        phoneNumber: "",
+        phoneNumber: "+351 96777",
         birthDate: portfolio.birthDate,
         location: portfolio.location
     }
-    var sidebar = drawSidebar(userInfoSidebar)
+    fillSidebar(userInfoSidebar)
     const userInfoAboutme = {
-        description: portfolio.description
+        description: portfolio.userDescription
     }
-    var aboutme = drawAboutme()
-    var main = document.getElementById("portfolioMain")
-    main.innerHTML = sidebar + aboutme
+    console.log(userInfoAboutme)
+    //fillAboutme(userInfoAboutme, false)
 }
 
-function drawSidebar(userInfoSidebar){
-    var sidebar =    `<!--#SIDEBAR-->
-        <aside class="sidebar" data-sidebar>
 
-        <div class="sidebar-info">
-
-            <figure class="avatar-box">
-            <img src="/images/te.png" alt="Richard hanrick" width="80">
-            </figure>
-
-            <div class="info-content">
-            <h1 class="name" title="Richard hanrick">`+userInfoSidebar.name+`</h1>
-
-            <p class="title">`+userInfoSidebar.title+`</p>
-            </div>
-
-            <button class="info_more-btn" data-sidebar-btn>
-            <span>Show Contacts</span>
-
-            <ion-icon name="chevron-down"></ion-icon>
-            </button>
-
-        </div>
-
-        <div class="sidebar-info_more">
-
-            <div class="separator"></div>
-
-            <ul class="contacts-list">
-
-            <li class="contact-item">
-
-                <div class="icon-box">
-                <ion-icon name="mail-outline"></ion-icon>
-                </div>
-
-                <div class="contact-info">
-                <p class="contact-title">Email</p>
-
-                <a href="mailto:richard@example.com" class="contact-link" id="userEmail">`+userInfoSidebar.email+`</a>
-                </div>
-
-            </li>
-
-            <li class="contact-item">
-
-                <div class="icon-box">
-                <ion-icon name="phone-portrait-outline"></ion-icon>
-                </div>
-
-                <div class="contact-info">
-                <p class="contact-title">Phone</p>
-
-                <a href="tel:+12133522795" class="contact-link">`+userInfoSidebar.phoneNumber+`</a>
-                </div>
-
-            </li>
-
-            <li class="contact-item">
-
-                <div class="icon-box">
-                <ion-icon name="calendar-outline"></ion-icon>
-                </div>
-
-                <div class="contact-info">
-                <p class="contact-title">Birthday</p>
-
-                <time datetime="1982-06-23">`+userInfoSidebar.birthDate+`</time>
-                </div>
-
-            </li>
-
-            <li class="contact-item">
-
-                <div class="icon-box">
-                <ion-icon name="location-outline"></ion-icon>
-                </div>
-
-                <div class="contact-info">
-                <p class="contact-title">Location</p>
-
-                <address>`+userInfoSidebar.location+`</address>
-                </div>
-
-            </li>
-
-            </ul>
-
-            <div class="separator"></div>
-
-            <ul class="social-list">
-            <li class="social-item">
-                <a href="https://www.facebook.com" class="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-                </a>
-            </li>
-            
-            <li class="social-item">
-                <a href="https://www.twitter.com" class="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-                </a>
-            </li>
-            
-            <li class="social-item">
-                <a href="https://www.instagram.com" class="social-link">
-                <ion-icon name="logo-instagram"></ion-icon>
-                </a>
-            </li>
-            </ul>        
-
-        </div>
-
-        </aside>`
-    return sidebar
+function fillSidebar(userInfoSidebar){
+    document.getElementById("userSidebarName").innerHTML= userInfoSidebar.name;
+    document.getElementById("userSidebarTitle").innerHTML= userInfoSidebar.title;
+    document.getElementById("userSidebarEmail").innerHTML= userInfoSidebar.email;
+    document.getElementById("userSidebarPhone").innerHTML= userInfoSidebar.phoneNumber;
+    document.getElementById("userSidebarBirthday").innerHTML= userInfoSidebar.birthDate;
+    document.getElementById("userSidebarLocation").innerHTML= userInfoSidebar.location;
 }
 
-function drawAboutme(){
+function fillAboutme(userInfoAboutme, edit){
+    var textAboutme = `<textarea class="editable-input" placeholder="Enter your text here" disabled="">Descricao</textarea>`
+                       
+    if(!edit){
+        textAboutme = userInfoAboutme.description
+    }
     var aboutme = `<!--#main-content-->
         <div class="main-content">
 
@@ -186,10 +85,10 @@ function drawAboutme(){
 
             <section class="about-section">
             <!--#Meter aqui a descricao-->
+            
                 <div class="about-text">
-                    <textarea class="editable-input" placeholder="Enter your text here" disabled></textarea>
-
-                    <button class="edit-button" onclick="toggleEditMode()">Edit</button>
+                `+textAboutme+`
+                <button class="edit-button" onclick="toggleEditMode()">Edit</button>
                 </div>
             </section>
             <hr>
