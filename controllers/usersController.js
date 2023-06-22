@@ -10,7 +10,6 @@ exports.getUsers = async (req, res) => {
         console.log(result);
         res.json(result);
       });
-    connection.end()
 };
 
 exports.registerUser = async (req, res) => {
@@ -279,8 +278,6 @@ exports.registerCompany = async (req, res) => {
   }
 };
 
-
-
 function existingCompany(email) {
   // Query to check if the user exists
   const query = `SELECT COUNT(*) AS count FROM companies WHERE email = '${email}'`;
@@ -295,6 +292,7 @@ function existingCompany(email) {
     });
   });
 }
+
 
 async function createCompany(company) {
   id = await generateRandomId(company.email)
@@ -322,9 +320,17 @@ exports.loginCompany = async (req, res) => {
     return res.status(405).json({ msg: `Password não inserida!` })  //verificar se pode ser 405
   }
   const companyExist = await existingCompany(email)
+
   if (!companyExist) {
       return res.status(404).json({ msg: `Email não correspondente a nenhuma conta` })
   };
+
+  const companyValid = await validatedCompany(email)
+  console.log('VALIDACAO', companyValid)
+  if (!companyValid){
+    return res.status(405).json({ msg: `Empresa ainda nao validada por um Admin! Aguarde por validaçao` })
+  }
+
   const query = `SELECT * FROM companies WHERE email = '${email}'`;
   connection.query(query, async function (err, result) {
     if (err) {
@@ -346,20 +352,24 @@ exports.loginCompany = async (req, res) => {
 })
 }
 
-function existingCompany(email) {
+
+
+function validatedCompany(email) {
   // Query to check if the user exists
-  const query = `SELECT COUNT(*) AS count FROM companies WHERE email = '${email}'`;
+  const query = `SELECT validated FROM companies WHERE email = '${email}'`;
   return new Promise((resolve, reject) => {
     connection.query(query, function (err, result) {
       if (err) {
         reject(err);
       } else {
-        const count = result[0].count;
+        console.log(result[0])
+        const count = result[0].validated;
         resolve(count > 0); // Returns true if the count is greater than 0
       }
     });
   });
 }
+
 
 exports.portfolioGet = async (req, res) => {
   const email = req.body.email;  
