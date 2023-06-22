@@ -27,7 +27,7 @@ exports.registerUser = async (req, res) => {
   const visibleProfile = user.visibleProfile;
 
   //Mudar alguns checks (gender nao pode ser gender)
-  if (checkVariables(username, name, password, email, location, description, gender, birtdate, visibleProfile)){
+  if (checkVariables(username, name, password, email, location, description, gender, birtdate)){
     return res.status(500).send({
       msg: "É necessario preencher todos os campos"
     });
@@ -51,6 +51,12 @@ exports.registerUser = async (req, res) => {
     });
   }
 
+  if (gender === "gender"){
+    return res.status(409).send({
+      msg: `Gender not valid`
+    });
+  }
+
   if (!userExists) {
     const newUser = {
       username: username,
@@ -68,7 +74,7 @@ exports.registerUser = async (req, res) => {
       await createUser(newUser); // Call the newUser function to insert the user into the database
 
       return res.status(201).send({
-        msg: `${username} was created.`
+        msg: `${username} was created with success. Can login now`
       });
     } catch (error) {
       console.log(error);
@@ -84,11 +90,14 @@ exports.registerUser = async (req, res) => {
 };
 
 function checkVariables(...variables) {
+  console.log("variaveis ->", variables)
   for (let i = 0; i < variables.length; i++) {
+    console.log("var", i, variables[i])
     if (typeof variables[i] === 'undefined') {
-      if(variables[i].trim() === ''){
-        return true; // At least one variable is undefined
-      }
+      return true
+    }
+    if(variables[i].trim() === ""){
+      return true; // At least one variable is undefined or ""
     }
   }
   return false; // All variables are defined
@@ -255,7 +264,7 @@ exports.registerCompany = async (req, res) => {
       await createCompany(newCompany); // Call the newUser function to insert the user into the database
 
       return res.status(201).send({
-        msg: `${companyName} was created.`
+        msg: `${companyName} was created with success. Can logIn now`
       });
     } catch (error) {
       console.log(error);
@@ -269,6 +278,7 @@ exports.registerCompany = async (req, res) => {
     });
   }
 };
+
 
 
 function existingCompany(email) {

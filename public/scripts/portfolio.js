@@ -62,6 +62,7 @@ function fillSidebar(userInfoSidebar){
     document.getElementById("userSidebarName").innerHTML= userInfoSidebar.name;
     document.getElementById("userSidebarTitle").innerHTML= userInfoSidebar.title;
     document.getElementById("userSidebarEmail").innerHTML= userInfoSidebar.email;
+    document.getElementById("userSidebarEmail").href= "mailto:" + userInfoSidebar.email;
     document.getElementById("userSidebarPhone").innerHTML= userInfoSidebar.phoneNumber;
     document.getElementById("userSidebarBirthday").innerHTML= userInfoSidebar.birthDate;
     document.getElementById("userSidebarLocation").innerHTML= userInfoSidebar.location;
