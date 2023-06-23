@@ -20,10 +20,11 @@
     <header>
         <nav> <!--NAVIGATION MENU WITH LOGO-->
             <img src="/images/briefcase.png" class="logo">
-            <ion-icon name="menu" id="openMenuButtonResponsive" class="openMenuButtonResponsive" onclick="showMenu()"></ion-icon>
+            <ion-icon name="menu" class="openMenuButtonResponsive" onclick="showMenu()"></ion-icon>
+            <ion-icon name="people" class="openFriendListResponsive" onclick="showFriendList()"></ion-icon>
             <ul id="menu">
                 <li><a href="../index.html">Home</a></li>
-                <li id="portfolio"><a href="../portfolio.html">Portfolio</a></li>
+                <li class="portfolio"><a href="../portfolio.html">Portfolio</a></li>
                 <li id="userSearch"><a href="../userSearch.html">Search User</a></li>
                 <li id="jobOffers"><a href="../jobOffers.html">Job Offers</a></li>
                 <li><a href="../aboutUs.html">About us</a></li>
@@ -31,13 +32,25 @@
                 <li><a href="../contacts.html">Contacts</a></li>
                 <li id="loginPopUpButton"><button class="loginPopUpButton" onclick="moveHeaderTextOpen()">Login</button></li>
                 <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logOut(); moveHeaderTextClose()">Logout</button></li>
-                <li id="friendsListButton"><button class="friendsListButton">Friends</button></li>
             </ul>
         </nav>
     </header>
 
-    <div class="friendsList">
-        <h2>Friends List<ion-icon class="closeFriendsList" name="close-outline"></ion-icon></h2>
+    <div class="friendList" id="friendList">
+        <h2>Friends List</h2>
+        <ul class="friendItems">
+            <li>Friend 1</li>
+            <li>Friend 2</li>
+            <li>Friend 3</li>
+            <li>Friend 4</li>
+            <li>Friend 5</li>
+        </ul>
+        <div class="friendActions">
+            <input type="text" id="newFriendInput" placeholder="Enter friend's name">
+            <button id="addFriendButton"><ion-icon name="person-add" size="small"></ion-icon></button>
+            <button class="removeFriendButton"><ion-icon name="person-remove" size="small"></ion-icon></button>
+            <button class="notificationButton"><ion-icon name="notifications" size="small"></ion-icon></button>
+        </div>
     </div>
 
     <div class="loginPopUp" id="loginPopUp">

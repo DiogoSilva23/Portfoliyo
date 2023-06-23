@@ -12,7 +12,7 @@ h1 {
     color: white;
 }
 
-#portfolio {
+.portfolio {
     display: none;
 }
 
@@ -142,11 +142,25 @@ nav ul li a:hover::after{
     display: none;
 }
 
-@media screen and (max-width: 750px) {
+.openFriendListResponsive {
+    color: white;
+    display: none;
+}
+
+@media screen and (max-width: 950px) {
     .openMenuButtonResponsive {
         font-size: 30px;
         margin-top: -40px;
         margin-right: 10px;
+        display: block;
+        float: right;
+        cursor: pointer;
+    }
+
+    .openFriendListResponsive {
+        font-size: 30px;
+        margin-top: -41px;
+        margin-right: 55px;
         display: block;
         float: right;
         cursor: pointer;
@@ -165,7 +179,6 @@ nav ul li a:hover::after{
         overflow: hidden;
         z-index: 2;
         padding: 10px;
-
     }
 
     nav ul li{
@@ -181,6 +194,7 @@ nav ul li a:hover::after{
         align-items: center;
         justify-content: center;
     }
+
 }
 
 ::-webkit-scrollbar {
@@ -199,26 +213,15 @@ nav ul li a:hover::after{
     background-color: rgb(77, 77, 77);
 }
 
-/*
-.fixed-nav ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .fixed-nav ul li {
-    margin: 0px 10px; 
-  }
-  
-  .fixed-nav ul li a {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    
-  }*/
+@media screen and (min-width: 951px) and (max-width: 1600px) {
+    .openFriendListResponsive {
+        font-size: 30px;
+        margin-top: -5px;
+        margin-right: 5px;
+        margin-left: 5px;
+        display: block;
+        float: right;
+        cursor: pointer;
+    }
+
+}

@@ -648,11 +648,10 @@ hr {
   resize: none;
   overflow: hidden;
   height: auto;
-  min-height: 70px;
-  max-height: 400px;
+  min-height: 200px;
 }
 
 .editable-input:disabled {
-  background-color: #f5f5f5;
+  background-color: #48cae4;
   cursor: not-allowed;
 }

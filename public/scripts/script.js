@@ -35,6 +35,16 @@ function showMenu() {
   }
 }
 
+function showFriendList() {
+  var friendList = document.getElementById("friendList");
+
+  if (friendList.style.display === "none") {
+    friendList.style.display = "flex";
+  } else {
+    friendList.style.display = "none";
+  }
+}
+
 /* Responsive Menu BackUp
 function toggleMenu() {
   var regularMenu = document.getElementById("regularMenu");
@@ -59,3 +69,29 @@ window.addEventListener("resize", function() {
     responsiveMenu.classList.remove("show");
   }
 });*/
+
+// Get references to the required elements
+const friendItems = document.querySelector('.friendItems');
+const addFriendButton = document.getElementById('addFriendButton');
+const newFriendInput = document.getElementById('newFriendInput');
+
+// Function to add a new friend
+function addFriend() {
+  const friendName = newFriendInput.value;
+  
+  // Check if the input is not empty
+  if (friendName.trim() !== '') {
+    // Create a new list item
+    const listItem = document.createElement('li');
+    listItem.textContent = friendName;
+
+    // Append the new friend item to the friendItems list
+    friendItems.appendChild(listItem);
+
+    // Clear the input field
+    newFriendInput.value = '';
+  }
+}
+
+// Add event listener to the addFriendButton
+addFriendButton.addEventListener('click', addFriend);
