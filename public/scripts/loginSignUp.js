@@ -190,6 +190,7 @@ function logOn(){
     document.getElementById("jobOffers").style.display = "inline-block";
     document.getElementById("html").style.overflowY = "scroll";
     document.getElementById("");
+    moveHeaderTextClose()
 }
 
 function logOff(){
