@@ -1,5 +1,5 @@
 // Obter todas as questões
-var faqQuestions = document.querySelectorAll('.faq-question');
+var faqQuestions = document.querySelectorAll('.faqQuestion');
 
 // Adicionar um evento para cada questão
 faqQuestions.forEach(function(question) {

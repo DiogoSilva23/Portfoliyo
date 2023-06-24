@@ -128,13 +128,13 @@ closeFriendsList.addEventListener('click', ()=> {
 // MOVER TEXTO QUANDO O FORM ABRE/FECHA
 
 function moveHeaderTextOpen() {
-    const headerTextElement = document.querySelector('.header-text');
+    const headerTextElement = document.querySelector('.headerText');
     headerTextElement.classList.add('moveOpen');
     headerTextElement.classList.remove('moveClose');
 }
   
 function moveHeaderTextClose() {
-    const headerTextElement = document.querySelector('.header-text');
+    const headerTextElement = document.querySelector('.headerText');
     headerTextElement.classList.add('moveClose');
     headerTextElement.classList.remove('moveOpen');
 }
@@ -185,7 +185,7 @@ function logOn(){
     document.getElementById("logoutPopUpButton").style.display = "inline-block";
     document.querySelector(".portfolio").style.display = "inline-block";
     document.getElementById("loginMessage").style.display = "none";
-    document.querySelector(".friendList").style.display = "flex";
+    document.getElementById("friendList").style.display = "flex";
     document.getElementById("userSearch").style.display = "inline-block";
     document.getElementById("jobOffers").style.display = "inline-block";
     document.getElementById("html").style.overflowY = "scroll";
@@ -197,12 +197,10 @@ function logOff(){
     document.getElementById("loginPopUp").classList.add('activePopUp');
     document.getElementById("loginPopUpButton").style.display = "inline-block";
     document.getElementById("logoutPopUpButton").style.display = "none";
-    document.getElementById("friendsListButton").style.display = "none";
     document.querySelector(".portfolio").style.display = "none";
     document.getElementById("jobOffers").style.display = "none";
     document.getElementById("userSearch").style.display = "none";
-    document.querySelector(".friendList").style.display = "none";
-    
+    document.getElementById("friendList").style.display = "none";
 }
 
 function switchLoginTab(tab) {

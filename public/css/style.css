@@ -16,6 +16,10 @@ h1 {
     display: none;
 }
 
+#friendList {
+    display: none;
+}
+
 #userSearch {
     display: none;
 }
@@ -85,7 +89,7 @@ nav ul li a:hover::after{
     width:100%;
 }
 
-.header-text{
+.headerText{
     margin-top: 18.5%;
     font-size: 30px;
     color: white;
@@ -104,12 +108,12 @@ nav ul li a:hover::after{
     transition: transform 0.5s ease;
 }
 
-.header-text h1{
+.headerText h1{
     font-size: 60px;
     margin-top: 20px;
 }
 
-.header-text p span{
+.headerText p span{
     color: #48cae4;
 }
 

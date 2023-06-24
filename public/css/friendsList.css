@@ -50,6 +50,14 @@
     border-bottom: none;
 }
 
+.viewProfileButton {
+  position: absolute;
+  right: 15px;
+  color: white;
+  cursor: pointer;
+  background: #0077b6;
+}
+
 .friendActions {
     position: fixed;
     bottom: 0;
@@ -85,56 +93,64 @@
 /* Media query for screens with a maximum width of 750px */
 @media (max-width: 1600px) {
   .friendList {
-    position: fixed;
-    bottom: 0;
-    top: auto;
-    right: 0;
-    width: 100%;
-    max-height: 300px;
-    background-color: #1558b1;
-    padding: 10px;
-    box-sizing: border-box;
-    border-left: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    z-index: 3;
+      position: fixed;
+      bottom: 0;
+      top: auto;
+      right: 0;
+      width: 100%;
+      max-height: 300px;
+      background-color: #1558b1;
+      padding: 10px;
+      box-sizing: border-box;
+      border-left: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 3;
   }
 
   .friendItems {
-    max-height: 750px;
-    overflow-y: auto;
+      max-height: 750px;
+      overflow-y: auto;
   }
 
-  .friendActions {
+  .viewProfileButton {
     position: relative;
-    bottom: initial;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-  }
-
-  .friendActions input[type="text"] {
-    padding: 8px;
-    margin-right: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-
-  .friendActions button {
-    padding: 10px 17px;
     color: white;
+    left: 30px;
     cursor: pointer;
-    display: inline;
-    justify-content: center;
-    margin-top: 5px;
-    border: 3px solid rgba(255, 255, 255, .5);
-    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-    border-radius: 20px;
     background: #0077b6;
   }
 
+  .friendActions {
+      position: relative;
+      bottom: initial;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+  }
+
+  .friendActions input[type="text"] {
+      padding: 8px;
+      margin-right: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+  }
+
+  .friendActions button {
+      padding: 10px 17px;
+      color: white;
+      cursor: pointer;
+      display: inline;
+      justify-content: center;
+      margin-top: 5px;
+      border: 3px solid rgba(255, 255, 255, .5);
+      box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+      border-radius: 20px;
+      background: #0077b6;
+  }
+
   .friendActions button:hover {
-    background-color: #023e8a;
+      background-color: #023e8a;
   }
 }

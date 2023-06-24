@@ -98,7 +98,6 @@
     transition: .3s;
 }
 
-
 .formBox h2 {
     font-size: 2em;
     margin-bottom: 10px;
@@ -145,6 +144,7 @@ input:-webkit-autofill:active{
     -webkit-background-clip: text;
     -webkit-text-fill-color: #ffffff;
 }
+
 .inputBox .icon {
     position: absolute;
     right: 8px;
