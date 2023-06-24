@@ -1,9 +1,9 @@
-h1 {
+.container h1 {
     text-align: center;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 600;
     color: white;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .container {
@@ -11,7 +11,90 @@ h1 {
 }
 
 .text {
-    margin-top: 100px;
-    font-size: 25px;
+    margin-top: 70px;
+    font-size: 20px;
     text-align: center;
+}
+
+.user {
+    text-align: left;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+    padding: auto;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+    border: 3px solid rgba(255, 255, 255, .5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+}
+
+.user p {
+    margin-left: 25px;
+}
+
+.user:after {
+    transition: 0.5s ease;
+}
+
+.user:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
+
+.enterpriseConfirm {
+    text-align: left;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+    padding: auto;
+    border: 3px solid rgba(255, 255, 255, .5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+}
+
+.enterpriseConfirm p {
+    margin-left: 25px;
+}
+
+.confirmButton{
+    margin-left: 25px;
+    margin-top: 20px;
+    background-color: #83b9ff;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    position: relative;
+    border: 2px solid gray;
+    border-radius: 6px;
+    width: 80px;
+    height: 40px;
+    transition: 0.5s;
+}
+
+.confirmButton::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    color: black;
+    bottom: 0;
+}
+
+.confirmButton:hover{
+    background: #caf0f8;
+    color: black;
+    transition: 0.5s;
 }

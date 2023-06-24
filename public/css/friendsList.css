@@ -101,10 +101,6 @@
     z-index: 3;
   }
 
-  .friendList h2 {
-    /* Adjust styles as needed for smaller screens */
-  }
-
   .friendItems {
     max-height: 750px;
     overflow-y: auto;
