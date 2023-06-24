@@ -98,3 +98,23 @@
     color: black;
     transition: 0.5s;
 }
+
+.viewProfileButton {
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    color: white;
+    cursor: pointer;
+    background: #0077b6;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 60px;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+}
+
+.viewProfileButton:hover {
+    transform: scale(1.10);
+    transition: transform 0.5s ease;
+}

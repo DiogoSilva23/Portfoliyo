@@ -89,7 +89,7 @@ async function loginUser() {
         document.getElementById("loginMessage").innerHTML = json.msg;
         createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
         createCookie('user', JSON.stringify(json.user), 0.5)
-        logOn()
+        logOnUser()
     }
     else{
         document.getElementById("loginMessage").style.display = "block";
@@ -154,7 +154,7 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
         document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
         if (reply.status === 201){
-            logOn()
+            logOnUser()
         }
     }else{
         const reply = await makeRequest("https://localhost:8000/api/company/login", {
@@ -166,12 +166,10 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
         document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
         if (reply.status === 201){
-            logOn()
+            logOnEnterprise()
         }
     }
 }
-
-
 
 async function logOut(){
     eraseCookie('user')
@@ -179,15 +177,27 @@ async function logOut(){
     logOff()
 }
 
-function logOn(){
+function logOnUser(){
     document.getElementById("loginPopUp").classList.remove('activePopUp');
     document.getElementById("loginPopUpButton").style.display = "none";
     document.getElementById("logoutPopUpButton").style.display = "inline-block";
     document.querySelector(".portfolio").style.display = "inline-block";
     document.getElementById("loginMessage").style.display = "none";
     document.getElementById("friendList").style.display = "flex";
-    document.getElementById("userSearch").style.display = "inline-block";
     document.getElementById("jobOffers").style.display = "inline-block";
+    document.getElementById("html").style.overflowY = "scroll";
+    moveHeaderTextClose()
+}
+
+function logOnEnterprise(){
+    document.getElementById("loginPopUp").classList.remove('activePopUp');
+    document.getElementById("loginPopUpButton").style.display = "none";
+    document.getElementById("logoutPopUpButton").style.display = "inline-block";
+    document.querySelector(".portfolio").style.display = "none";
+    document.getElementById("loginMessage").style.display = "none";
+    document.getElementById("friendList").style.display = "none";
+    document.getElementById("userSearch").style.display = "inline-block";
+    document.getElementById("jobOffers").style.display = "none";
     document.getElementById("html").style.overflowY = "scroll";
     moveHeaderTextClose()
 }
@@ -198,9 +208,9 @@ function logOff(){
     document.getElementById("loginPopUpButton").style.display = "inline-block";
     document.getElementById("logoutPopUpButton").style.display = "none";
     document.querySelector(".portfolio").style.display = "none";
-    document.getElementById("jobOffers").style.display = "none";
-    document.getElementById("userSearch").style.display = "none";
     document.getElementById("friendList").style.display = "none";
+    document.getElementById("userSearch").style.display = "none";
+    document.getElementById("jobOffers").style.display = "none";
 }
 
 function switchLoginTab(tab) {
@@ -312,7 +322,7 @@ async function loginCompany() {
         document.getElementById("loginMessage").innerHTML = json.msg;
         createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
         createCookie('user', JSON.stringify(json.company), 0.5)
-        logOn()
+        logOnEnterprise()
         document.getElementById("portfolio").style.display = "none";
     }
     else{
