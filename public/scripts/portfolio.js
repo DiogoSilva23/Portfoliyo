@@ -1,4 +1,9 @@
-const { portfolioGet } = require("../../controllers/usersController");
+
+
+var editSidebar = false;
+var editAboutme = false;
+var editExperience = false;
+var editEducation = false;
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
@@ -23,9 +28,28 @@ async function getPortfolio(){
         return userPortfolio;
     }
 }
+async function enterPortfolio(){
+    editSidebar = false;
+    editAboutme = false;
+    editExperience = false;
+    editEducation = false;
+    templatePortfolio()
+    // get the user id from the url 
+    const urlParams = new URLSearchParams(window.location.search);
+    //fillPortfolio(urlParams.get('id'))
+    fillPortfolio("0833bc82b31c3f6e8013");
+}
 
-async function fillPortfolio(){
-    console.log('AHGFHSJAFYGFUYGYUTZX')
+async function fillPortfolio(userId){
+    // get the user id from the cookie
+       const cookie = JSON.parse(readCookie("user"));
+       console.log(cookie.id)
+       console.log(userId)
+       // make the code to if user id is equal to the logged in user, then show edit buttons in the classes editBTN
+   
+
+
+ 
     const portfolio = await getPortfolio(); 
     /*
     const portfolio = {
@@ -49,14 +73,63 @@ async function fillPortfolio(){
         birthDate: portfolio.birthDate,
         location: portfolio.location
     }
+
     fillSidebar(userInfoSidebar)
     const userInfoAboutme = {
         description: portfolio.userDescription
     }
-    console.log(userInfoAboutme)
-    //fillAboutme(userInfoAboutme, false)
+    fillAboutme(userInfoAboutme, false)
+
+    const userInfoExperiences = "afsfaf"
+    fillExperience(userInfoExperiences);
+    const userInfoEducations = "afsfaf";
+    fillEducation(userInfoEducations);
+
+
+     if (cookie.id == userId) {
+       let editbtns = document.getElementsByClassName("editBTN");
+       for (let i = 0; i < editbtns.length; i++) {
+         editbtns[i].style.display = "block";
+       }
+     } else {
+       let editbtns = document.getElementsByClassName("editBTN");
+       for (let i = 0; i < editbtns.length; i++) {
+         editbtns[i].style.display = "none";
+       }
+     }
 }
 
+function toggleEditMode(where)  {
+    //toggle a variable between edit true or false
+    switch(where){
+        case "sidebar":
+            if(!editSidebar){
+                editSidebar = !editSidebar;
+                editSidebarF()
+            }
+            break;
+        case "aboutme":
+            if(!editAboutme){
+                editAboutme = !editAboutme;
+                editAboutmeF()
+            }
+            break;
+        case "exp":
+            if(!editExperience){
+                editExperience = !editExperience;
+                editExperienceF()
+            }
+            break;
+        case "edu":
+            if(!editEducation){
+                editEducation = !editEducation;
+                editEducationF()
+            }
+            break;
+
+    }
+    
+}
 
 function fillSidebar(userInfoSidebar){
     document.getElementById("userSidebarName").innerHTML= userInfoSidebar.name;
@@ -68,146 +141,111 @@ function fillSidebar(userInfoSidebar){
     document.getElementById("userSidebarLocation").innerHTML= userInfoSidebar.location;
 }
 
-function fillAboutme(userInfoAboutme, edit){
-    var textAboutme = `<textarea class="editable-input" placeholder="Enter your text here" disabled="">Descricao</textarea>`
-                       
-    if(!edit){
-        textAboutme = userInfoAboutme.description
-    }
-    var aboutme = `<!--#main-content-->
-        <div class="main-content">
+function fillAboutme(userInfoAboutme){
+    document.getElementById("userAboutText").innerHTML= userInfoAboutme.description;
 
-        <!--#ABOUT-->
-        <article class="about  active" data-page="about">
-
-            <header>
-            <h2 class="h2 article-title">About me</h2>
-            </header>
-
-            <section class="about-section">
-            <!--#Meter aqui a descricao-->
-            
-                <div class="about-text">
-                `+textAboutme+`
-                <button class="edit-button" onclick="toggleEditMode()">Edit</button>
-                </div>
-            </section>
-            <hr>
-            <section>
-            <div class="tabtitles">
-                <p class="tablinks activelink" onclick="opentab('skills4', this)">Skills</p>
-                <p class="tablinks" onclick="opentab('experience4', this)">Experience</p>
-                <p class="tablinks" onclick="opentab('education4', this)">Education</p>
-            </div>
-            <div class="tabcontents activetab" id="skills4">
-                <ul>
-                    <li><span>UI/UX</span><br>Designing Web/App interfaces</li>
-                    <li><span>Web Development</span><br>Web/App Development</li>
-                    <li><span>App Development</span><br>Building Android/iOS apps</li>
-                </ul>
-            </div>
-            <div class="tabcontents" id="experience4">
-                <ul>
-                    <li><span>2021 - Current</span><br>UI/UX Design Training at ET Insitute.</li>
-                    <li><span>2019 - 2021</span><br>Team lead at StarApp LLC.</li>
-                    <li><span>2017 - 2019</span><br>UI/UX Design Executive at Coin Digital Ltd.</li>
-                    <li><span>2016 - 2017</span><br>Internship at ekart eCommerce.</li>
-                    </ul>
-                </div>
-                <div class="tabcontents" id="education4">
-                    <ul>
-                        <li><span>2016</span><br>UI/UX Design Training at ET Institute.</li>
-                        <li><span>2016</span><br>MBA from MIT Bangalore.</li>
-                        <li><span>2014</span><br>BBA from ISM Bangalore.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- service-->
-            <section class="service">
-
-            <h2 class="h2 service-title">Portfolio</h2>
-
-            <ul class="service-list">
-
-                <li class="service-item">
-
-                <div class="service-icon-box">
-                    <img src="/images/te.png
-                    " alt="design icon" width="40">
-                </div>
-
-                <div class="service-content-box">
-                    <h4 class="h4 service-item-title">Web design</h4>
-
-                    <p class="service-item-text">
-                    The most modern and high-quality design made at a professional level.
-                    </p>
-                </div>
-
-                </li>
-
-                <li class="service-item">
-
-                <div class="service-icon-box">
-                    <img src="/images/te.png" alt="Web development icon" width="40">
-                </div>
-
-                <div class="service-content-box">
-                    <h4 class="h4 service-item-title">Web development</h4>
-
-                    <p class="service-item-text">
-                    High-quality development of sites at the professional level.
-                    </p>
-                </div>
-
-                </li>
-
-                <li class="service-item">
-
-                <div class="service-icon-box">
-                    <img src="/images/te.png" alt="mobile app icon" width="40">
-                </div>
-
-                <div class="service-content-box">
-                    <h4 class="h4 service-item-title">Mobile apps</h4>
-
-                    <p class="service-item-text">
-                    Professional development of applications for iOS and Android.
-                    </p>
-                </div>
-
-                </li>
-
-                <li class="service-item">
-
-                <div class="service-icon-box">
-                    <img src="/images/te.png" alt="camera icon" width="40">
-                </div>
-
-                <div class="service-content-box">
-                    <h4 class="h4 service-item-title">Photography</h4>
-
-                    <p class="service-item-text">
-                    I make high-quality photos of any category at a professional level.
-                    </p>
-                </div>
-
-                </li>
-
-            </ul>
-
-            </section>
-        </article>`
-    return aboutme
 }
+function fillExperience(userInfoExperiences){
+    //make dummy user info with 1 experience that starts in 2021 and ends current , its title is engineer and its description is "I am an engineer"
+    userInfoExperiences = [{initialDate: "2021", finalDate: "current", title: "engineer", description: "I am an engineer", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}]
+    // add another one , title webDeveloper and description "I am a web developer" no start or end
+    
+    userInfoExperiences.push({initialDate: "", finalDate: "", title: "webDeveloper", description: "I am a web developer"})
+    for (let i = 0; i < userInfoExperiences.length; i++) {
+        const experience = userInfoExperiences[i];
+        document.getElementById("ExperienceList").innerHTML += `
+            <li class="service-item">
+
+                <div class="service-icon-box">
+                    <img src="${experience.image}
+                    " alt="/images/te.png" width="40">
+                </div>
+
+                <div class="service-content-box">
+                    <h4 class="h4 service-item-title">${experience.initialDate} - ${experience.finalDate} <br> ${experience.title}</h4>
+
+                    <p class="service-item-text">
+                    ${experience.description}
+
+                    </p>
+                </div>
+                <button class="editBTN" style="display:block;" onclick='deleteExperience(${i})'>--</button>
+            </li>
+
+        `;
+    }
+}
+
+//function to delete an experience find element by classes service-item and erase the one with the index i 
+function deleteExperience(i){
+    var elements = document.getElementsByClassName("service-item");
+    elements[i].remove();
+}
+function addExperience(Experience){
+    // count how many experiences there are and store in position
+    // create dummy experience with 1 experience that starts in 2021 and ends current , its title is engineer and its description is "I am an engineer" 
+    Experience = {initialDate: "2021", finalDate: "current", title: "engineer", description: "I am an engineer", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}
+    var elements = document.getElementsByClassName("service-item");
+    var position = elements.length;
+    const experience = Experience;
+        document.getElementById("ExperienceList").innerHTML += `
+            <li class="service-item">
+
+                <div class="service-icon-box">
+                    <img src="${experience.image}
+                    " alt="/images/te.png" width="40">
+                </div>
+
+                <div class="service-content-box">
+                    <h4 class="h4 service-item-title">${experience.initialDate} - ${experience.finalDate} <br> ${experience.title}</h4>
+
+                    <p class="service-item-text">
+                    ${experience.description}
+
+                    </p>
+                </div>
+                <button class="editBTN" style="display:block;" onclick='deleteExperience(${position})'>-----</button>
+            </li>
+
+        `;
+    //get the values from the input fields
+}
+
+/*
+function fillEducation(userInfoEducations){
+    //create dummy user info with 1 education that starts in 2021 and ends current , its title is LEI and its description is "I am studying LEI"
+    userInfoEducations = [{initialDate: "2021", finalDate: "current", title: "LEI", description: "I am studying LEI", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}]  
+
+    for (let i = 0; i < userInfoEducations.length; i++) {
+        const education = userInfoEducations[i];
+        document.getElementById("education4").innerHTML += `
+            <li class="service-item1">
+
+    <div class="service-icon-box">
+    <img src="${education.image}
+    " alt="/images/te.png" width="40">
+    </div>
+
+    <div class="service-content-box">
+    <h4 class="h4 service-item-title">${education.initialDate} - ${education.finalDate} <br> ${education.title}.</h4>
+
+    <p class="service-item-text">
+    
+    ${education.description}
+
+    </p>
+    </div>
+
+            `;
+    }    
+}*/
 
 // Function to check if any paragraph is in edit mode
 function isEditModeActive() {
     var urlParams = new URLSearchParams(window.location.search);
     return urlParams.has('edit') && urlParams.get('edit') === 'true';
 }
-
+/*
 function toggleEditMode() {
     var inputField = document.querySelector('.editable-input');
     var editButton = document.querySelector('.edit-button');
@@ -221,7 +259,7 @@ function toggleEditMode() {
         saveText();
     }
 }
-  
+  */
 window.addEventListener('DOMContentLoaded', function() {
     loadText();
   
@@ -234,4 +272,4 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 
     loadText()
-});
+})

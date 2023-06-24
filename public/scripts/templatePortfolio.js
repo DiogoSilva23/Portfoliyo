@@ -11,28 +11,28 @@ function templatePortfolio(){
 
 
 function templateSidebar(){
-    var sidebar =    `<!--#SIDEBAR-->
-        <aside class="sidebar" data-sidebar>
+    var sidebar = `<!--#SIDEBAR-->
+        <aside class="sidebar" data-sidebar id="allsidebar">
 
-        <div class="sidebar-info">
+            <div class="sidebar-info">
 
-            <figure class="avatar-box">
-            <img src="/images/te.png" alt="Richard hanrick" width="80">
-            </figure>
+                <figure class="avatar-box">
+                <img id="sideBarImage" src="/images/te.png" alt="Richard hanrick" width="80">
+                </figure>
 
-            <div class="info-content">
-            <h1 class="name" title="Richard hanrick" id="userSidebarName"></h1>
+                <div class="info-content">
+                <h1 class="name" title="Richard hanrick" id="userSidebarName"></h1>
 
-            <p class="title" id="userSidebarTitle"> </p>
+                <p class="title" id="userSidebarTitle"> </p>
+                </div>
+
+                <button class="info_more-btn" data-sidebar-btn>
+                <span>Show Contacts</span>
+
+                <ion-icon name="chevron-down"></ion-icon>
+                </button>
+
             </div>
-
-            <button class="info_more-btn" data-sidebar-btn>
-            <span>Show Contacts</span>
-
-            <ion-icon name="chevron-down"></ion-icon>
-            </button>
-
-        </div>
 
         <div class="sidebar-info_more">
 
@@ -118,10 +118,12 @@ function templateSidebar(){
                 <ion-icon name="logo-instagram"></ion-icon>
                 </a>
             </li>
-            </ul>        
+            </ul>
+            <button class="editBTN" onclick='toggleEditMode("sidebar")'>Edit</button>   
+            
 
         </div>
-        </aside>`
+        </aside>`;
     return sidebar
 }
 
@@ -135,10 +137,11 @@ function templateAboutme(){
             <h2 class="h2 article-title">About me</h2>
             </header>
 
-            <section class="about-section">
+            <section class="about-section"  id="allAboutMe">
                 <div class="about-text" id = "userAboutText">
-                    fasfsasfsfafsa
+                    f
                 </div>
+                <button class="editBTN" onclick='toggleEditMode("aboutme")'>Edit</button>  
             </section>
             <hr>
             <section>
@@ -152,22 +155,23 @@ function templateAboutme(){
             <div class="tabcontents" id="education4">
                 
             </div>
+            
             </section>
 
             <!-- service-->
             
-        </article>`
+        </article>`;
     return aboutme
 }
 
 function templateExperience(){
-    document.getElementById("experience4").innerHTML =        `             <ul>
+    document.getElementById("experience4").innerHTML = `             <ul>
 
         <section class="service">
 
     <h2 class="h2 service-title"></h2>
 
-    <ul class="service-list">
+    <ul class="service-list" id="ExperienceList">
 
     <li class="service-item">
 
@@ -239,19 +243,20 @@ function templateExperience(){
     </li>
 
     </ul>
-
+        <button class="editBTN" onclick="toggleEditMode("exp")">Edit</edit-button>
+        <button class="editBTN" onclick="addExperience(null)">Add new</edit-button>  
     </section>
-    </ul>`
+    </ul>`;
 }
 
 function templateEducation(){
-    document.getElementById("education4").innerHTML =       `  <ul>
+    document.getElementById("education4").innerHTML = `  <ul>
 
     <section class="service">
 
     <h2 class="h2 service-title"></h2>
 
-    <ul class="service-list">
+    <ul class="service-list" id ="EducationsList">
 
     <li class="service-item">
 
@@ -323,7 +328,7 @@ function templateEducation(){
     </li>
 
     </ul>
-
+        <button class="editBTN" onclick="toggleEditMode("edu")">Edit</edit-button>  
     </section>
-    </ul>`
+    </ul>`;
 }

@@ -83,13 +83,20 @@ async function loginUser() {
     });
     json = await reply.json();
     console.log(json.user)
+    console.log(json.user.userAdmin)
     //mudar isto
     if (reply.status === 201){
+
         document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
         createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
         createCookie('user', JSON.stringify(json.user), 0.5)
-        logOnUser()
+        if(json.user.userAdmin === 1){
+            logOnAdmin
+        }
+        else{
+            logOnUser()
+        }
     }
     else{
         document.getElementById("loginMessage").style.display = "block";
@@ -200,6 +207,14 @@ function logOnEnterprise(){
     document.getElementById("jobOffers").style.display = "none";
     document.getElementById("html").style.overflowY = "scroll";
     moveHeaderTextClose()
+}
+
+//NAO FUNCIONA BEM
+function logOnAdmin(){
+    window.location.href = "../indexAdmin.html";
+    document.getElementById("loginPopUp").classList.remove('activePopUp');
+    moveHeaderTextClose()
+
 }
 
 function logOff(){
