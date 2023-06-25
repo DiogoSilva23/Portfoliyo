@@ -229,3 +229,20 @@ nav ul li a:hover::after{
     }
 
 }
+
+@media screen and (min-width: 1601px) {
+    .openFriendListResponsive {
+        font-size: 30px;
+        margin-top: -5px;
+        margin-right: 5px;
+        margin-left: 5px;
+        display: block;
+        float: right;
+        cursor: pointer;
+    }
+
+}
+
+#openFriendListResponsive {
+    display: none;
+}
