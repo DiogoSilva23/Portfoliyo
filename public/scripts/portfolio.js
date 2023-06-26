@@ -87,7 +87,7 @@ async function fillPortfolio(userId){
 
 
        const cookie = JSON.parse(readCookie("user"));
-       console.log(cookie.id)
+       console.log(cookie)
        console.log(userId)
        // make the code to if user id is equal to the logged in user, then show edit buttons in the classes editBTN
    
@@ -234,7 +234,7 @@ function addExperience(Experience){
 }
 */
 // delete education
-async function deleteEdcuation(id){
+async function deleteEducation(id){
     var elements = document.getElementsByClassName("service-item-edu"); //meter experience
     //delete element by finding the one with the same id
     for (let i = 0; i < elements.length; i++) {
@@ -249,6 +249,7 @@ async function deleteEdcuation(id){
         body: JSON.stringify({id: id, userId: user.id}),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
+    enterPortfolio();
 }
 
 async function fillEducation(userInfoEducation){
@@ -267,7 +268,7 @@ async function fillEducation(userInfoEducation){
 
                     </p>
                 </div>
-                <button class="editBTN" style="display:block;" onclick='deleteEdcuation(${education.idEducation})'>--</button>
+                <button class="editBTN" style="display:block;" onclick='deleteEducation(${education.idEducation})'>--</button>
             </li>
 
         `;

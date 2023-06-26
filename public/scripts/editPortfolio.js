@@ -267,9 +267,9 @@ async function saveExperience(){
 function addEducationF() {
 
     //count the number of Education
-    let EducationCount = document.getElementById("EducationList").childElementCount;
+    let EducationCount = document.getElementById("EducationsList").childElementCount;
     console.log(EducationCount);
-  document.getElementById("EducationList").innerHTML += `
+  document.getElementById("EducationsList").innerHTML += `
         
         
             <li class="service-item-edu" >
@@ -277,11 +277,11 @@ function addEducationF() {
                     <h4 class="h4 service-item-title"> 
                         <div class="birthdate">
                             <label for="schoolName">schoolName</label>
-                            <input type="date" name="schoolName" id="schoolName" required>
+                            <input type="text" name="schoolName" id="schoolName" required>
                         </div> 
                         <div class="birthdate">
                             <label for="CurseName">CurseName</label>
-                            <input type="date" name="CurseName" id="CurseName" required>
+                            <input type="text" name="CurseName" id="CurseName" required>
                         </div>
                         <div>
                             <label for="CurseType">CurseType</label>
@@ -291,7 +291,7 @@ function addEducationF() {
                             <label for="media">media</label>
                             <input type="text"  width="1000px" height="200px" name="media" id="media" required>
                         </div>
-                    <button class="editBTN" style="display:inline;" onclick='saveExperience()'>Save</button>
+                    <button class="editBTN" style="display:inline;" onclick='saveEducation()'>Save</button>
                     <button class="editBTN" style="display:inline;" onclick='enterPortfolio()'>cancel</button>
                 </div>
             </li>
@@ -300,7 +300,9 @@ function addEducationF() {
 async function saveEducation(){
     schoolName = document.getElementById("schoolName");
     CurseName = document.getElementById("CurseName");
+    console.log(CurseName)
     CurseType = document.getElementById("CurseType");
+    console.log(CurseType)
     media = document.getElementById("media");
 
     schoolName = schoolName.value;

@@ -476,8 +476,8 @@ async function alredyFriends(friend, nick){
 
 
 exports.getExperiences = async (req, res) => {
-  const id = req.body.id;
-
+  const id = req.body[0].id;
+  console.log(id)
   connection.query(`SELECT * FROM experiences WHERE idPortfolio = '${id}'`, function (err, result, fields) {
       if (err) throw err;
       res.json(result);
@@ -485,9 +485,9 @@ exports.getExperiences = async (req, res) => {
 };
 
 exports.getEducations = async (req, res) => {
-  const id = req.body.id;
+  const id = req.body[0].id;
 
-  connection.query(`SELECT * FROM educations WHERE idEducation = '${id}'`, function (err, result, fields) {
+  connection.query(`SELECT * FROM educations WHERE idPortfolio = '${id}'`, function (err, result, fields) {
       if (err) throw err;
 
       res.json(result);
@@ -522,8 +522,8 @@ exports.addEducation = async (req, res) => {
   const education = req.body;
   const id = education.userId;
   const schoolName = education.schoolName;
-  const curseName = education.curseName;
-  const curseType = education.curseType;
+  const curseName = education.CurseName;
+  const curseType = education.CurseType;
   const media = education.media;
 
   const query = `INSERT INTO educations (idPortfolio, schoolName, curseName, curseType, media) VALUES ('${id}', '${schoolName}', '${curseName}', '${curseType}', '${media}')`;
@@ -613,21 +613,7 @@ exports.rejectFriend = async (req, res) => {
 
 //get user by id
 exports.getUser = async (req, res) => {
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  
   console.log(req.params)
   const id = req.params.userId;
   console.log(req.params)
@@ -641,11 +627,7 @@ exports.getUser = async (req, res) => {
 };
 
 exports.getUserByNick = async (req, res) => {
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
-  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+
 
   const nick = req.body.nick;
   connection.query(`SELECT * FROM users WHERE nick = '${nick}'`, function (err, result, fields) {
