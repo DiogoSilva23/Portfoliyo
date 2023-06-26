@@ -192,6 +192,36 @@ function addExperience(Experience){
     const experience = Experience;
         document.getElementById("ExperienceList").innerHTML += `
             <li class="service-item-exp" id="${experience.id}">
+                <div class="service-content-box">
+                    <h4 class="h4 service-item-title">
+                        <div>
+                            <label for="image">Image URL</label>
+                            <input type="text" name="image" id="image" required>
+                        </div> 
+                        <div class="birthdate">
+                            <label for="registerBirthdate">Initial Date</label>
+                            <input type="date" name="registerDate" id="registerDate" required>
+                        </div> 
+                        <div class="birthdate">
+                            <label for="registerBirthdate">Final Date</label>
+                            <input type="date" name="registerDate" id="registerDate" required>
+                        </div>
+                        <div>
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title" required>
+                        </div>
+                        <div>
+                            <label for="description">Description</label>
+                            <input type="text" name="description" id="description" required>
+                        </div>
+                    <button class="editBTN" style="display:inline;">Save</button>
+                    <button class="editBTN" style="display:inline;" onclick='deleteExperience(${experience.id})'>-----</button>
+                </div>
+            </li>
+        `;
+        /*
+
+        <li class="service-item-exp" id="${experience.id}">
 
                 <div class="service-icon-box">
                     <img src="${experience.image}
@@ -199,17 +229,23 @@ function addExperience(Experience){
                 </div>
 
                 <div class="service-content-box">
-                    <h4 class="h4 service-item-title">${experience.initialDate} - ${experience.finalDate} <br> ${experience.title}</h4>
-
+                    <h4 class="h4 service-item-title">  <br> </h4>
+                    <div class="birthdate">
+                        <span class="icon"><ion-icon name="calendar"></ion-icon></span>
+                        <label for="registerBirthdate">Birthdate</label>
+                        <input type="date" name="registerDate" id="registerDate" required>
+                    </div>
                     <p class="service-item-text">
-                    ${experience.description}
+                    
 
                     </p>
                 </div>
                 <button class="editBTN" style="display:block;" onclick='deleteExperience(${experience.id})'>-----</button>
-            </li>
 
-        `;
+            </li>
+        
+            */
+
     //get the values from the input fields
 }
 
