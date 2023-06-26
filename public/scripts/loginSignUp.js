@@ -278,6 +278,14 @@ function openLoginPopup() {
     loginPopUp.classList.add('activePopUp');
     document.getElementById("html").style.overflowY = "hidden";
 }
+
+function openNotificationPopup() {
+    document.getElementById("notificationPopup").style.display = "block";
+}
+  
+function closeNotificationPopup() {
+    document.getElementById("notificationPopup").style.display = "none";
+}
   
 window.onload = function() {
     var urlParams = new URLSearchParams(window.location.search);
