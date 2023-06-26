@@ -17,10 +17,12 @@ router.post('/api/user/addFriend', usersController.addFriends)
 router.post('/api/user/listFriends', usersController.getFriends)
 router.post('/api/user/getExperiences', usersController.getExperiences)
 router.post('/api/user/getEducations', usersController.getEducations)
-// add experience and educ routes
 router.post('/api/user/addExperience', usersController.addExperience)
 router.post('/api/user/addEducation', usersController.addEducation)
-// delete experience and educ routes
 router.post('/api/user/deleteExperience', usersController.deleteExperience)
 router.post('/api/user/deleteEducation', usersController.deleteEducation)
+router.post('/api/user/acceptFriend', usersController.acceptFriend)
+router.post('/api/user/rejectFriend', usersController.rejectFriend)
+router.get('/api/user/getUser/:userId', usersController.getUser)
+router.post('/api/user/getUserByNick', usersController.getUserByNick)
 module.exports = router;

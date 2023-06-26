@@ -1,3 +1,4 @@
+const e = require("express");
 
 function editSidebarF() { 
 
@@ -132,7 +133,7 @@ function editSidebarF() {
 
   
 }
-async function saveSideBar(){
+async function saveSideBar(id){
     userSideBarImage = document.getElementById("userSidebarImageInput");
     userSidebarName = document.getElementById("userSidebarNameInput");
 
@@ -161,7 +162,6 @@ async function saveSideBar(){
         userSidebarPhone : userSidebarPhone,
         userSidebarBirthday : userSidebarBirthday,
         userSidebarLocation : userSidebarLocation
-        
     }
 
     const reply = await makeRequest("https://localhost:8000/api/user/savePortfolioSidebar", {
@@ -180,28 +180,8 @@ async function saveSideBar(){
     console.log(userSidebarLocation);
 
     editSidebar = false;
-    enterPortfolio();
 }
 
-
-
-function editAboutmeF() {
-    let userAboutMeInput = document.getElementById("userAboutText").innerHTML;
-
-    document.getElementById("allAboutMe").innerHTML = `
-
-                
-            <div class="about-text" id = "userAboutText">
-                    <input type="textArea" id="userAboutMeInput" name="userAboutMe" placeholder="About me" ></input> 
-                </div>
-
-            <!-- service-->
-            <button class="editBTN" style="display:block;" onclick='enterPortfolio()'>Cancel Edit</button>  
-            <button class="editBTN" style="display:block;" onclick='saveAboutMe()'>Save Edit</button>  
-        `;
-
-    document.getElementById("userAboutMeInput").value = userAboutMeInput;
-}
 
 
 function addExperienceF() {
@@ -241,7 +221,6 @@ function addExperienceF() {
             </li>
         `;
 }
-
 async function saveExperience(){
     experienceImage = document.getElementById("image");
     experienceTitle = document.getElementById("titleEXP");
@@ -281,7 +260,98 @@ async function saveExperience(){
     editExperience = false;
     enterPortfolio();    
 }
-function saveAboutMe(){
+
+
+
+
+function addEducationF() {
+
+    //count the number of Education
+    let EducationCount = document.getElementById("EducationList").childElementCount;
+    console.log(EducationCount);
+  document.getElementById("EducationList").innerHTML += `
+        
+        
+            <li class="service-item-edu" >
+                <div class="service-content-box">
+                    <h4 class="h4 service-item-title"> 
+                        <div class="birthdate">
+                            <label for="schoolName">schoolName</label>
+                            <input type="date" name="schoolName" id="schoolName" required>
+                        </div> 
+                        <div class="birthdate">
+                            <label for="CurseName">CurseName</label>
+                            <input type="date" name="CurseName" id="CurseName" required>
+                        </div>
+                        <div>
+                            <label for="CurseType">CurseType</label>
+                            <input type="text" name="CurseType" id="CurseType" required>
+                        </div>
+                        <div>
+                            <label for="media">media</label>
+                            <input type="text"  width="1000px" height="200px" name="media" id="media" required>
+                        </div>
+                    <button class="editBTN" style="display:inline;" onclick='saveExperience()'>Save</button>
+                    <button class="editBTN" style="display:inline;" onclick='enterPortfolio()'>cancel</button>
+                </div>
+            </li>
+        `;
+}
+async function saveEducation(){
+    schoolName = document.getElementById("schoolName");
+    CurseName = document.getElementById("CurseName");
+    CurseType = document.getElementById("CurseType");
+    media = document.getElementById("media");
+
+    schoolName = schoolName.value;
+    CurseName = CurseName.value;
+    CurseType = CurseType.value;
+    media = media.value;
+
+    const cookie = JSON.parse(readCookie("user"));
+    console.log('BOLACHAAAAA', cookie);
+
+    education = {
+        userId : cookie.id,
+        schoolName : schoolName,
+        CurseName : CurseName,
+        CurseType : CurseType,
+        media : media
+    }
+
+    const reply = makeRequest("https://localhost:8000/api/user/addEducation", {
+        method: "POST",
+        body: JSON.stringify(education),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+
+    editEducation = false;
+    enterPortfolio();
+}
+
+
+
+
+
+
+function editAboutmeF() {
+    let userAboutMeInput = document.getElementById("userAboutText").innerHTML;
+
+    document.getElementById("allAboutMe").innerHTML = `
+
+                
+            <div class="about-text" id = "userAboutText">
+                    <input type="textArea" id="userAboutMeInput" name="userAboutMe" placeholder="About me" ></input> 
+                </div>
+
+            <!-- service-->
+            <button class="editBTN" style="display:block;" onclick='enterPortfolio()'>Cancel Edit</button>  
+            <button class="editBTN" style="display:block;" onclick='saveAboutMe()'>Save Edit</button>  
+        `;
+
+    document.getElementById("userAboutMeInput").value = userAboutMeInput;
+}
+async function saveAboutMe(){
     userAboutMe = document.getElementById("userAboutMeInput");
     const cookie = JSON.parse(readCookie("user"));
     userAboutMe = {
@@ -289,7 +359,7 @@ function saveAboutMe(){
         description: userAboutMe.value
     }
 
-    const reply = makeRequest("https://localhost:8000/api/user/savePortfolioAboutMe", {
+    const reply = await makeRequest("https://localhost:8000/api/user/savePortfolioAboutMe", {
         method: "POST",
         body: JSON.stringify(userAboutMe),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -297,5 +367,4 @@ function saveAboutMe(){
 
     console.log(userAboutMe);
     editAboutMe = false;
-    enterPortfolio();
 }

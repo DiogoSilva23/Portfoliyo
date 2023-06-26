@@ -12,8 +12,8 @@ function templatePortfolio(){
 
 function templateSidebar(){
     var sidebar = `<!--#SIDEBAR-->
+        
         <aside class="sidebar" data-sidebar id="allsidebar">
-
             <div class="sidebar-info">
 
                 <figure class="avatar-box">
@@ -184,83 +184,15 @@ function templateExperience(){
 function templateEducation(){
     document.getElementById("education4").innerHTML = `  <ul>
 
-    <section class="service">
+        <section class="service">
 
     <h2 class="h2 service-title"></h2>
 
     <ul class="service-list" id ="EducationsList">
 
-    <li class="service-item">
-
-    <div class="service-icon-box">
-    <img src="https://ih1.redbubble.net/image.4190408899.0169/st,small,845x845-pad,1000x1000,f8f8f8.jpg
-    " alt="design icon" width="40">
-    </div>
-
-    <div class="service-content-box">
-    <h4 class="h4 service-item-title">2021 - current <br> Web design at ET Insitute.</h4>
-
-    <p class="service-item-text">
-    The most modern and high-quality design made at a professional level. UI/UX Design Training.
-    The most modern and high-quality design made at a professional level. UI/UX Design Training.
-    The most modern and high-quality design made at a professional level. UI/UX Design Training.
-    The most modern and high-quality design made at a professional level. UI/UX Design Training.
-
-    </p>
-    </div>
-
-    </li>
-
-    <li class="service-item">
-
-    <div class="service-icon-box">
-    <img src="/images/te.png" alt="Web development icon" width="40">
-    </div>
-
-    <div class="service-content-box">
-    <h4 class="h4 service-item-title">Web development</h4>
-
-    <p class="service-item-text">
-    High-quality development of sites at the professional level.
-    </p>
-    </div>
-
-    </li>
-
-    <li class="service-item">
-
-    <div class="service-icon-box">
-    <img src="/images/te.png" alt="mobile app icon" width="40">
-    </div>
-
-    <div class="service-content-box">
-    <h4 class="h4 service-item-title">Mobile apps</h4>
-
-    <p class="service-item-text">
-    Professional development of applications for iOS and Android.
-    </p>
-    </div>
-
-    </li>
-
-    <li class="service-item">
-
-    <div class="service-icon-box">
-    <img src="/images/te.png" alt="camera icon" width="40">
-    </div>
-
-    <div class="service-content-box">
-    <h4 class="h4 service-item-title">Photography</h4>
-
-    <p class="service-item-text">
-    I make high-quality photos of any category at a professional level.
-    </p>
-    </div>
-
-    </li>
-
     </ul>
         <button class="editBTN" onclick="toggleEditMode("edu")">Edit</edit-button>  
+        <button class="editBTN" onclick="addEducationF()">Add new</edit-button>  
     </section>
     </ul>`;
 }

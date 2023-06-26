@@ -152,8 +152,6 @@ function moveHeaderTextClose() {
 async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO LOGIN
     const cookie = JSON.parse(readCookie('user'))
     const user = cookie
-    console.log('COOKIE', cookie)
-    console.log(typeof(cookie.nick))
     if (typeof(cookie.nick) === "string"){
         const reply = await makeRequest("https://localhost:8000/api/user/login", {
             method: "POST",
@@ -330,7 +328,6 @@ async function registerCompany() {
         console.log('registado com sucesso')
     }
     else{
-        console.log(json.msg)
         document.getElementById("registerMessageEnterprise").innerHTML = json.msg;
         console.log('problema no registo')
     }
@@ -343,7 +340,6 @@ async function loginCompany() {
         email: email,
         pword: pword,
     }
-    console.log('jaun', company)
     const reply = await makeRequest("https://localhost:8000/api/company/login", {
         method: "POST",
         body: JSON.stringify(company),

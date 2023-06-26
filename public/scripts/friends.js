@@ -2,16 +2,13 @@ const { json } = require("body-parser");
 
 
 async function addFriend(){
-    console.log('AMIGO' )
     var friend = document.getElementById("newFriendInput").value;
     if (friend.trim() === '') {
         pass //MENSAGEM DE ERRO
         console.log('ERROR')
     }
     const cookie = JSON.parse(readCookie('user'));
-    console.log(cookie);
     const myNick = cookie.nick;
-    console.log(myNick);
     if (friend === myNick){
         pass    //MENSAGEM DE ERRO
         console.log('ERROR')
@@ -27,13 +24,14 @@ async function addFriend(){
         body: JSON.stringify(friends),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
-    json = await reply.json();
+    friendss = await reply.json();
 
     if (reply.status === 201){
-
+        console.log('DEU CERTO')
+        listFriends()
     }
     else{
-        console.log(json.msg); //MENSAGEM DE ERRO
+        console.log(friendss.msg); //MENSAGEM DE ERRO
     }
     document.getElementById("newFriendInput").value = '';
 }
@@ -49,19 +47,33 @@ async function listFriends(){
         body: JSON.stringify(nick),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
-    
+    //get use by nick
+
     friends = await reply.json();
+    document.getElementById("friendsList").innerHTML = ""
+    document.getElementById("friendsRequests").innerHTML = ""
+    
     for (let i = 0; i < friends.length; i++) {
-        if(friends[i].valid === 1){
+        var tempNick = {
+            nick: friends[i].friend1_nick
+        }
+        var user = await makeRequest("https://localhost:8000/api/user/getUserbyNick", {
+            method: "POST", 
+            body: JSON.stringify(tempNick),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+        });
+
+
+        if(friends[i].accepted === 1){
             if(friends[i].friend1_nick === myNick){
-                console.log('YOOOOO');
+                
                 document.getElementById("friendsList").innerHTML += `
         
                 <li>${friends[i].friend2_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+                <button onclick="window.location.href = '/portfolio.html?user=${user.id}'">Portfolio</button>
             
                 `;
             }else{
-                console.log('YO');
                 document.getElementById("friendsList").innerHTML += `
         
                 <li>${friends[i].friend1_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
@@ -69,17 +81,17 @@ async function listFriends(){
                 `;
             }
         }else{
+            
             if(friends[i].friend1_nick === myNick){
-                console.log('YOOOOO');
                 document.getElementById("friendsRequests").innerHTML += `
         
-                <li>${friends[i].friend2_nick}<button class="accept" >+</button><button class="reject">-</button></li>
+                <li>${friends[i].friend2_nick}<button class="accept" onclick="acceptFriendRequest('${friends[i].friend2_nick}')">+</button><button class="reject" onclick="rejectFriendRequest('${friends[i].friend2_nick}')" >-</button></li>
                 `;
             }else{
-                console.log('YO');
+
                 document.getElementById("friendsRequests").innerHTML += `
         
-                <li>${friends[i].friend2_nick}<button class="accept" >+</button><button class="reject">-</button></li>
+                <li>${friends[i].friend1_nick}<button class="accept" onclick="acceptFriendRequest('${friends[i].friend1_nick}')">+</button><button class="reject" onclick="rejectFriendRequest('${friends[i].friend2_nick}')" >-</button></li>
             
                 `;
             }
@@ -90,3 +102,42 @@ async function listFriends(){
     
     
 }
+
+async function acceptFriendRequest(friend){
+    const cookie = JSON.parse(readCookie('user'));
+    myNick = cookie.nick;
+    const request = {
+        nick: myNick,
+        friend: friend
+    }
+
+    const reply = await makeRequest("https://localhost:8000/api/user/acceptFriend", {
+        method: "POST",
+        body: JSON.stringify(request),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    
+    listFriends()
+
+}
+
+async function rejectFriendRequest(friend){
+    const cookie = JSON.parse(readCookie('user'));
+    myNick = cookie.nick;
+    const request = {
+        nick: myNick,
+        friend: friend
+    }
+
+    const reply = await makeRequest("https://localhost:8000/api/user/rejectFriend", {
+        method: "POST",
+        body: JSON.stringify(request),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    
+    listFriends()
+
+}
+
+
+//

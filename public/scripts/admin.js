@@ -1,7 +1,6 @@
 
 
 async function getUsers() {
-    console.log("TESTE123")
     const reply = await makeRequest("https://localhost:8000/api/users", {
         method: "GET",
         body: JSON.stringify(),
@@ -14,7 +13,6 @@ async function getUsers() {
 async function insertUsers(){
     document.getElementById("userContainer").innerHTML = ""
     users = await getUsers()
-    console.log('USERS', users)
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         document.getElementById("userContainer").innerHTML += `
@@ -42,10 +40,8 @@ async function insertEnterprises(){
     
     document.getElementById("enterpriseContainer").innerHTML = ""
     enterprises = await getEnterprises()
-    console.log('USERS', enterprises)
     for (let i = 0; i < enterprises.length; i++) {
         const enterprise = enterprises[i];
-        console.log(enterprise[i])
         document.getElementById("enterpriseContainer").innerHTML += `
         <div class="user" >
         <p><b>Nome: </b>${enterprise.companieName}</p>

@@ -5,7 +5,6 @@ const connection = require('../config')
 require('dotenv').config()
 
 exports.getUsers = async (req, res) => {
-    console.log("GET USERS")
     connection.query("SELECT * FROM users", function (err, result, fields) {
         if (err) throw err;
         res.json(result);
@@ -13,7 +12,6 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.registerUser = async (req, res) => {
-  console.log('AQUIIII')
   const user = req.body;
   const username = user.username.trim();
   const name = user.name;
@@ -89,7 +87,6 @@ exports.registerUser = async (req, res) => {
 };
 
 function checkVariables(...variables) {
-  console.log("variaveis ->", variables)
   for (let i = 0; i < variables.length; i++) {
     if (typeof variables[i] === "undefined") {
       return true
@@ -116,7 +113,6 @@ function existingEmail(email) {
 }
 
 function existingUser(user) {
-  console.log(user)
   // Query to check if the user exists
   const query = `SELECT COUNT(*) AS count FROM users WHERE nick = '${user}'`;
   return new Promise((resolve, reject) => {
@@ -125,7 +121,6 @@ function existingUser(user) {
         reject(err);
       } else {
         const count = result[0].count;
-        console.log('NUMERO', count)
         resolve(count > 0); // Returns true if the count is greater than 0
       }
     });
@@ -167,9 +162,7 @@ function createPortfolio(id, user){
   }
 
   function generateRandomId(email) {
-    console.log('TESTEEEEE')
     const randomString = Math.random().toString(36).substring(2); // Generate a random string 
-    console.log(randomString)
     const data = email + randomString; // Combine email with random string
   
     const hash = crypto.createHash('sha256'); // Use SHA-256 hash function
@@ -217,7 +210,6 @@ function createPortfolio(id, user){
 }
 
 function generateAccessToken(user) {
-    console.log(user, process.env.ACCESS_TOKEN_SECRET)
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "300s"
     })
@@ -308,7 +300,6 @@ async function createCompany(company) {
 exports.loginCompany = async (req, res) => {
   const email = req.body.email;
   const pword = req.body.pword;
-  console.log('YOOOO', email, pword)
   if (email.length == 0){
     return res.status(405).json({ msg: `Email não inserido!` })   //verificar se pode ser 405
   }
@@ -322,7 +313,6 @@ exports.loginCompany = async (req, res) => {
   };
 
   const companyValid = await validatedCompany(email)
-  console.log('VALIDACAO', companyValid)
   if (!companyValid){
     return res.status(405).json({ msg: `Empresa ainda nao validada por um Admin! Aguarde por validaçao` })
   }
@@ -358,7 +348,6 @@ function validatedCompany(email) {
       if (err) {
         reject(err);
       } else {
-        console.log(result[0])
         const count = result[0].validated;
         resolve(count > 0); // Returns true if the count is greater than 0
       }
@@ -368,17 +357,20 @@ function validatedCompany(email) {
 
 
 exports.portfolioGet = async (req, res) => {
-  const email = req.body.email;  
+  const email = req.body[0].email;  
+  console.log("GET PORTFOLIO")
+  console.log(req.body[0])
   const query = `SELECT * FROM portfolios WHERE email = '${email}'`;
   connection.query(query, async function (err, result) {
+    console.log(result)
     if (err) {
         return res.status(500).send({msg: "Erro ao tentar obter o portfolio"});
     }
     const portfolio = result[0];
+    console.log(portfolio)
     return res.status(201).json({ msg: `Logado com sucesso`,  portfolio: portfolio})
 })
 }
-
 exports.portfolioSaveSidebar = async (req, res) => {
   const sidebar = req.body;
   const userId = sidebar.userId;
@@ -416,7 +408,6 @@ exports.portfolioSaveAboutMe = async (req, res) => {
 }
 
 exports.getEnterprises = async (req, res) => {
-  console.log("GET Enterprises")
   connection.query("SELECT * FROM companies", function (err, result, fields) {
       if (err) throw err;
 
@@ -432,7 +423,8 @@ exports.addFriends = async (req, res) => {
     return res.status(404).json({ msg: `Utilizador não existe` })
   }
   
-  if(alredyFriends(friend, myNick)){
+  isFriend = await alredyFriends(friend, myNick)
+  if(isFriend){
     return res.status(404).json({ msg: `Utilizador já é seu amigo` })
   }
 
@@ -485,20 +477,16 @@ async function alredyFriends(friend, nick){
 
 exports.getExperiences = async (req, res) => {
   const id = req.body.id;
-  console.log("GET Experiences")
-  console.log(req.body)
-  
-  console.log(`SELECT * FROM experiences WHERE idPortffolio = "${id}";`);
+
   connection.query(`SELECT * FROM experiences WHERE idPortfolio = '${id}'`, function (err, result, fields) {
       if (err) throw err;
-      console.log(result)
       res.json(result);
     });
 };
 
 exports.getEducations = async (req, res) => {
   const id = req.body.id;
-  console.log("GET Educations")
+
   connection.query(`SELECT * FROM educations WHERE idEducation = '${id}'`, function (err, result, fields) {
       if (err) throw err;
 
@@ -517,14 +505,13 @@ exports.addExperience = async (req, res) => {
   const finalDate = experience.experienceFinalDate;
   const functionsDescription = experience.experienceDescription;
   
-  console.log(experience);
   const query = `INSERT INTO experiences (idPortfolio, localName, logoUrl, inicialDate, finalDate, functionsDescription) VALUES ('${id}', '${localName}', '${logoUrl}', '${inicialDate}', '${finalDate}', '${functionsDescription}')`;
   return new Promise((resolve, reject) => {
     connection.query(query, function (err, result) {
       if (err) {
         reject(err);
       } else {
-        console.log(result);
+
         resolve(result);
       }
     });
@@ -545,7 +532,6 @@ exports.addEducation = async (req, res) => {
       if (err) {
         reject(err);
       } else {
-        console.log(result)
         resolve(result);
       }
     });
@@ -562,7 +548,6 @@ exports.deleteExperience = async (req, res) => {
       if (err) {
         reject(err);
       } else {
-        console.log(result)
         resolve(result);
       }
     });
@@ -579,7 +564,7 @@ exports.deleteEducation = async (req, res) => {
       if (err) {
         reject(err);
       } else {
-        console.log(result)
+
         resolve(result);
       }
     });
@@ -587,12 +572,86 @@ exports.deleteEducation = async (req, res) => {
 }
 
 exports.getFriends = async (req, res) => {
-  console.log(req)
+
   const nick = req.body.nick;
-  console.log("GETFriends", nick)
+
   const query = `SELECT * FROM friends WHERE friend1_nick = '${nick}' OR friend2_nick = '${nick}'`;
   connection.query(query, function (err, result, fields) {
     if (err) throw err;
     res.json(result);
   });
 };
+
+exports.acceptFriend = async (req, res) => {
+  const nick = req.body.nick;
+  const friend = req.body.friend;
+
+  const query = `UPDATE friends
+  SET accepted = 1
+  WHERE (friend1_nick = '${nick}' AND friend2_nick = '${friend}')
+     OR (friend1_nick = '${friend}' AND friend2_nick = '${nick}')`;
+
+     connection.query(query, function (err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    });
+};
+
+exports.rejectFriend = async (req, res) => {
+  const nick = req.body.nick;
+  const friend = req.body.friend;
+
+  const query = `DELETE FROM friends
+  WHERE (friend1_nick = '${nick}' AND friend2_nick = '${friend}')
+     OR (friend1_nick = '${friend}' AND friend2_nick = '${nick}');`;
+
+     connection.query(query, function (err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    });
+};
+
+//get user by id
+exports.getUser = async (req, res) => {
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log(req.params)
+  const id = req.params.id;
+  console.log(req.params)
+  console.log("GET USER")
+  connection.query(`SELECT * FROM users WHERE id = '${id}'`, function (err, result, fields) {
+      if (err) throw err;
+      console.log(result)
+      res.json(result);
+    }
+  );
+};
+
+exports.getUserByNick = async (req, res) => {
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+  console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
+
+  const nick = req.body.nick;
+  connection.query(`SELECT * FROM users WHERE nick = '${nick}'`, function (err, result, fields) {
+      if (err) throw err;
+      console.log(result)
+      res.json(result);
+    }
+  );
+}

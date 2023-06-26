@@ -15,24 +15,21 @@ const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 // sidebar toggle functionality for mobile
 sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
 
-async function getPortfolio(){
-    const user = JSON.parse(readCookie('user'))
+async function getPortfolio(user){
+    console.log(user)
     const reply = await makeRequest("https://localhost:8000/api/user/getPortfolio", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
     json = await reply.json();
-    if (reply.status === 201){
-        const userPortfolio = json.portfolio
-        return userPortfolio;
-    }
+    const userPortfolio = json.portfolio
+    return userPortfolio;
+
+
 }
-
-
 // get experiences from user
-async function getExperiences(){
-    const user = JSON.parse(readCookie('user'))
+async function getExperiences(user){
     const reply = await makeRequest("https://localhost:8000/api/user/getExperiences", {
         method: "POST",
         body: JSON.stringify(user),
@@ -45,21 +42,17 @@ async function getExperiences(){
     return userExperiences;
 }
 // get educations from user
-async function getEducations(){
-    const user = JSON.parse(readCookie('user'))
+async function getEducations(user){
     const reply = await makeRequest("https://localhost:8000/api/user/getEducations", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
-    json = await reply.json();
-    if (reply.status === 201){
-        const userEducations = json
-        return userEducations;
-    }
+    jseon = await reply.json();
+    const userEducations = jseon
+    return userEducations;
+
 }
-
-
 
 
 async function enterPortfolio(){
@@ -70,34 +63,40 @@ async function enterPortfolio(){
     templatePortfolio()
     // get the user id from the url 
     const urlParams = new URLSearchParams(window.location.search);
-    fillPortfolio(urlParams.get('id'));
+    fillPortfolio(urlParams.get('user'))
+}
+// test enterportfolio from different user by redirecting to the url with the id of the user
+
+async function getUserforprofile(userId){
+    const reply = await makeRequest("https://localhost:8000/api/user/getUser/"+userId, {
+        method: "GET",
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    jseon = await reply.json();
+    console.log(jseon)
+    const user = jseon
+        return user;
 }
 
 async function fillPortfolio(userId){
     // get the user id from the cookie
+    // make a if userid empty , then is equal to the cookie id
+    if (userId == null){
+        userId = JSON.parse(readCookie("user")).id
+    }
+
+
        const cookie = JSON.parse(readCookie("user"));
        console.log(cookie.id)
        console.log(userId)
-       userId = "1e9ff9b647a6408f5f7d"
        // make the code to if user id is equal to the logged in user, then show edit buttons in the classes editBTN
    
 
+    // get user from database
+    const user = await getUserforprofile(userId);
+    console.log(user)
+    const portfolio = await getPortfolio(user); 
 
- 
-    const portfolio = await getPortfolio(); 
-    /*
-    const portfolio = {
-        username = "",
-        nick = "",
-        email = "",
-        phone = "",
-        birthdate = "",
-        location = "",
-        description = "",
-    }
-    
-    
-    */
     console.log(portfolio)
     const userInfoSidebar = {
         name: portfolio.userName,
@@ -114,11 +113,12 @@ async function fillPortfolio(userId){
     }
     fillAboutme(userInfoAboutme, false)
 
-    const userInfoExperiences = await getExperiences();
+    const userInfoExperiences = await getExperiences(user);
     console.log(userInfoExperiences)
     fillExperience(userInfoExperiences);
-    /*const userInfoEducations = await getEducations();
-    fillEducation(userInfoEducations);*/
+    const userInfoEducations = await getEducations(user);
+    console.log(userInfoEducations)
+    fillEducation(userInfoEducations);
 
 
      if (cookie.id == userId) {
@@ -206,6 +206,7 @@ async function fillExperience(userInfoExperiences){
         `;
     }
 }
+
 //function to delete an experience find element by classes service-item and erase the one with the index i 
 async function deleteExperience(id){
     var elements = document.getElementsByClassName("service-item-exp"); //meter experience
@@ -222,75 +223,57 @@ async function deleteExperience(id){
         body: JSON.stringify({id: id, userId: user.id}),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
+    json = await reply.json();
+    if (reply.status === 201){
+        console.log("deleted experience")
+    }
+}
+/*
+function addExperience(Experience){
+
+}
+*/
+// delete education
+async function deleteEdcuation(id){
+    var elements = document.getElementsByClassName("service-item-edu"); //meter experience
+    //delete element by finding the one with the same id
+    for (let i = 0; i < elements.length; i++) {
+        if(elements[i].id == id){
+            elements[i].remove();
+        }
+    }
+    //delete from database
+    const user = JSON.parse(readCookie('user'))
+    const reply = makeRequest("https://localhost:8000/api/user/deleteEducation", {
+        method: "POST",
+        body: JSON.stringify({id: id, userId: user.id}),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
 }
 
-function addExperience(Experience){
-  // count how many experiences there are and store in position
-  // create dummy experience with 1 experience that starts in 2021 and ends current , its title is engineer and its description is "I am an engineer"
-  Experience = {
-    initialDate: "2021",
-    id: "14221412",
-    finalDate: "curffffffrent",
-    title: "afsafasafasfsaengineer",
-    description: "I am an engineer",
-    image: "https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png",
-  };
-  const experience = Experience;
-  document.getElementById("ExperienceList").innerHTML += `
-    <li class="service-item-exp" id="${experience.id}">
+async function fillEducation(userInfoEducation){
+    document.getElementById("EducationsList").innerHTML ="";
+    for (let i = 0; i < userInfoEducation.length; i++) {
+        const education = userInfoEducation[i];
+        document.getElementById("EducationsList").innerHTML += `
+            <li class="service-item-exp" id="${education.idEducation}">
 
-                <div class="service-icon-box">
-                    <img src="${experience.image}
-                    " alt="/images/te.png" width="40">
-                </div>
 
                 <div class="service-content-box">
-                    <h4 class="h4 service-item-title">  <br> </h4>
-                    <div class="birthdate">
-                        <span class="icon"><ion-icon name="calendar"></ion-icon></span>
-                        <label for="registerBirthdate">Birthdate</label>
-                        <input type="date" name="registerDate" id="registerDate" required>
-                    </div>
+                    <h4 class="h4 service-item-title"> ${education.schoolName}<br> ${education.curseName} - ${education.curseType}</h4>
+
                     <p class="service-item-text">
-                    
+                     Media do curso: ${education.media}
 
                     </p>
                 </div>
-                <button class="editBTN" style="display:block;" onclick='deleteExperience(${experience.id})'>-</button>
-
+                <button class="editBTN" style="display:block;" onclick='deleteEdcuation(${education.idEducation})'>--</button>
             </li>
-        
+
         `;
-
+    }
 }
-/*
-function fillEducation(userInfoEducations){
-    //create dummy user info with 1 education that starts in 2021 and ends current , its title is LEI and its description is "I am studying LEI"
-    userInfoEducations = [{initialDate: "2021", finalDate: "current", title: "LEI", description: "I am studying LEI", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}]  
 
-    for (let i = 0; i < userInfoEducations.length; i++) {
-        const education = userInfoEducations[i];
-        document.getElementById("education4").innerHTML += `
-            <li class="service-item1">
-
-    <div class="service-icon-box">
-    <img src="${education.image}
-    " alt="/images/te.png" width="40">
-    </div>
-
-    <div class="service-content-box">
-    <h4 class="h4 service-item-title">${education.initialDate} - ${education.finalDate} <br> ${education.title}.</h4>
-
-    <p class="service-item-text">
-    
-    ${education.description}
-
-    </p>
-    </div>
-
-            `;
-    }    
-}*/
 
 // Function to check if any paragraph is in edit mode
 function isEditModeActive() {

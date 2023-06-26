@@ -130,7 +130,7 @@ nav ul li a:hover::after{
 }
 
 .copyrightFlex {
-    position: flex;
+    position: fixed;
     width: 100%;
     text-align: center;
     padding: 18px 0;
