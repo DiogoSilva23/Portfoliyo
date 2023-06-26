@@ -52,21 +52,41 @@ async function listFriends(){
     
     friends = await reply.json();
     for (let i = 0; i < friends.length; i++) {
-        if(friends[i].friend1_nick === myNick){
-            console.log('YOOOOO');
-            document.getElementById("friendsList").innerHTML += `
-    
-            <li>${friends[i].friend2_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+        if(friends[i].valid === 1){
+            if(friends[i].friend1_nick === myNick){
+                console.log('YOOOOO');
+                document.getElementById("friendsList").innerHTML += `
         
-            `;
+                <li>${friends[i].friend2_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+            
+                `;
+            }else{
+                console.log('YO');
+                document.getElementById("friendsList").innerHTML += `
+        
+                <li>${friends[i].friend1_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+            
+                `;
+            }
         }else{
-            console.log('YO');
-            document.getElementById("friendsList").innerHTML += `
-    
-            <li>${friends[i].friend1_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+            if(friends[i].friend1_nick === myNick){
+                console.log('YOOOOO');
+                document.getElementById("friendsRequests").innerHTML += `
         
-            `;
+                <li>${friends[i].friend2_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+            
+                `;
+            }else{
+                console.log('YO');
+                document.getElementById("friendsRequests").innerHTML += `
+        
+                <li>${friends[i].friend1_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+            
+                `;
+            }
         }
+
+
     }
     
     

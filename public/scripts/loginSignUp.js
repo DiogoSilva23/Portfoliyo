@@ -349,17 +349,17 @@ async function loginCompany() {
         body: JSON.stringify(company),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
-    json = await reply.json();
+    companie = await reply.json();
     //mudar isto
     if (reply.status === 201){
-        document.getElementById("loginMessage").innerHTML = json.msg;
-        createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
-        createCookie('user', JSON.stringify(json.company), 0.5)
+        document.getElementById("loginMessage").innerHTML = companie.msg;
+        createCookie('userToken', companie.token, 0.5)  //VERIFICAR ESTA CENA
+        createCookie('user', JSON.stringify(companie.company), 0.5)
         logOnEnterprise()
         document.getElementById("portfolio").style.display = "none";
     }
     else{
-        document.getElementById("loginMessage").innerHTML = json.msg;
+        document.getElementById("loginMessage").innerHTML = companie.msg;
     }
 
 }
