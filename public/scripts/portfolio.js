@@ -133,7 +133,6 @@ function toggleEditMode(where)  {
 
 function fillSidebar(userInfoSidebar){
     document.getElementById("userSidebarName").innerHTML= userInfoSidebar.name;
-    document.getElementById("userSidebarTitle").innerHTML= userInfoSidebar.title;
     document.getElementById("userSidebarEmail").innerHTML= userInfoSidebar.email;
     document.getElementById("userSidebarEmail").href= "mailto:" + userInfoSidebar.email;
     document.getElementById("userSidebarPhone").innerHTML= userInfoSidebar.phoneNumber;
@@ -147,14 +146,14 @@ function fillAboutme(userInfoAboutme){
 }
 function fillExperience(userInfoExperiences){
     //make dummy user info with 1 experience that starts in 2021 and ends current , its title is engineer and its description is "I am an engineer"
-    userInfoExperiences = [{initialDate: "2021", finalDate: "current", title: "engineer", description: "I am an engineer", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}]
+    userInfoExperiences = [{initialDate: "2021", id: "12312312", finalDate: "current", title: "engineer", description: "I am not an engineer", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}]
     // add another one , title webDeveloper and description "I am a web developer" no start or end
     
-    userInfoExperiences.push({initialDate: "", finalDate: "", title: "webDeveloper", description: "I am a web developer"})
+    userInfoExperiences.push({initialDate: "", id: "12314312", finalDate: "", title: "webDevefasafasfsafsfasloper", description: "I am a fasfasfasffsafasfasffasweb developer"})
     for (let i = 0; i < userInfoExperiences.length; i++) {
         const experience = userInfoExperiences[i];
         document.getElementById("ExperienceList").innerHTML += `
-            <li class="service-item">
+            <li class="service-item-exp" id="${experience.id}">
 
                 <div class="service-icon-box">
                     <img src="${experience.image}
@@ -169,7 +168,7 @@ function fillExperience(userInfoExperiences){
 
                     </p>
                 </div>
-                <button class="editBTN" style="display:block;" onclick='deleteExperience(${i})'>--</button>
+                <button class="editBTN" style="display:block;" onclick='deleteExperience(${experience.id})'>--</button>
             </li>
 
         `;
@@ -177,19 +176,22 @@ function fillExperience(userInfoExperiences){
 }
 
 //function to delete an experience find element by classes service-item and erase the one with the index i 
-function deleteExperience(i){
-    var elements = document.getElementsByClassName("service-item");
-    elements[i].remove();
+function deleteExperience(id){
+    var elements = document.getElementsByClassName("service-item-exp"); //meter experience
+    //delete element by finding the one with the same id
+    for (let i = 0; i < elements.length; i++) {
+        if(elements[i].id == id){
+            elements[i].remove();
+        }
+    }
 }
 function addExperience(Experience){
     // count how many experiences there are and store in position
     // create dummy experience with 1 experience that starts in 2021 and ends current , its title is engineer and its description is "I am an engineer" 
-    Experience = {initialDate: "2021", finalDate: "current", title: "engineer", description: "I am an engineer", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}
-    var elements = document.getElementsByClassName("service-item");
-    var position = elements.length;
+    Experience = {initialDate: "2021", id: "14221412", finalDate: "curffffffrent", title: "afsafasafasfsaengineer", description: "I am an engineer", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}
     const experience = Experience;
         document.getElementById("ExperienceList").innerHTML += `
-            <li class="service-item">
+            <li class="service-item-exp" id="${experience.id}">
 
                 <div class="service-icon-box">
                     <img src="${experience.image}
@@ -204,7 +206,7 @@ function addExperience(Experience){
 
                     </p>
                 </div>
-                <button class="editBTN" style="display:block;" onclick='deleteExperience(${position})'>-----</button>
+                <button class="editBTN" style="display:block;" onclick='deleteExperience(${experience.id})'>-----</button>
             </li>
 
         `;

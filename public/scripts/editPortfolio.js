@@ -1,6 +1,13 @@
 
 function editSidebarF() { 
 
+    let userSidebarPhoneInput = document.getElementById("userSidebarPhone").innerHTML;
+    let userSidebarBirthdayInput = document.getElementById("userSidebarBirthday").innerHTML;
+    let userSidebarLocationInput = document.getElementById("userSidebarLocation").innerHTML;
+    let userSidebarNameInput = document.getElementById("userSidebarName").innerHTML;
+
+     
+
     document.getElementById("allsidebar").innerHTML = `<!--#SIDEBAR-->
         <div class="sidebar-info">
 
@@ -15,7 +22,7 @@ function editSidebarF() {
             <input type="text" id="userSidebarNameInput" name="userTitle" placeholder="title">  </input>
 
             <p class="title" id="userSidebarTitle">
-            <input type="text" id="userSidebarTitleInput" name="userTitle" placeholder="title">  </input>
+
             </p>
             </div>
 
@@ -42,7 +49,7 @@ function editSidebarF() {
                 <div class="contact-info">
                 <p class="contact-title">Email</p>
 
-                <input type="text" id="userSidebarEmailInput" name="userEmail" placeholder="Email" ></input>
+
                 </div>
 
             </li>
@@ -117,41 +124,72 @@ function editSidebarF() {
             
 
         </div>`;
-}
-function saveSideBar(){
-  userSideBarImage = document.getElementById("userSidebarImageInput");
-  userSidebarName = document.getElementById("userSidebarNameInput");
-  userSidebarTitle = document.getElementById("userSidebarTitleInput");
-  userSidebarEmail = document.getElementById("userSidebarEmailInput");
-  userSidebarPhone = document.getElementById("userSidebarPhoneInput");
-  userSidebarBirthday = document.getElementById("userSidebarBirthdayInput");
-  userSidebarLocation = document.getElementById("userSidebarLocationInput");
-  //get the value from the input field
 
-  userSideBarImage = userSideBarImage.value;
-  userSidebarName = userSidebarName.value;
-  userSidebarTitle = userSidebarTitle.value;
-  userSidebarEmail = userSidebarEmail.value;
-  userSidebarPhone = userSidebarPhone.value;
-  userSidebarBirthday = userSidebarBirthday.value;
-  userSidebarLocation = userSidebarLocation.value;
-  // console log all values
-  console.log(userSideBarImage);
-  console.log(userSidebarName);
-  console.log(userSidebarTitle);
-  console.log(userSidebarEmail);
-  console.log(userSidebarPhone);
-  console.log(userSidebarBirthday);
-  console.log(userSidebarLocation);
+    document.getElementById("userSidebarPhoneInput").value = userSidebarPhoneInput;
+    document.getElementById("userSidebarBirthdayInput").value = userSidebarBirthdayInput;
+    document.getElementById("userSidebarLocationInput").value = userSidebarLocationInput;
+    document.getElementById("userSidebarNameInput").value = userSidebarNameInput;
 
-  editSidebar = false;
+  
 }
+async function saveSideBar(id){
+    userSideBarImage = document.getElementById("userSidebarImageInput");
+    userSidebarName = document.getElementById("userSidebarNameInput");
+
+    userSidebarPhone = document.getElementById("userSidebarPhoneInput");
+    userSidebarBirthday = document.getElementById("userSidebarBirthdayInput");
+    userSidebarLocation = document.getElementById("userSidebarLocationInput");
+    //get the value from the input field
+
+    userSideBarImage = userSideBarImage.value;
+    userSidebarName = userSidebarName.value;
+
+    userSidebarPhone = userSidebarPhone.value;
+    userSidebarBirthday = userSidebarBirthday.value;
+    userSidebarLocation = userSidebarLocation.value;
+
+    
+
+    const cookie = JSON.parse(readCookie("user"));
+    console.log('BOLACHAAAAA', cookie);
+
+    userSidebar = {
+        userId : cookie.id,
+        userSideBarImage : userSideBarImage,
+        userSidebarName : userSidebarName,
+
+        userSidebarPhone : userSidebarPhone,
+        userSidebarBirthday : userSidebarBirthday,
+        userSidebarLocation : userSidebarLocation
+    }
+
+    const reply = await makeRequest("https://localhost:8000/api/user/savePortfolioSidebar", {
+    method: "POST",
+    body: JSON.stringify(userSidebar),
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+
+    // console log all values
+    console.log(userSideBarImage);
+    console.log(userSidebarName);
+    console.log(userSidebarTitle);
+
+    console.log(userSidebarPhone);
+    console.log(userSidebarBirthday);
+    console.log(userSidebarLocation);
+
+    editSidebar = false;
+}
+
+
 
 function editAboutmeF() {
-  document.getElementById("allAboutMe").innerHTML = `
+    let userAboutMeInput = document.getElementById("userAboutText").innerHTML;
+
+    document.getElementById("allAboutMe").innerHTML = `
 
                 
-          <div class="about-text" id = "userAboutText">
+            <div class="about-text" id = "userAboutText">
                     <input type="textArea" id="userAboutMeInput" name="userAboutMe" placeholder="About me" ></input> 
                 </div>
 
@@ -159,11 +197,22 @@ function editAboutmeF() {
             <button class="editBTN" style="display:block;" onclick='enterPortfolio()'>Cancel Edit</button>  
             <button class="editBTN" style="display:block;" onclick='saveAboutMe()'>Save Edit</button>  
         `;
-}
-function saveAboutMe(){
-    userAboutMe = document.getElementById("userAboutMeInput");
 
-    userAboutMe = userAboutMe.value;
+    document.getElementById("userAboutMeInput").value = userAboutMeInput;
+}
+async function saveAboutMe(){
+    userAboutMe = document.getElementById("userAboutMeInput");
+    const cookie = JSON.parse(readCookie("user"));
+    userAboutMe = {
+        userId: cookie.id,
+        description: userAboutMe.value
+    }
+
+    const reply = await makeRequest("https://localhost:8000/api/user/savePortfolioAboutMe", {
+        method: "POST",
+        body: JSON.stringify(userAboutMe),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+        })
 
     console.log(userAboutMe);
     editAboutMe = false;

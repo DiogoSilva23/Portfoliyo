@@ -31,7 +31,7 @@
 }
 
 .loginPopUp {
-    position: absolute;
+    position: fixed;
     width: 425px;
     height: 450px;
     background: transparent;

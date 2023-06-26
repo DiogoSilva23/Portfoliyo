@@ -82,8 +82,6 @@ async function loginUser() {
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
     json = await reply.json();
-    console.log(json.user)
-    console.log(json.user.userAdmin)
     //mudar isto
     if (reply.status === 201){
 
@@ -92,7 +90,7 @@ async function loginUser() {
         createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
         createCookie('user', JSON.stringify(json.user), 0.5)
         if(json.user.userAdmin === 1){
-            logOnAdmin
+            logOnAdmin()
         }
         else{
             logOnUser()
@@ -108,6 +106,14 @@ document.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         if (document.activeElement.id === 'professionalEmail' || document.activeElement.id === 'professionalPassword') {
             loginUser(); // Call the loginUser function when Enter key is pressed on the email or password input fields
+        }
+    }
+});
+
+document.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        if (document.activeElement.id === 'enterpriseEmail' || document.activeElement.id === 'enterprisePassword') {
+        loginCompany(); // Call the loginUser function when Enter key is pressed on the email or password input fields
         }
     }
 });
@@ -161,7 +167,12 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
         document.getElementById("loginMessage").style.display = "block";
         document.getElementById("loginMessage").innerHTML = json.msg;
         if (reply.status === 201){
-            logOnUser()
+            if(json.user.userAdmin === 1){
+                logOnAdmin()
+            }
+            else{
+                logOnUser()
+            }
         }
     }else{
         const reply = await makeRequest("https://localhost:8000/api/company/login", {
@@ -193,6 +204,7 @@ function logOnUser(){
     document.getElementById("friendList").style.display = "flex";
     document.getElementById("jobOffers").style.display = "inline-block";
     document.getElementById("html").style.overflowY = "scroll";
+    document.getElementById("openFriendListResponsive").style.display = "flex";
     moveHeaderTextClose()
 }
 
@@ -211,7 +223,7 @@ function logOnEnterprise(){
 
 //NAO FUNCIONA BEM
 function logOnAdmin(){
-    window.location.href = "../indexAdmin.html";
+    window.location.href = "indexAdmin.html";
     document.getElementById("loginPopUp").classList.remove('activePopUp');
     moveHeaderTextClose()
 
@@ -308,12 +320,13 @@ async function registerCompany() {
 
     json = await reply.json();
     if (reply.status === 201){
-        document.getElementById("registerMessage").innerHTML = json.msg;
+        document.getElementById("registerMessageEnterprise").innerHTML = json.msg;
         //Mandar para a home page
         console.log('registado com sucesso')
     }
     else{
-        document.getElementById("registerMessage").innerHTML = json.msg;
+        console.log(json.msg)
+        document.getElementById("registerMessageEnterprise").innerHTML = json.msg;
         console.log('problema no registo')
     }
 }
@@ -346,10 +359,3 @@ async function loginCompany() {
 
 }
   
-document.addEventListener('keypress', function (event) {
-    if (event.key === 'Enter') {
-        if (document.activeElement.id === 'enterpriseEmail' || document.activeElement.id === 'enterprisePassword') {
-        loginCompany(); // Call the loginUser function when Enter key is pressed on the email or password input fields
-        }
-    }
-});

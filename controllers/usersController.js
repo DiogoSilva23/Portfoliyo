@@ -5,9 +5,9 @@ const connection = require('../config')
 require('dotenv').config()
 
 exports.getUsers = async (req, res) => {
+    console.log("GET USERS")
     connection.query("SELECT * FROM users", function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
         res.json(result);
       });
 };
@@ -382,3 +382,48 @@ exports.portfolioGet = async (req, res) => {
     return res.status(201).json({ msg: `Logado com sucesso`,  portfolio: portfolio})
 })
 }
+
+exports.portfolioSaveSidebar = async (req, res) => {
+  const sidebar = req.body;
+  const userId = sidebar.userId;
+  const userSideBarImage = sidebar.userSideBarImage;
+  const userSidebarName = sidebar.userSidebarName;
+  const userSidebarPhone = sidebar.userSidebarPhone;
+  const userSidebarBirthday = sidebar.userSidebarBirthday;
+  const userSidebarLocation = sidebar.userSidebarLocation;
+
+  const query = `UPDATE portfolios SET profileImageURL = '${userSideBarImage}', userName = '${userSidebarName}', userName = '${userSidebarName}', phone = '${userSidebarPhone}', birthDate = '${userSidebarBirthday}', location = '${userSidebarLocation}'  WHERE id = '${userId}'`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+exports.portfolioSaveAboutMe = async (req, res) => {
+  const aboutMe = req.body.description;
+  const id = req.body.userId;
+  const query = `UPDATE portfolios SET userDescription = '${aboutMe}' WHERE id = '${id}'`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+exports.getEnterprises = async (req, res) => {
+  console.log("GET Enterprises")
+  connection.query("SELECT * FROM companies", function (err, result, fields) {
+      if (err) throw err;
+
+      res.json(result);
+    });
+};

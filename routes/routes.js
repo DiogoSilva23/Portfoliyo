@@ -10,4 +10,7 @@ router.post('/api/user/login', usersController.loginUser)
 router.post('/api/company/registerCompany', usersController.registerCompany)
 router.post('/api/company/login', usersController.loginCompany)
 router.post('/api/user/getPortfolio', usersController.portfolioGet)
+router.post('/api/user/savePortfolioSidebar', usersController.portfolioSaveSidebar)
+router.post('/api/user/savePortfolioAboutMe', usersController.portfolioSaveAboutMe)
+router.get('/api/enterprises', usersController.getEnterprises)
 module.exports = router;
