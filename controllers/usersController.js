@@ -629,7 +629,7 @@ exports.getUser = async (req, res) => {
   console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
   console.log("ghafsgashfgashjsfaguyafsgsyuagfashjgafsuyfasgyusafgsfayfas")
   console.log(req.params)
-  const id = req.params.id;
+  const id = req.params.userId;
   console.log(req.params)
   console.log("GET USER")
   connection.query(`SELECT * FROM users WHERE id = '${id}'`, function (err, result, fields) {
