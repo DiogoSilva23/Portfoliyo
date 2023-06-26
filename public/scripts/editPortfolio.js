@@ -132,7 +132,7 @@ function editSidebarF() {
 
   
 }
-async function saveSideBar(id){
+async function saveSideBar(){
     userSideBarImage = document.getElementById("userSidebarImageInput");
     userSidebarName = document.getElementById("userSidebarNameInput");
 
@@ -161,6 +161,7 @@ async function saveSideBar(id){
         userSidebarPhone : userSidebarPhone,
         userSidebarBirthday : userSidebarBirthday,
         userSidebarLocation : userSidebarLocation
+        
     }
 
     const reply = await makeRequest("https://localhost:8000/api/user/savePortfolioSidebar", {
@@ -179,6 +180,7 @@ async function saveSideBar(id){
     console.log(userSidebarLocation);
 
     editSidebar = false;
+    enterPortfolio();
 }
 
 
@@ -200,7 +202,86 @@ function editAboutmeF() {
 
     document.getElementById("userAboutMeInput").value = userAboutMeInput;
 }
-async function saveAboutMe(){
+
+
+function addExperienceF() {
+
+    //count the number of experiences
+    let experienceCount = document.getElementById("ExperienceList").childElementCount;
+    console.log(experienceCount);
+  document.getElementById("ExperienceList").innerHTML += `
+        
+        
+            <li class="service-item-exp" >
+                <div class="service-content-box">
+                    <h4 class="h4 service-item-title">
+                        <div>
+                            <label for="image">Image URL</label>
+                            <input type="text" name="image" id="image" required>
+                        </div> 
+                        <div class="birthdate">
+                            <label for="registerBirthdate">Initial Date</label>
+                            <input type="date" name="initialDate" id="initialDate" required>
+                        </div> 
+                        <div class="birthdate">
+                            <label for="registerBirthdate">Final Date</label>
+                            <input type="date" name="finalDate" id="finalDate" required>
+                        </div>
+                        <div>
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="titleEXP" required>
+                        </div>
+                        <div>
+                            <label for="description">Description</label>
+                            <input type="text"  width="1000px" height="200px" name="description" id="description" required>
+                        </div>
+                    <button class="editBTN" style="display:inline;" onclick='saveExperience()'>Save</button>
+                    <button class="editBTN" style="display:inline;" onclick='enterPortfolio()'>cancel</button>
+                </div>
+            </li>
+        `;
+}
+
+async function saveExperience(){
+    experienceImage = document.getElementById("image");
+    experienceTitle = document.getElementById("titleEXP");
+    experienceDescription = document.getElementById("description");
+    experienceInitialDate = document.getElementById("initialDate");
+    experienceFinalDate = document.getElementById("finalDate");
+
+    experienceImage = experienceImage.value;
+    experienceTitle = experienceTitle.value;
+    experienceDescription = experienceDescription.value;
+    experienceInitialDate = experienceInitialDate.value;
+    experienceFinalDate = experienceFinalDate.value;
+    
+    const cookie = JSON.parse(readCookie("user"));
+    console.log('BOLACHAAAAA', cookie);
+
+    experience = {
+        userId : cookie.id,
+        experienceImage : experienceImage,
+        experienceTitle : experienceTitle,
+        experienceDescription : experienceDescription,
+        experienceInitialDate : experienceInitialDate,
+        experienceFinalDate : experienceFinalDate
+    }
+        console.log(experienceImage);
+        console.log(experienceTitle);
+        console.log(experienceDescription);
+        console.log(experienceInitialDate);
+        console.log(experienceFinalDate);
+
+    const reply = makeRequest("https://localhost:8000/api/user/addExperience", {
+        method: "POST",
+        body: JSON.stringify(experience),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+
+    editExperience = false;
+    enterPortfolio();    
+}
+function saveAboutMe(){
     userAboutMe = document.getElementById("userAboutMeInput");
     const cookie = JSON.parse(readCookie("user"));
     userAboutMe = {
@@ -208,7 +289,7 @@ async function saveAboutMe(){
         description: userAboutMe.value
     }
 
-    const reply = await makeRequest("https://localhost:8000/api/user/savePortfolioAboutMe", {
+    const reply = makeRequest("https://localhost:8000/api/user/savePortfolioAboutMe", {
         method: "POST",
         body: JSON.stringify(userAboutMe),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -216,4 +297,5 @@ async function saveAboutMe(){
 
     console.log(userAboutMe);
     editAboutMe = false;
+    enterPortfolio();
 }

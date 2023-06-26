@@ -176,7 +176,7 @@ function templateExperience(){
 
     </ul>
         <button class="editBTN" onclick="toggleEditMode("exp")">Edit</edit-button>
-        <button class="editBTN" onclick="addExperience(null)">Add new</edit-button>  
+        <button class="editBTN" onclick="addExperienceF()">Add new</edit-button>  
     </section>
     </ul>`;
 }

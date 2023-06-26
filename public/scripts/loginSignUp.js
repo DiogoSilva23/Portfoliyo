@@ -46,7 +46,6 @@ async function registerUser() {
         birtdate: birtdate,
         visibleProfile: visibleProfile
     }
-    console.log(user, 'user')
     
     const reply = await makeRequest("https://localhost:8000/api/user/registerUser", {
         method: "POST",
@@ -75,21 +74,19 @@ async function loginUser() {
         email: email,
         pword: pword
     }
-    console.log(user)
     const reply = await makeRequest("https://localhost:8000/api/user/login", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
-    json = await reply.json();
-    //mudar isto
+    userL = await reply.json();
     if (reply.status === 201){
 
         document.getElementById("loginMessage").style.display = "block";
-        document.getElementById("loginMessage").innerHTML = json.msg;
-        createCookie('userToken', json.token, 0.5)  //VERIFICAR ESTA CENA
-        createCookie('user', JSON.stringify(json.user), 0.5)
-        if(json.user.userAdmin === 1){
+        document.getElementById("loginMessage").innerHTML = userL.msg;
+        createCookie('userToken', userL.token, 0.5)  //VERIFICAR ESTA CENA
+        createCookie('user', JSON.stringify(userL.user), 0.5)
+        if(userL.user.userAdmin === 1){
             logOnAdmin()
         }
         else{
@@ -98,7 +95,7 @@ async function loginUser() {
     }
     else{
         document.getElementById("loginMessage").style.display = "block";
-        document.getElementById("loginMessage").innerHTML = json.msg;
+        document.getElementById("loginMessage").innerHTML = userL.msg;
     }
 }
   
@@ -163,11 +160,11 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
             body: JSON.stringify(user),
             headers: { "Content-type": "application/json; charset=UTF-8" },
         });
-        json = await reply.json();
+        session = await reply.json();
         document.getElementById("loginMessage").style.display = "block";
-        document.getElementById("loginMessage").innerHTML = json.msg;
+        document.getElementById("loginMessage").innerHTML = session.msg;
         if (reply.status === 201){
-            if(json.user.userAdmin === 1){
+            if(session.user.userAdmin === 1){
                 logOnAdmin()
             }
             else{
@@ -180,9 +177,9 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
             body: JSON.stringify(user),
             headers: { "Content-type": "application/json; charset=UTF-8" },
         });
-        json = await reply.json();
+        session = await reply.json();
         document.getElementById("loginMessage").style.display = "block";
-        document.getElementById("loginMessage").innerHTML = json.msg;
+        document.getElementById("loginMessage").innerHTML = session.msg;
         if (reply.status === 201){
             logOnEnterprise()
         }

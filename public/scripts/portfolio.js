@@ -28,6 +28,40 @@ async function getPortfolio(){
         return userPortfolio;
     }
 }
+
+
+// get experiences from user
+async function getExperiences(){
+    const user = JSON.parse(readCookie('user'))
+    const reply = await makeRequest("https://localhost:8000/api/user/getExperiences", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+
+    json = await reply.json();
+    const userExperiences = json;
+    console.log(userExperiences);
+    return userExperiences;
+}
+// get educations from user
+async function getEducations(){
+    const user = JSON.parse(readCookie('user'))
+    const reply = await makeRequest("https://localhost:8000/api/user/getEducations", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    json = await reply.json();
+    if (reply.status === 201){
+        const userEducations = json
+        return userEducations;
+    }
+}
+
+
+
+
 async function enterPortfolio(){
     editSidebar = false;
     editAboutme = false;
@@ -36,8 +70,7 @@ async function enterPortfolio(){
     templatePortfolio()
     // get the user id from the url 
     const urlParams = new URLSearchParams(window.location.search);
-    //fillPortfolio(urlParams.get('id'))
-    fillPortfolio("0833bc82b31c3f6e8013");
+    fillPortfolio(urlParams.get('id'));
 }
 
 async function fillPortfolio(userId){
@@ -45,6 +78,7 @@ async function fillPortfolio(userId){
        const cookie = JSON.parse(readCookie("user"));
        console.log(cookie.id)
        console.log(userId)
+       userId = "1e9ff9b647a6408f5f7d"
        // make the code to if user id is equal to the logged in user, then show edit buttons in the classes editBTN
    
 
@@ -80,16 +114,17 @@ async function fillPortfolio(userId){
     }
     fillAboutme(userInfoAboutme, false)
 
-    const userInfoExperiences = "afsfaf"
+    const userInfoExperiences = await getExperiences();
+    console.log(userInfoExperiences)
     fillExperience(userInfoExperiences);
-    const userInfoEducations = "afsfaf";
-    fillEducation(userInfoEducations);
+    /*const userInfoEducations = await getEducations();
+    fillEducation(userInfoEducations);*/
 
 
      if (cookie.id == userId) {
        let editbtns = document.getElementsByClassName("editBTN");
        for (let i = 0; i < editbtns.length; i++) {
-         editbtns[i].style.display = "block";
+         editbtns[i].style.display = "inline";
        }
      } else {
        let editbtns = document.getElementsByClassName("editBTN");
@@ -144,39 +179,35 @@ function fillAboutme(userInfoAboutme){
     document.getElementById("userAboutText").innerHTML= userInfoAboutme.description;
 
 }
-function fillExperience(userInfoExperiences){
-    //make dummy user info with 1 experience that starts in 2021 and ends current , its title is engineer and its description is "I am an engineer"
-    userInfoExperiences = [{initialDate: "2021", id: "12312312", finalDate: "current", title: "engineer", description: "I am not an engineer", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}]
-    // add another one , title webDeveloper and description "I am a web developer" no start or end
-    
-    userInfoExperiences.push({initialDate: "", id: "12314312", finalDate: "", title: "webDevefasafasfsafsfasloper", description: "I am a fasfasfasffsafasfasffasweb developer"})
+async function fillExperience(userInfoExperiences){
+    console.log(userInfoExperiences)
+    document.getElementById("ExperienceList").innerHTML ="";
     for (let i = 0; i < userInfoExperiences.length; i++) {
         const experience = userInfoExperiences[i];
         document.getElementById("ExperienceList").innerHTML += `
-            <li class="service-item-exp" id="${experience.id}">
+            <li class="service-item-exp" id="${experience.idExperiences}">
 
                 <div class="service-icon-box">
-                    <img src="${experience.image}
-                    " alt="/images/te.png" width="40">
+                    <img src="${experience.logoUrl}
+                    " alt="../image/te.png" width="40">
                 </div>
 
                 <div class="service-content-box">
-                    <h4 class="h4 service-item-title">${experience.initialDate} - ${experience.finalDate} <br> ${experience.title}</h4>
+                    <h4 class="h4 service-item-title">${experience.inicialDate} - ${experience.finalDate} <br> ${experience.localName}</h4>
 
                     <p class="service-item-text">
-                    ${experience.description}
+                    ${experience.functionsDescription}
 
                     </p>
                 </div>
-                <button class="editBTN" style="display:block;" onclick='deleteExperience(${experience.id})'>--</button>
+                <button class="editBTN" style="display:block;" onclick='deleteExperience(${experience.idExperiences})'>--</button>
             </li>
 
         `;
     }
 }
-
 //function to delete an experience find element by classes service-item and erase the one with the index i 
-function deleteExperience(id){
+async function deleteExperience(id){
     var elements = document.getElementsByClassName("service-item-exp"); //meter experience
     //delete element by finding the one with the same id
     for (let i = 0; i < elements.length; i++) {
@@ -184,44 +215,29 @@ function deleteExperience(id){
             elements[i].remove();
         }
     }
+    //delete from database
+    const user = JSON.parse(readCookie('user'))
+    const reply = makeRequest("https://localhost:8000/api/user/deleteExperience", {
+        method: "POST",
+        body: JSON.stringify({id: id, userId: user.id}),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
 }
-function addExperience(Experience){
-    // count how many experiences there are and store in position
-    // create dummy experience with 1 experience that starts in 2021 and ends current , its title is engineer and its description is "I am an engineer" 
-    Experience = {initialDate: "2021", id: "14221412", finalDate: "curffffffrent", title: "afsafasafasfsaengineer", description: "I am an engineer", image:"https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png"}
-    const experience = Experience;
-        document.getElementById("ExperienceList").innerHTML += `
-            <li class="service-item-exp" id="${experience.id}">
-                <div class="service-content-box">
-                    <h4 class="h4 service-item-title">
-                        <div>
-                            <label for="image">Image URL</label>
-                            <input type="text" name="image" id="image" required>
-                        </div> 
-                        <div class="birthdate">
-                            <label for="registerBirthdate">Initial Date</label>
-                            <input type="date" name="registerDate" id="registerDate" required>
-                        </div> 
-                        <div class="birthdate">
-                            <label for="registerBirthdate">Final Date</label>
-                            <input type="date" name="registerDate" id="registerDate" required>
-                        </div>
-                        <div>
-                            <label for="title">Title</label>
-                            <input type="text" name="title" id="title" required>
-                        </div>
-                        <div>
-                            <label for="description">Description</label>
-                            <input type="text" name="description" id="description" required>
-                        </div>
-                    <button class="editBTN" style="display:inline;">Save</button>
-                    <button class="editBTN" style="display:inline;" onclick='deleteExperience(${experience.id})'>-----</button>
-                </div>
-            </li>
-        `;
-        /*
 
-        <li class="service-item-exp" id="${experience.id}">
+function addExperience(Experience){
+  // count how many experiences there are and store in position
+  // create dummy experience with 1 experience that starts in 2021 and ends current , its title is engineer and its description is "I am an engineer"
+  Experience = {
+    initialDate: "2021",
+    id: "14221412",
+    finalDate: "curffffffrent",
+    title: "afsafasafasfsaengineer",
+    description: "I am an engineer",
+    image: "https://autonoma.pt/wp-content/uploads/2018/01/logoUAL1.png",
+  };
+  const experience = Experience;
+  document.getElementById("ExperienceList").innerHTML += `
+    <li class="service-item-exp" id="${experience.id}">
 
                 <div class="service-icon-box">
                     <img src="${experience.image}
@@ -240,15 +256,13 @@ function addExperience(Experience){
 
                     </p>
                 </div>
-                <button class="editBTN" style="display:block;" onclick='deleteExperience(${experience.id})'>-----</button>
+                <button class="editBTN" style="display:block;" onclick='deleteExperience(${experience.id})'>-</button>
 
             </li>
         
-            */
+        `;
 
-    //get the values from the input fields
 }
-
 /*
 function fillEducation(userInfoEducations){
     //create dummy user info with 1 education that starts in 2021 and ends current , its title is LEI and its description is "I am studying LEI"

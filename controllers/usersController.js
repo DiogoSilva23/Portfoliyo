@@ -91,8 +91,7 @@ exports.registerUser = async (req, res) => {
 function checkVariables(...variables) {
   console.log("variaveis ->", variables)
   for (let i = 0; i < variables.length; i++) {
-    console.log("var", i, variables[i])
-    if (typeof variables[i] === 'undefined') {
+    if (typeof variables[i] === "undefined") {
       return true
     }
     if(variables[i].trim() === ""){
@@ -182,10 +181,8 @@ function createPortfolio(id, user){
   }
 
   exports.loginUser = async (req, res) => {
-    console.log(req.body)
     const email = req.body.email;
     const pword = req.body.pword;
-    console.log('TESTE123', email, pword)
     if (email.length == 0){
       return res.status(405).json({ msg: `Email não inserido!` })   //verificar se pode ser 405
     }
@@ -196,20 +193,19 @@ function createPortfolio(id, user){
     if (!emailExist) {
         return res.status(404).json({ msg: `Email não correspondente a nenhuma conta` })
     };
-
     const query = `SELECT * FROM users WHERE email = '${email}'`;
     connection.query(query, async function (err, result) {
       if (err) {
           return res.status(500).send({msg: "Erro no Log in"});
       }
       const user = result[0];
-      console.log(user)
       if (pword === user.pword){
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
         return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken, user: user})
       }
       const samePassword = await bcrypt.compare(pword, user.pword)
       if (!samePassword){
+
           return res.status(401).json({ msg: `Password invalida!` })
       }
       //const accessToken = generateAccessToken(user) 
@@ -231,7 +227,7 @@ exports.registerCompany = async (req, res) => {
   const company = req.body;
   const companyName = company.companyName
   const email = company.email
-  const password = company.password
+  const password = company.pword
   const websiteURL =  company.websiteURL
   const logoURL = company.logoURL
   const description = company.description
@@ -426,4 +422,177 @@ exports.getEnterprises = async (req, res) => {
 
       res.json(result);
     });
+};
+
+exports.addFriends = async (req, res) => {
+  myNick = req.body.myNick;
+  friend = req.body.friend;
+  userExists = await existingUser(friend)
+  if (!userExists){
+    return res.status(404).json({ msg: `Utilizador não existe` })
+  }
+  
+  if(alredyFriends(friend, myNick)){
+    return res.status(404).json({ msg: `Utilizador já é seu amigo` })
+  }
+
+  try {
+    await addNewFriend(friend, myNick); 
+
+    return res.status(201).send({
+      msg: `${friend} request sent successfully!`
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      msg: "An error occurred while trying to add the friend."
+    });
+  }
+
+}
+
+async function addNewFriend(friend, nick) {
+  // Query to insert friends
+  const query = `INSERT INTO friends (friend1_nick, friend2_nick, accepted) VALUES ('${nick}', '${friend}', 0)`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+async function alredyFriends(friend, nick){
+  const query = `SELECT COUNT(*) AS count FROM friends 
+               WHERE (friend1_nick = '${nick}' AND friend2_nick = '${friend}')
+               OR (friend1_nick = '${friend}' AND friend2_nick = '${nick}')`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        const count = result[0].count;
+        resolve(count > 0); // Returns true if the count is greater than 0
+      }
+    });
+  });
+
+}
+
+
+exports.getExperiences = async (req, res) => {
+  const id = req.body.id;
+  console.log("GET Experiences")
+  console.log(req.body)
+  
+  console.log(`SELECT * FROM experiences WHERE idPortffolio = "${id}";`);
+  connection.query(`SELECT * FROM experiences WHERE idPortfolio = '${id}'`, function (err, result, fields) {
+      if (err) throw err;
+      console.log(result)
+      res.json(result);
+    });
+};
+
+exports.getEducations = async (req, res) => {
+  const id = req.body.id;
+  console.log("GET Educations")
+  connection.query(`SELECT * FROM educations WHERE idEducation = '${id}'`, function (err, result, fields) {
+      if (err) throw err;
+
+      res.json(result);
+    });
+};
+
+
+exports.addExperience = async (req, res) => {
+
+  const experience = req.body;
+  const id = experience.userId;
+  const localName = experience.experienceTitle;
+  const logoUrl = experience.experienceImage;
+  const inicialDate = experience.experienceInitialDate;
+  const finalDate = experience.experienceFinalDate;
+  const functionsDescription = experience.experienceDescription;
+  
+  console.log(experience);
+  const query = `INSERT INTO experiences (idPortfolio, localName, logoUrl, inicialDate, finalDate, functionsDescription) VALUES ('${id}', '${localName}', '${logoUrl}', '${inicialDate}', '${finalDate}', '${functionsDescription}')`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(result);
+        resolve(result);
+      }
+    });
+  });
+}
+
+exports.addEducation = async (req, res) => {
+  const education = req.body;
+  const id = education.userId;
+  const schoolName = education.schoolName;
+  const curseName = education.curseName;
+  const curseType = education.curseType;
+  const media = education.media;
+
+  const query = `INSERT INTO educations (idPortfolio, schoolName, curseName, curseType, media) VALUES ('${id}', '${schoolName}', '${curseName}', '${curseType}', '${media}')`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(result)
+        resolve(result);
+      }
+    });
+  });
+}
+
+exports.deleteExperience = async (req, res) => {
+  const experience = req.body;
+  const id = experience.id;
+
+  const query = `DELETE FROM experiences WHERE idExperiences = '${id}'`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(result)
+        resolve(result);
+      }
+    });
+  });
+}
+
+exports.deleteEducation = async (req, res) => {
+  const education = req.body;
+  const id = education.id;
+
+  const query = `DELETE FROM educations WHERE idEducation = '${id}'`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(result)
+        resolve(result);
+      }
+    });
+  });
+}
+
+exports.getFriends = async (req, res) => {
+  console.log(req)
+  const nick = req.body.nick;
+  console.log("GETFriends", nick)
+  const query = `SELECT * FROM friends WHERE friend1_nick = '${nick}' OR friend2_nick = '${nick}'`;
+  connection.query(query, function (err, result, fields) {
+    if (err) throw err;
+    res.json(result);
+  });
 };
