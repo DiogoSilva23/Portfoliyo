@@ -53,18 +53,16 @@
         </nav>
     </header>
 
-    <div class="friendList" id="friendList">
+    <div class="friendList" id="friendListC">
         <h2>Friends List</h2>
-        <ul class="friendItems">
-            <li>Friend 1 <button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
-            <li>Friend 2 <button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
-            <li>Friend 3 <button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
-            <li>Friend 4 <button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
-            <li>Friend 5 <button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+        <ul class="friendItems" id="friendsList">
+        </ul>
+        <h2>Friend Requests</h2>
+        <ul class="friendItems" id="friendsRequests">
         </ul>
         <div class="friendActions">
             <input type="text" id="newFriendInput" placeholder="Enter friend's name">
-            <button id="addFriendButton"><ion-icon name="person-add" size="small"></ion-icon></button>
+            <button id="addFriendButton" onclick="addFriend()"><ion-icon name="person-add" size="small" ></ion-icon></button>
             <button class="removeFriendButton"><ion-icon name="person-remove" size="small"></ion-icon></button>
             <button class="notificationButton" onclick="openNotificationPopup()"><ion-icon name="notifications" size="small"></ion-icon></button>
         </div>
