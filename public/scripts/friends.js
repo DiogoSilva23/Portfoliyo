@@ -73,14 +73,13 @@ async function listFriends(){
                 console.log('YOOOOO');
                 document.getElementById("friendsRequests").innerHTML += `
         
-                <li>${friends[i].friend2_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
-            
+                <li>${friends[i].friend2_nick}<button class="accept" >+</button><button class="reject">-</button></li>
                 `;
             }else{
                 console.log('YO');
                 document.getElementById("friendsRequests").innerHTML += `
         
-                <li>${friends[i].friend1_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+                <li>${friends[i].friend2_nick}<button class="accept" >+</button><button class="reject">-</button></li>
             
                 `;
             }
