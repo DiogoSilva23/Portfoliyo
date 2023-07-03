@@ -1,3 +1,7 @@
+#friendList {
+    display: none;
+}
+
 .friendList {
     position: fixed;
     top: 60px;

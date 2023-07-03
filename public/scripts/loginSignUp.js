@@ -65,8 +65,6 @@ async function registerUser() {
     }
 }
 
-
-
 async function loginUser() {
     const email = document.getElementById("professionalEmail").value;
     const pword = document.getElementById("professionalPassword").value;
@@ -209,7 +207,6 @@ function logOnEnterprise(){
     document.getElementById("logoutPopUpButton").style.display = "inline-block";
     document.querySelector(".portfolio").style.display = "none";
     document.getElementById("loginMessage").style.display = "none";
-    document.getElementById("friendList").style.display = "none";
     document.getElementById("userSearch").style.display = "inline-block";
     document.getElementById("jobOffers").style.display = "none";
     document.getElementById("html").style.overflowY = "scroll";

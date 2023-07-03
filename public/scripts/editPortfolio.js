@@ -121,7 +121,7 @@ function editSidebarF() {
             </li>
             </ul>     
             <button class="editBTN" style="display:block;" onclick='enterPortfolio()'>Cancel Edit</button>  
-            <button class="editBTN" style="display:block;" onclick='saveSideBar()'>Save Edit</button>  
+            <button class="editBTN" style="display:block;" onclick='saveSideBar(); enterPortfolio()'>Save Edit</button>  
             
 
         </div>`;
@@ -331,24 +331,17 @@ async function saveEducation(){
     enterPortfolio();
 }
 
-
-
-
-
-
 function editAboutmeF() {
     let userAboutMeInput = document.getElementById("userAboutText").innerHTML;
 
-    document.getElementById("allAboutMe").innerHTML = `
-
-                
+    document.getElementById("allAboutMe").innerHTML = `  
             <div class="about-text" id = "userAboutText">
                     <input type="textArea" id="userAboutMeInput" name="userAboutMe" placeholder="About me" ></input> 
                 </div>
 
             <!-- service-->
             <button class="editBTN" style="display:block;" onclick='enterPortfolio()'>Cancel Edit</button>  
-            <button class="editBTN" style="display:block;" onclick='saveAboutMe()'>Save Edit</button>  
+            <button class="editBTN" style="display:block;" onclick='saveAboutMe(); enterPortfolio()'>Save Edit</button>  
         `;
 
     document.getElementById("userAboutMeInput").value = userAboutMeInput;

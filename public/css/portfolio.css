@@ -276,7 +276,6 @@ img, ion-icon, a, button, time, span { display: block; }
 .about .article-title { margin-bottom: 15px; }
 
 .about-text {
-  color: var(--light-gray);
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   line-height: 1.6;
@@ -688,3 +687,20 @@ hr {
   border-radius: 20px;
   background: #023e8a;
 }
+
+#userAboutMeInput {
+  resize: none;
+  height: 30px;
+  padding: 5px;
+  width: 100%;
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 3%;
+  outline: none;
+  color: white;
+}
+
+::placeholder {
+  color: white;
+}
+
