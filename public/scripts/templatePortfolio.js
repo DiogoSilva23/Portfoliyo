@@ -43,7 +43,7 @@ function templateSidebar(){
             <li class="contact-item">
 
                 <div class="icon-box">
-                <ion-icon name="mail-outline"></ion-icon>
+                <ion-icon name="mail"></ion-icon>
                 </div>
 
                 <div class="contact-info">
@@ -57,7 +57,7 @@ function templateSidebar(){
             <li class="contact-item">
 
                 <div class="icon-box">
-                <ion-icon name="phone-portrait-outline"></ion-icon>
+                <ion-icon name="phone-portrait-sharp"></ion-icon>
                 </div>
 
                 <div class="contact-info">
@@ -71,7 +71,7 @@ function templateSidebar(){
             <li class="contact-item">
 
                 <div class="icon-box">
-                <ion-icon name="calendar-outline"></ion-icon>
+                <ion-icon name="calendar"></ion-icon>
                 </div>
 
                 <div class="contact-info">
@@ -85,7 +85,7 @@ function templateSidebar(){
             <li class="contact-item">
 
                 <div class="icon-box">
-                <ion-icon name="location-outline"></ion-icon>
+                <ion-icon name="location"></ion-icon>
                 </div>
 
                 <div class="contact-info">

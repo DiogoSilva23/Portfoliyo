@@ -33,7 +33,7 @@
 .loginPopUp {
     position: fixed;
     width: 425px;
-    height: 450px;
+    height: 475px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .5);
     border-radius: 5%;
