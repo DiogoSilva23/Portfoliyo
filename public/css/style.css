@@ -91,11 +91,10 @@ nav ul li a:hover::after{
 }
 
 .headerText{
-    margin-top: 18.5%;
+    margin-top: 400px;
     font-size: 30px;
     color: white;
     text-align: center;
-    height: 60%;
     position: relative;
 }
 
@@ -187,8 +186,10 @@ nav ul li a:hover::after{
     }
 
     nav ul li{
-        display: block;
+        display: flex;
+        flex-direction: row;
         text-align: center;
+        justify-content: center;
         padding: 5px;
     }
 
@@ -199,7 +200,6 @@ nav ul li a:hover::after{
         align-items: center;
         justify-content: center;
     }
-
 }
 
 ::-webkit-scrollbar {

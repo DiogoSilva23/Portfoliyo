@@ -191,13 +191,22 @@ async function logOut(){
 function logOnUser(){
     document.getElementById("loginPopUp").classList.remove('activePopUp');
     document.getElementById("loginPopUpButton").style.display = "none";
-    document.getElementById("logoutPopUpButton").style.display = "inline-block";
-    document.querySelector(".portfolio").style.display = "inline-block";
     document.getElementById("loginMessage").style.display = "none";
     document.getElementById("friendList").style.display = "flex";
-    document.getElementById("jobOffers").style.display = "inline-block";
     document.getElementById("html").style.overflowY = "scroll";
     document.getElementById("openFriendListResponsive").style.display = "flex";
+    document.querySelector(".portfolio").style.display = "inline-block";
+    document.getElementById("jobOffers").style.display = "inline-block";
+    document.getElementById("logoutPopUpButton").style.display = "inline-block";
+    /*if (window.innerWidth >= 1600) {
+        document.querySelector(".portfolio").style.display = "inline-block";
+        document.getElementById("jobOffers").style.display = "inline-block";
+        document.getElementById("logoutPopUpButton").style.display = "inline-block";
+    } else {
+        document.querySelector(".portfolio").style.display = "inherit";
+        document.getElementById("jobOffers").style.display = "inherit";
+        document.getElementById("logoutPopUpButton").style.display = "inherit";
+    }*/
     moveHeaderTextClose()
 }
 
