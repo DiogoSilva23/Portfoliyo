@@ -12,19 +12,11 @@ h1 {
     color: white;
 }
 
-.portfolio {
+.hiddenTabs {
     display: none;
 }
 
 #friendList {
-    display: none;
-}
-
-#userSearch {
-    display: none;
-}
-
-#jobOffers {
     display: none;
 }
 
