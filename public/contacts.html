@@ -36,26 +36,20 @@
     </header>
 
     <div class="friendList" id="friendList">
+
         <h2>Friends List</h2>
         <ul class="friendItems" id="friendsList">
         </ul>
         <h2>Friend Requests</h2>
         <ul class="friendItems" id="friendsRequests">
         </ul>
+
         <div class="friendActions">
             <input type="text" id="newFriendInput" placeholder="Enter friend's name">
             <button id="addFriendButton" onclick="addFriend()"><ion-icon name="person-add" size="small" ></ion-icon></button>
             <button class="removeFriendButton"><ion-icon name="person-remove" size="small"></ion-icon></button>
-            <button class="notificationButton" onclick="openNotificationPopup()"><ion-icon name="notifications" size="small"></ion-icon></button>
         </div>
-        <div id="notificationPopup" class="notificationPopup">
-            <ul class="notificationPopupContent">
-              <span class="close" onclick="closeNotificationPopup()">&times;</span>
-              <li>Andre quer te adicionar como amigo <button class="AcceptButton"><ion-icon name="add-circle-outline" size="small"></ion-icon></button> <button class="RejectButton"><ion-icon name="remove-circle-outline" size="small"></ion-icon></button></li>
-              <li>Armando quer te adicionar como amigo</li>
-              <li>Diogo quer te adicionar como amigo</li>
-            </ul>
-        </div>
+
     </div>
 
     <div class="loginPopUp" id="loginPopUp">
@@ -143,7 +137,8 @@
     <script src="scripts/script.js"></script>
     <script src="scripts/cookie.js"></script>
     <script src="scripts/contacts.js"></script>
+    <script src="scripts/friends.js"></script>
     <script> checkSession() </script>
-
+    <script> listFriends() </script>
 </body>
 </html>

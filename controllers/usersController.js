@@ -357,18 +357,14 @@ function validatedCompany(email) {
 
 
 exports.portfolioGet = async (req, res) => {
-  const email = req.body[0].email;  
-  console.log("GET PORTFOLIO")
-  console.log(req.body[0])
+  const email = req.body.email;  
   const query = `SELECT * FROM portfolios WHERE email = '${email}'`;
   connection.query(query, async function (err, result) {
-    console.log(result)
     if (err) {
         return res.status(500).send({msg: "Erro ao tentar obter o portfolio"});
     }
     const portfolio = result[0];
-    console.log(portfolio)
-    return res.status(201).json({ msg: `Logado com sucesso`,  portfolio: portfolio})
+    return res.status(201).json({portfolio: portfolio})
 })
 }
 exports.portfolioSaveSidebar = async (req, res) => {
@@ -477,7 +473,7 @@ async function alredyFriends(friend, nick){
 
 exports.getExperiences = async (req, res) => {
   const id = req.body[0].id;
-  console.log(id)
+  console.log('ID', id)
   connection.query(`SELECT * FROM experiences WHERE idPortfolio = '${id}'`, function (err, result, fields) {
       if (err) throw err;
       res.json(result);

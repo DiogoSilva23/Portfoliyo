@@ -16,14 +16,13 @@ const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
 
 async function getPortfolio(user){
-    console.log(user)
     const reply = await makeRequest("https://localhost:8000/api/user/getPortfolio", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
-    json = await reply.json();
-    const userPortfolio = json.portfolio
+    portfolio = await reply.json();
+    const userPortfolio = portfolio.portfolio;
     return userPortfolio;
 
 
@@ -38,7 +37,7 @@ async function getExperiences(user){
 
     json = await reply.json();
     const userExperiences = json;
-    console.log(userExperiences);
+    console.log('EXPE', userExperiences);
     return userExperiences;
 }
 // get educations from user
@@ -81,33 +80,30 @@ async function getUserforprofile(userId){
 async function fillPortfolio(userId){
     // get the user id from the cookie
     // make a if userid empty , then is equal to the cookie id
+
+    const cookie = JSON.parse(readCookie("user"));
+    
     if (userId == null){
-        userId = JSON.parse(readCookie("user")).id
+        userId = cookie.id
     }
-
-
-       const cookie = JSON.parse(readCookie("user"));
-       console.log(cookie)
-       console.log(userId)
-       // make the code to if user id is equal to the logged in user, then show edit buttons in the classes editBTN
-   
 
     // get user from database
     const user = await getUserforprofile(userId);
-    console.log(user)
-    const portfolio = await getPortfolio(user); 
+    const portfolio = await getPortfolio(user[0]); 
 
-    console.log(portfolio)
+    console.log('PORTF', portfolio)
+
+
     const userInfoSidebar = {
         name: portfolio.userName,
         title: "@" + portfolio.nick,
         email: portfolio.email,
-        phoneNumber: "+351 96777",
+        phoneNumber: portfolio.phone,
         birthDate: portfolio.birthDate,
         location: portfolio.location
     }
-
     fillSidebar(userInfoSidebar)
+
     const userInfoAboutme = {
         description: portfolio.userDescription
     }
@@ -168,6 +164,7 @@ function toggleEditMode(where)  {
 
 function fillSidebar(userInfoSidebar){
     document.getElementById("userSidebarName").innerHTML= userInfoSidebar.name;
+    document.getElementById("userSidebarTitle").innerHTML= userInfoSidebar.title;
     document.getElementById("userSidebarEmail").innerHTML= userInfoSidebar.email;
     document.getElementById("userSidebarEmail").href= "mailto:" + userInfoSidebar.email;
     document.getElementById("userSidebarPhone").innerHTML= userInfoSidebar.phoneNumber;
