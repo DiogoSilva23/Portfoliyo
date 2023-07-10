@@ -35,8 +35,8 @@ async function getExperiences(user){
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
 
-    json = await reply.json();
-    const userExperiences = json;
+    experiences = await reply.json();
+    const userExperiences = experiences;
     console.log('EXPE', userExperiences);
     return userExperiences;
 }

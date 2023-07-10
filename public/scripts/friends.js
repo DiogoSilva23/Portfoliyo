@@ -54,30 +54,46 @@ async function listFriends(){
     document.getElementById("friendsRequests").innerHTML = ""
     
     for (let i = 0; i < friends.length; i++) {
-        var tempNick = {
-            nick: friends[i].friend1_nick
-        }
-        var user = await makeRequest("https://localhost:8000/api/user/getUserbyNick", {
-            method: "POST", 
-            body: JSON.stringify(tempNick),
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-        });
-
 
         if(friends[i].accepted === 1){
             if(friends[i].friend1_nick === myNick){
                 
+                var tempNick = {
+                    nick: friends[i].friend2_nick
+                }
+                var user = await makeRequest("https://localhost:8000/api/user/getUserbyNick", {
+                    method: "POST", 
+                    body: JSON.stringify(tempNick),
+                    headers: { "Content-type": "application/json; charset=UTF-8" },
+                });
+
+                friend = await user.json();
+                idFriend = friend[0].id
+                
                 document.getElementById("friendsList").innerHTML += `
         
-                <li>${friends[i].friend2_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
-                <button onclick="window.location.href = '/portfolio.html?user=${user.id}'">Portfolio</button>
+                <li>${friends[i].friend2_nick}<button class="viewProfileButton" onclick="window.location.href = '/portfolio.html?user=${idFriend}'"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+                <button onclick="window.location.href = '/portfolio.html?user=${idFriend}'">Portfolio</button>
             
                 `;
             }else{
+
+                var tempNick = {
+                    nick: friends[i].friend1_nick
+                }
+                var user = await makeRequest("https://localhost:8000/api/user/getUserbyNick", {
+                    method: "POST", 
+                    body: JSON.stringify(tempNick),
+                    headers: { "Content-type": "application/json; charset=UTF-8" },
+                });
+                
+                friend = await user.json();
+                idFriend = friend[0].id
+
                 document.getElementById("friendsList").innerHTML += `
         
-                <li>${friends[i].friend1_nick}<button class="viewProfileButton"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
-            
+                <li>${friends[i].friend1_nick}<button class="viewProfileButton" onclick="window.location.href = '/portfolio.html?user=${idFriend}'"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
+
                 `;
             }
         }else{

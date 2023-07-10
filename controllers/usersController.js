@@ -609,11 +609,7 @@ exports.rejectFriend = async (req, res) => {
 
 //get user by id
 exports.getUser = async (req, res) => {
-  
-  console.log(req.params)
   const id = req.params.userId;
-  console.log(req.params)
-  console.log("GET USER")
   connection.query(`SELECT * FROM users WHERE id = '${id}'`, function (err, result, fields) {
       if (err) throw err;
       console.log(result)
@@ -623,12 +619,9 @@ exports.getUser = async (req, res) => {
 };
 
 exports.getUserByNick = async (req, res) => {
-
-
   const nick = req.body.nick;
   connection.query(`SELECT * FROM users WHERE nick = '${nick}'`, function (err, result, fields) {
       if (err) throw err;
-      console.log(result)
       res.json(result);
     }
   );
