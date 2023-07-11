@@ -700,7 +700,7 @@ exports.removeFriends = async (req, res) => {
 
 async function removeFriend(friend, nick) {
   // Query to insert friends
-  const query = `DELETE FROM friends WHERE (friend1_nick = 'friend' AND friend2_nick = 'nick') OR  (friend1_nick = 'nick'  AND friend2_nick = 'friend')`;
+  const query = `DELETE FROM friends WHERE (friend1_nick = '${friend}' AND friend2_nick = '${nick}') OR  (friend1_nick = '${nick}'  AND friend2_nick = '${friend}')`;
   return new Promise((resolve, reject) => {
     connection.query(query, function (err, result) {
       if (err) {

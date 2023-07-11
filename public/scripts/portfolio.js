@@ -127,7 +127,16 @@ async function fillPortfolio(userId){
        for (let i = 0; i < editbtns.length; i++) {
          editbtns[i].style.display = "none";
        }
-     }
+       try{
+        if (cookie.validated == 1){
+            console.log("validated")
+            //let probtn = document.getElementsByClassName("editBTN");
+            //probtn.style.display = "none";
+            }
+        }catch{
+        console.log('ERRO')
+        }
+    }
 }
 
 function toggleEditMode(where)  {
@@ -306,3 +315,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     loadText()
 })
+
+function enviarProposta(){
+    console.log("enviar proposta")
+}
