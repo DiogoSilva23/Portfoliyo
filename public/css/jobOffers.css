@@ -27,6 +27,7 @@
 }
 
 .jobOffer {
+    padding: 30px;
     background-color: #0077b6;
     border: 3px solid rgba(255, 255, 255, .5);
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
@@ -63,23 +64,47 @@
 
 .offerDescription {
     font-size: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
 }
 
 .offerInfo {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-gap: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.acceptRejectOffer {
+    padding-right: 40px;
+    padding-left: 40px;
+    height: 45px;
+    background: #023e8a;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: white;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.acceptRejectOffer:hover {
+    background-color: #155ebd;
+    transition: .3s;
 }
 
 @media screen and (max-width: 1500px) {
-
-    .jobOffer {
-        padding: 2% 20%;
-    }
-
     .offerInfo {
         grid-template-columns: 1fr;
+    }
+
+    .acceptRejectOffer {
+        margin-bottom: 10px;
     }
 }
 

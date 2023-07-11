@@ -22,34 +22,15 @@
             <ion-icon name="people" class="openFriendListResponsive" id="openFriendListResponsive" onclick="showFriendList()"></ion-icon>
             <ul id="menu">
                 <li><a href="../index.html">Home</a></li>
-                <li class="portfolio"><a href="../portfolio.html">Portfolio</a></li>
-                <li id="userSearch"><a href="../userSearch.html">Search User</a></li>
-                <li id="jobOffers"><a href="../jobOffers.html">Job Offers</a></li>
-                <li><a href="../aboutUs.html">About us</a></li>
-                <li><a href="../FAQ.html">FAQ</a></li>
-                <li><a href="../contacts.html">Contacts</a></li>
-                <li id="loginPopUpButton"><button class="loginPopUpButton">Login</button></li>
-                <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logOut()">Logout</button></li>
-            </ul>
-
-            <!--Menu Responsivo Backup
-            <div class="teste">
-                <img src="/images/briefcase.png" class="logo">
-                <ion-icon name="menu" id="openMenuButtonResponsive" class="openMenuButtonResponsive" onclick="toggleMenu()"></ion-icon>
-              </div>
-            
-              <ul class="menuTabs" id="regularMenu">
-                <li><a href="../index.html">Home</a></li>
-                <li id="portfolio"><a href="../portfolio.html">Portfolio</a></li>
+                <li class="hiddenTabs" id="portfolio"><a href="../portfolio.html">Portfolio</a></li>
+                <li class="hiddenTabs" id="searchUser"><a href="../userSearch.html">Search User</a></li>
+                <li class="hiddenTabs" id="jobOffers"><a href="../jobOffers.html">Job Offers</a></li>
                 <li><a href="../aboutUs.html">About us</a></li>
                 <li><a href="../FAQ.html">FAQ</a></li>
                 <li><a href="../contacts.html">Contacts</a></li>
                 <li id="loginPopUpButton"><button class="loginPopUpButton" onclick="moveHeaderTextOpen()">Login</button></li>
-                <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logOut(); moveHeaderTextClose()">Logout</button></li>
-                <li id="friendsListButton"><button class="friendsListButton">Friends</button></li>
-              </ul>
-
-            <div id="responsiveMenu"></div>-->
+                <li id="logoutPopUpButton" class="logoutButton"><button class="logoutPopUpButton" onclick="logOut(); moveHeaderTextClose()">Logout</button></li>
+            </ul>
         </nav>
     </header>
 

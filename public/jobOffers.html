@@ -23,14 +23,14 @@
             <ion-icon name="menu" class="openMenuButtonResponsive" onclick="showMenu()"></ion-icon>
             <ul id="menu">
                 <li><a href="../index.html">Home</a></li>
-                <li class="portfolio"><a href="../portfolio.html">Portfolio</a></li>
-                <li id="userSearch"><a href="../userSearch.html">Search User</a></li>
-                <li id="jobOffers"><a href="../jobOffers.html">Job Offers</a></li>
+                <li class="hiddenTabs" id="portfolio"><a href="../portfolio.html">Portfolio</a></li>
+                <li class="hiddenTabs" id="searchUser"><a href="../userSearch.html">Search User</a></li>
+                <li class="hiddenTabs" id="jobOffers"><a href="../jobOffers.html">Job Offers</a></li>
                 <li><a href="../aboutUs.html">About us</a></li>
                 <li><a href="../FAQ.html">FAQ</a></li>
                 <li><a href="../contacts.html">Contacts</a></li>
                 <li id="loginPopUpButton"><button class="loginPopUpButton" onclick="moveHeaderTextOpen()">Login</button></li>
-                <li id="logoutPopUpButton"><button class="logoutPopUpButton" onclick="logOut(); moveHeaderTextClose()">Logout</button></li>
+                <li id="logoutPopUpButton" class="logoutButton"><button class="logoutPopUpButton" onclick="logOut()">Logout</button></li>
             </ul>
             <ion-icon name="people" class="openFriendListResponsive" id="openFriendListResponsive" onclick="showFriendList()"></ion-icon>
         </nav>
@@ -122,9 +122,8 @@
             <div class="offerDetails">
                 <h3 class="offerHeading">Job Offer</h3>
                 <p class="offerDescription">Offer Description</p>
-              
+
                 <div class="offerInfo">
-                
                     <div class="infoItem">
                         <span class="infoLabel">Duration:</span>
                         <span class="infoValue">6 months</span>
@@ -144,9 +143,10 @@
                         <span class="infoLabel">Area of Work:</span>
                         <span class="infoValue">Software Development</span>
                     </div>
-    
                 </div>
             </div>
+            <button class="acceptRejectOffer">Accept</button>
+            <button class="acceptRejectOffer">Reject</button>
         </div>
     </div>
 
