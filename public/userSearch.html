@@ -130,13 +130,37 @@
         <p>Copyright © Portfoliyo</p>
     </footer>
 
+    <!--
     <div class="searchUser">
         <h1>Search User</h1>
         <div class="searchBar">
             <input text="text" placeholder="Pesquise o utilizador..." name="searchUser">
-            <button type="submit"><ion-icon name="search"></ion-icon></button>
+            <button type="submit"><ion-icon name="search"></ion-icon></button> 
         </div>
     </div>
+    -->
+
+    <div class="container">
+        <h1>Users</h1>
+        <div class="text" id="userContainer">
+            <div class="user">
+                <p><b>Username: aaa</b></p>
+                <p><b>Nome: </b></p>
+                <p><b>Email: </b></p>
+            </div>
+            <div class="user">
+                <p><b>Username: </b></p>
+                <p><b>Nome: </b></p>
+                <p><b>Email: </b></p>
+            </div>
+            <div class="user">
+                <p><b>Username: </b></p>
+                <p><b>Nome: </b></p>
+                <p><b>Email: </b></p>
+            </div>
+        </div>
+    </div>
+
 
     <script src="scripts/loginSignUp.js"></script>
     <script src="scripts/script.js"></script>
@@ -144,5 +168,6 @@
     <script src="scripts/friends.js"></script>
     <script> checkSession() </script>
     <script> listFriends() </script>
+    <script> insertVisibleUsers() </script>
 </body>
 </html>

@@ -662,3 +662,11 @@ exports.rejectEnterprise = async (req, res) => {
       res.json(result);
     });
 }
+
+exports.getVisibleUsers = async (req, res) => {
+  connection.query(`SELECT * FROM users WHERE companiesView = 1`, function (err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    });
+};
+

@@ -73,7 +73,6 @@ async function listFriends(){
                 document.getElementById("friendsList").innerHTML += `
         
                 <li>${friends[i].friend2_nick}<button class="viewProfileButton" onclick="window.location.href = '/portfolio.html?user=${idFriend}'"><ion-icon name="person-circle" size="small"></ion-icon></button></li>
-                <button onclick="window.location.href = '/portfolio.html?user=${idFriend}'">Portfolio</button>
             
                 `;
             }else{

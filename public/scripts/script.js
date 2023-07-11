@@ -45,30 +45,30 @@ function showFriendList() {
   }
 }
 
-/* Responsive Menu BackUp
-function toggleMenu() {
-  var regularMenu = document.getElementById("regularMenu");
-  var responsiveMenu = document.getElementById("responsiveMenu");
-
-  if (regularMenu.style.display === "none") {
-    regularMenu.style.display = "block";
-    responsiveMenu.classList.remove("show");
-  } else {
-    regularMenu.style.display = "none";
-    responsiveMenu.classList.add("show");
+async function insertVisibleUsers(){
+  document.getElementById("userContainer").innerHTML = ""
+  users = await getVisibleUsers()
+  for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+      document.getElementById("userContainer").innerHTML += `
+          <div class="user">
+          <p><b>Username: </b>${user.nick}</p>
+          <p><b>Nome: </b>${user.userName}</p>
+          <p><b>Email: </b>${user.email}</p>
+          <button class="viewProfileButton" onclick="window.location.href = '/portfolio.html?user=${user.id}'"><ion-icon name="person-circle" size="large"></ion-icon></button>
+      </div>
+      `;
   }
 }
 
-window.addEventListener("resize", function() {
-  var screenWidth = window.innerWidth;
-  var regularMenu = document.getElementById("regularMenu");
-  var responsiveMenu = document.getElementById("responsiveMenu");
-
-  if (screenWidth > 750) {
-    regularMenu.style.display = "block";
-    responsiveMenu.classList.remove("show");
-  }
-});*/
-
+async function getVisibleUsers() {
+  const reply = await makeRequest("https://localhost:8000/api/visibleUsers", {
+    method: "GET",
+    body: JSON.stringify(),
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+})
+users = await reply.json();
+return users;
+}
 
 

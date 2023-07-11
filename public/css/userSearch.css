@@ -55,3 +55,70 @@ h1 {
     color: white;
 }
 
+.container h1 {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 600;
+    color: white;
+    margin-top: 50px;
+}
+
+.container {
+    padding: 2% 25%;
+}
+
+.text {
+    margin-top: 70px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.user {
+    text-align: left;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+    padding: auto;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+    border: 3px solid rgba(255, 255, 255, .5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+}
+
+.user p {
+    margin-left: 25px;
+}
+
+.user:after {
+    transition: 0.5s ease;
+}
+
+.user:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
+
+.viewProfileButton {
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    color: white;
+    cursor: pointer;
+    background: #0077b6;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 60px;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+}
+
+.viewProfileButton:hover {
+    transform: scale(1.10);
+    transition: transform 0.5s ease;
+}
