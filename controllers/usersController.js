@@ -626,3 +626,39 @@ exports.getUserByNick = async (req, res) => {
     }
   );
 }
+
+exports.getEnterprisesNotConfirmed = async (req, res) => {
+  connection.query("SELECT * FROM companies WHERE validated = 0", function (err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    });
+};
+
+exports.getEnterprisesConfirmed = async (req, res) => {
+  connection.query("SELECT * FROM companies WHERE validated = 1", function (err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    });
+};
+
+exports.getEnterprises = async (req, res) => {
+  const id = req.body;
+  console.log(id)
+
+}
+
+exports.acceptEnterprise = async (req, res) => {
+  id = req.body.id;
+  connection.query(`UPDATE companies SET validated = 1 WHERE id = '${id}'`, function (err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    });
+}
+
+exports.rejectEnterprise = async (req, res) => {
+  id = req.body.id;
+  connection.query(`DELETE FROM companies WHERE id = '${id}'`, function (err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    });
+}

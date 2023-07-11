@@ -25,4 +25,11 @@ router.post('/api/user/acceptFriend', usersController.acceptFriend)
 router.post('/api/user/rejectFriend', usersController.rejectFriend)
 router.get('/api/user/getUser/:userId', usersController.getUser)
 router.post('/api/user/getUserByNick', usersController.getUserByNick)
+router.get('/api/enterprises/NotConfirmed', usersController.getEnterprisesNotConfirmed)
+router.get('/api/enterprises/Confirmed', usersController.getEnterprisesConfirmed)
+router.post('/api/enterprises/accept', usersController.acceptEnterprise)
+router.post('/api/enterprises/reject', usersController.rejectEnterprise)
+
+
+
 module.exports = router;
