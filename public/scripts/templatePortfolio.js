@@ -120,7 +120,7 @@ function templateSidebar(){
             </li>
             </ul>
             <button class="editBTN" onclick='toggleEditMode("sidebar")'>Edit</button>   
-            <button class="propbtn" id="propbtn" onclick='enviarProposta()'>Enviar Proposta</button>
+            <button class="propBTN" onclick='enviarProposta()'>Enviar Proposta</button>
             
 
         </div>

@@ -117,27 +117,30 @@ async function fillPortfolio(userId){
     fillEducation(userInfoEducations);
 
 
-     if (cookie.id == userId) {
-       let editbtns = document.getElementsByClassName("editBTN");
-       for (let i = 0; i < editbtns.length; i++) {
-         editbtns[i].style.display = "inline";
-       }
-     } else {
-       let editbtns = document.getElementsByClassName("editBTN");
-       for (let i = 0; i < editbtns.length; i++) {
-         editbtns[i].style.display = "none";
-       }
-       try{
-        if (cookie.validated == 1){
-            console.log("validated")
-            //let probtn = document.getElementsByClassName("editBTN");
-            //probtn.style.display = "none";
-            }
-        }catch{
-        console.log('ERRO')
+    if (cookie.id == userId) {
+        let editbtns = document.getElementsByClassName("editBTN");
+        for (let i = 0; i < editbtns.length; i++) {
+            editbtns[i].style.display = "inline";
+        }
+    } else {
+        
+        let editbtns = document.getElementsByClassName("editBTN");
+        for (let i = 0; i < editbtns.length; i++) {
+            editbtns[i].style.display = "none";
         }
     }
+        if (cookie.validated == 1){
+            let probtns = document.getElementsByClassName("propBTN");
+            probtns[0].style.display = "inline";
+            }
+        else{
+            let probtns = document.getElementsByClassName("propBTN");
+            probtns[0].style.display = "none";
+
+        }
+
 }
+
 
 function toggleEditMode(where)  {
     //toggle a variable between edit true or false
