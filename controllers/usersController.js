@@ -670,3 +670,44 @@ exports.getVisibleUsers = async (req, res) => {
     });
 };
 
+exports.removeFriends = async (req, res) => {
+  myNick = req.body.myNick;
+  friend = req.body.friend;
+  userExists = await existingUser(friend)
+  if (!userExists){
+    return res.status(404).json({ msg: `Utilizador não existe` })
+  }
+  
+  isFriend = await alredyFriends(friend, myNick)
+  if(!isFriend){
+    return res.status(404).json({ msg: `Utilizador não é seu amigo` })
+  }
+
+  try {
+    await removeFriend(friend, myNick); 
+
+    return res.status(201).send({
+      msg: `${friend} request sent successfully!`
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      msg: "An error occurred while trying to add the friend."
+    });
+  }
+
+}
+
+async function removeFriend(friend, nick) {
+  // Query to insert friends
+  const query = `DELETE FROM friends WHERE (friend1_nick = 'friend' AND friend2_nick = 'nick') OR  (friend1_nick = 'nick'  AND friend2_nick = 'friend')`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}

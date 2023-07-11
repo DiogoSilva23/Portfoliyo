@@ -97,17 +97,10 @@ async function listFriends(){
             }
         }else{
             
-            if(friends[i].friend1_nick === myNick){
-                document.getElementById("friendsRequests").innerHTML += `
-        
-                <li>${friends[i].friend2_nick}<button class="accept" onclick="acceptFriendRequest('${friends[i].friend2_nick}')">+</button><button class="reject" onclick="rejectFriendRequest('${friends[i].friend2_nick}')" >-</button></li>
-                `;
-            }else{
-
+            if(friends[i].friend2_nick === myNick){
                 document.getElementById("friendsRequests").innerHTML += `
         
                 <li>${friends[i].friend1_nick}<button class="accept" onclick="acceptFriendRequest('${friends[i].friend1_nick}')">+</button><button class="reject" onclick="rejectFriendRequest('${friends[i].friend2_nick}')" >-</button></li>
-            
                 `;
             }
         }
@@ -154,5 +147,37 @@ async function rejectFriendRequest(friend){
 
 }
 
+async function removeFriend(){
+    var friend = document.getElementById("newFriendInput").value;
+    if (friend.trim() === '') {
+        pass //MENSAGEM DE ERRO
+        console.log('ERROR')
+    }
+    const cookie = JSON.parse(readCookie('user'));
+    const myNick = cookie.nick;
+    if (friend === myNick){
+        pass    //MENSAGEM DE ERRO
+        console.log('ERROR')
+    }
+    
+    const friends = {
+        myNick: myNick,
+        friend: friend
+    }
 
-//
+    const reply = await makeRequest("https://localhost:8000/api/user/removeFriend", {
+        method: "POST",
+        body: JSON.stringify(friends),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    friendss = await reply.json();
+
+    if (reply.status === 201){
+        console.log('DEU CERTO')
+        listFriends()
+    }
+    else{
+        console.log(friendss.msg); //MENSAGEM DE ERRO
+    }
+    document.getElementById("newFriendInput").value = '';
+}
