@@ -122,7 +122,6 @@ function editSidebarF() {
             </ul>     
             <button class="editBTN" style="display:block;" onclick='enterPortfolio()'>Cancel Edit</button>  
             <button class="editBTN" style="display:block;" onclick='saveSideBar(); enterPortfolio()'>Save Edit</button>  
-            
 
         </div>`;
 

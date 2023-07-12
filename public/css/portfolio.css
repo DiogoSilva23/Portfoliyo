@@ -736,3 +736,77 @@ hr {
 #userSidebarName {
   font-weight: bold;
 }
+
+.enviarPropostaPopUp {
+  padding: 50px;
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 5%;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  margin-top: -225px;
+  margin-left: -212.5px; 
+  z-index: 2;
+}
+
+.enviarPropostaPopUp .closeIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45px;
+  height: 45px;
+  background: #023e8a;
+  font-size: 2em;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 20px;
+  cursor: pointer;
+  z-index: 1;
+  transition: .5s;
+}
+
+.enviarPropostaPopUp .closeIcon:hover {
+  background-color: #155ebd;
+  transition: .3s;
+}
+
+.enviarPropostaPopUp h1 {
+  margin-bottom: 30px;
+}
+
+.propostaInputs {
+  margin-bottom: 10px;
+}
+
+.submitOffer {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-right: 40px;
+  padding-left: 40px;
+  height: 45px;
+  background: #023e8a;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  color: white;
+  font-weight: 500;
+  transition: .3s;
+}
+
+.submitOffer:hover {
+  background-color: #155ebd;
+  transition: .3s;
+}

@@ -121,8 +121,41 @@ function templateSidebar(){
             </ul>
             <button class="editBTN" onclick='toggleEditMode("sidebar")'>Edit</button>   
             <button class="propBTN" onclick='enviarProposta()'>Enviar Proposta</button>
-            
 
+            <div class="enviarPropostaPopUp">
+                <span class="closeIcon">
+                    <ion-icon name="close-outline""></ion-icon>
+                </span>
+
+                <h1>Send Offer</h1>
+
+                <div class="propostaInputs">
+                    <p class="contact-title">Description</p>
+                    <input type="text" id="offerDescription" name="offerDescription" placeholder="offerDescription"></input>
+                </div>
+
+                <div class="propostaInputs">
+                    <p class="contact-title">Area of Work</p>
+                    <input type="text" id="offerAreaOfWork" name="offerAreaOfWork" placeholder="offerAreaOfWork"></input>
+                </div>
+
+                <div class="propostaInputs">
+                    <p class="contact-title">Duration</p>
+                    <input type="text" id="offerDuration" name="offerDuration" placeholder="offerDuration"></input>
+                </div>
+
+                <div class="propostaInputs">
+                    <p class="contact-title">value</p>
+                    <input type="text" id="offerValue" name="offerValue" placeholder="offerValue"></input>
+                </div>
+
+                <div class="propostaInputs">
+                    <p class="contact-title">Valid until</p>
+                    <input type="date" id="offerValidationDate" name="offerValidationDate" placeholder="offerValidationDate"></input>
+                </div>
+
+                <button class="submitOffer">Submit Offer</button>
+            </div>
         </div>
         </aside>`;
     return sidebar
