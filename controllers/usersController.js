@@ -473,7 +473,6 @@ async function alredyFriends(friend, nick){
 
 exports.getExperiences = async (req, res) => {
   const id = req.body[0].id;
-  console.log('ID', id)
   connection.query(`SELECT * FROM experiences WHERE idPortfolio = '${id}'`, function (err, result, fields) {
       if (err) throw err;
       res.json(result);
@@ -641,11 +640,6 @@ exports.getEnterprisesConfirmed = async (req, res) => {
     });
 };
 
-exports.getEnterprises = async (req, res) => {
-  const id = req.body;
-  console.log(id)
-
-}
 
 exports.acceptEnterprise = async (req, res) => {
   id = req.body.id;

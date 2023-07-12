@@ -91,7 +91,6 @@ async function fillPortfolio(userId){
     const user = await getUserforprofile(userId);
     const portfolio = await getPortfolio(user[0]); 
 
-    console.log('PORTF', portfolio)
 
 
     const userInfoSidebar = {
@@ -100,7 +99,8 @@ async function fillPortfolio(userId){
         email: portfolio.email,
         phoneNumber: portfolio.phone,
         birthDate: portfolio.birthDate,
-        location: portfolio.location
+        location: portfolio.location,
+        imageURL: portfolio.profileImageURL
     }
     fillSidebar(userInfoSidebar)
 
@@ -182,6 +182,7 @@ function fillSidebar(userInfoSidebar){
     document.getElementById("userSidebarPhone").innerHTML= userInfoSidebar.phoneNumber;
     document.getElementById("userSidebarBirthday").innerHTML= userInfoSidebar.birthDate;
     document.getElementById("userSidebarLocation").innerHTML= userInfoSidebar.location;
+    document.getElementById("sideBarImage").src=  userInfoSidebar.imageURL;
 }
 
 function fillAboutme(userInfoAboutme){

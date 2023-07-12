@@ -15,6 +15,7 @@ async function insertUsers(){
     users = await getUsers()
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
+        if(user.userAdmin == 1) continue;
         document.getElementById("userContainer").innerHTML += `
             <div class="user">
             <p><b>Username: </b>${user.nick}</p>
@@ -52,14 +53,12 @@ async function insertEnterprises(){
 }
 
 async function getEnterprisesConfirmations(){
-    console.log('OOOOO')
     const reply = await makeRequest("https://localhost:8000/api/enterprises/NotConfirmed", {
         method: "GET",
         body: JSON.stringify(),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     })
     json = await reply.json();
-    console.log('ooo')
     return json;
 }
 

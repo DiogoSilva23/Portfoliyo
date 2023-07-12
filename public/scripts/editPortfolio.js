@@ -6,7 +6,7 @@ function editSidebarF() {
     let userSidebarBirthdayInput = document.getElementById("userSidebarBirthday").innerHTML;
     let userSidebarLocationInput = document.getElementById("userSidebarLocation").innerHTML;
     let userSidebarNameInput = document.getElementById("userSidebarName").innerHTML;
-
+    let userSidebarImageInput = document.getElementById("sideBarImage").src;
      
 
     document.getElementById("allsidebar").innerHTML = `<!--#SIDEBAR-->
@@ -130,6 +130,7 @@ function editSidebarF() {
     document.getElementById("userSidebarBirthdayInput").value = userSidebarBirthdayInput;
     document.getElementById("userSidebarLocationInput").value = userSidebarLocationInput;
     document.getElementById("userSidebarNameInput").value = userSidebarNameInput;
+    document.getElementById("userSidebarImageInput").value = userSidebarImageInput;
 
   
 }
@@ -140,7 +141,6 @@ async function saveSideBar(id){
     userSidebarPhone = document.getElementById("userSidebarPhoneInput");
     userSidebarBirthday = document.getElementById("userSidebarBirthdayInput");
     userSidebarLocation = document.getElementById("userSidebarLocationInput");
-    //get the value from the input field
 
     userSideBarImage = userSideBarImage.value;
     userSidebarName = userSidebarName.value;
@@ -149,10 +149,11 @@ async function saveSideBar(id){
     userSidebarBirthday = userSidebarBirthday.value;
     userSidebarLocation = userSidebarLocation.value;
 
-    
+    if(userSideBarImage.trim() == ""){
+        userSideBarImage = "/images/te.png";
+    }
 
     const cookie = JSON.parse(readCookie("user"));
-    console.log('BOLACHAAAAA', cookie);
 
     userSidebar = {
         userId : cookie.id,
@@ -170,14 +171,6 @@ async function saveSideBar(id){
     headers: { "Content-type": "application/json; charset=UTF-8" },
     })
 
-    // console log all values
-    console.log(userSideBarImage);
-    console.log(userSidebarName);
-    console.log(userSidebarTitle);
-
-    console.log(userSidebarPhone);
-    console.log(userSidebarBirthday);
-    console.log(userSidebarLocation);
 
     editSidebar = false;
 }
@@ -300,9 +293,7 @@ function addEducationF() {
 async function saveEducation(){
     schoolName = document.getElementById("schoolName");
     CurseName = document.getElementById("CurseName");
-    console.log(CurseName)
     CurseType = document.getElementById("CurseType");
-    console.log(CurseType)
     media = document.getElementById("media");
 
     schoolName = schoolName.value;
@@ -311,7 +302,6 @@ async function saveEducation(){
     media = media.value;
 
     const cookie = JSON.parse(readCookie("user"));
-    console.log('BOLACHAAAAA', cookie);
 
     education = {
         userId : cookie.id,
@@ -360,6 +350,5 @@ async function saveAboutMe(){
         headers: { "Content-type": "application/json; charset=UTF-8" },
         })
 
-    console.log(userAboutMe);
     editAboutMe = false;
 }
