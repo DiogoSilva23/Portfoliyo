@@ -9,7 +9,6 @@ function templatePortfolio(){
     templateEducation()
 }
 
-
 function templateSidebar(){
     var sidebar = `<!--#SIDEBAR-->
         
@@ -120,45 +119,23 @@ function templateSidebar(){
             </li>
             </ul>
             <button class="editBTN" onclick='toggleEditMode("sidebar")'>Edit</button>   
-            <button class="propBTN" onclick='enviarProposta()'>Enviar Proposta</button>
+            <button class="offerBTN" onclick='openOfferPopUp()'>Make Offer</button>
 
-            <div class="enviarPropostaPopUp">
-                <span class="closeIcon">
-                    <ion-icon name="close-outline""></ion-icon>
-                </span>
+            
 
-                <h1>Send Offer</h1>
-
-                <div class="propostaInputs">
-                    <p class="contact-title">Description</p>
-                    <input type="text" id="offerDescription" name="offerDescription" placeholder="offerDescription"></input>
-                </div>
-
-                <div class="propostaInputs">
-                    <p class="contact-title">Area of Work</p>
-                    <input type="text" id="offerAreaOfWork" name="offerAreaOfWork" placeholder="offerAreaOfWork"></input>
-                </div>
-
-                <div class="propostaInputs">
-                    <p class="contact-title">Duration</p>
-                    <input type="text" id="offerDuration" name="offerDuration" placeholder="offerDuration"></input>
-                </div>
-
-                <div class="propostaInputs">
-                    <p class="contact-title">value</p>
-                    <input type="text" id="offerValue" name="offerValue" placeholder="offerValue"></input>
-                </div>
-
-                <div class="propostaInputs">
-                    <p class="contact-title">Valid until</p>
-                    <input type="date" id="offerValidationDate" name="offerValidationDate" placeholder="offerValidationDate"></input>
-                </div>
-
-                <button class="submitOffer">Submit Offer</button>
-            </div>
         </div>
         </aside>`;
     return sidebar
+}
+
+function openOfferPopUp() {
+    const makeOfferPopUp = document.querySelector('.makeOfferPopUp');
+    makeOfferPopUp.classList.add('activePopUp');
+}
+
+function closeOfferPopUp() {
+    const makeOfferPopUp = document.querySelector('.makeOfferPopUp');
+    makeOfferPopUp.classList.remove('activePopUp');
 }
 
 function templateAboutme(){
@@ -190,6 +167,40 @@ function templateAboutme(){
                 
             </div>
             
+            <div class="makeOfferPopUp">
+                <span class="closeIcon" onclick='closeOfferPopUp()'>
+                    <ion-icon name="close-outline""></ion-icon>
+                </span>
+
+                <h1>Send Offer</h1>
+
+                <div class="offerInputs">
+                    <p class="contact-title">Description</p>
+                    <input type="text" id="offerDescription" name="offerDescription" placeholder="Insert the job description here..."></input>
+                </div>
+
+                <div class="offerInputs">
+                    <p class="contact-title">Area of Work</p>
+                    <input type="text" id="offerAreaOfWork" name="offerAreaOfWork" placeholder="Insert the area of work here..."></input>
+                </div>
+
+                <div class="offerInputs">
+                    <p class="contact-title">Duration</p>
+                    <input type="text" id="offerDuration" name="offerDuration" placeholder="Insert the duration here..."></input>
+                </div>
+
+                <div class="offerInputs">
+                    <p class="contact-title">value</p>
+                    <input type="text" id="offerValue" name="offerValue" placeholder="Insert the value here..."></input>
+                </div>
+
+                <div class="offerInputs">
+                    <p class="contact-title">Valid until</p>
+                    <input type="date" id="offerValidationDate" name="offerValidationDate" placeholder="offerValidationDate"></input>
+                </div>
+
+                <button class="submitOffer" onclick="enviarProposta()">Submit Offer</button>
+            </div>
             </section>
 
             <!-- service-->

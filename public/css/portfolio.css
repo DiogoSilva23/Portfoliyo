@@ -70,7 +70,6 @@ img, ion-icon, a, button, time, span { display: block; }
   border-radius: 20px;
   padding: 15px;
   box-shadow: var(--shadow-1);
-  z-index: 1;
 }
   
 .separator {
@@ -527,7 +526,7 @@ main {
     height: 100%;
     margin-bottom: 0;
     padding-top: 60px;
-    z-index: 1;
+   
   }
 
   .sidebar-info { flex-direction: column; }
@@ -737,11 +736,34 @@ hr {
   font-weight: bold;
 }
 
-.enviarPropostaPopUp {
+.offerBTN {
+  width: 100%;
+  position: relative;
+  padding: 8px 15px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  justify-content: center;
+  margin-top: 30px;
+  bottom: 0;
+  right: 0;
+  border: 2px solid rgba(255, 255, 255, .5);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+  border-radius: 20px;
+  background: #023e8a;
+  transition: 0.3s;
+}
+
+.offerBTN:hover {
+  background-color: #155ebd;
+  transition: 0.3s;
+}
+
+.makeOfferPopUp {
   padding: 50px;
   position: fixed;
   width: 500px;
-  height: 500px;
+  height: 540px;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, .5);
   border-radius: 5%;
@@ -754,10 +776,11 @@ hr {
   left: 50%;
   margin-top: -225px;
   margin-left: -212.5px; 
-  z-index: 2;
+  transform: scale(0);
+  transition: .5s ease;
 }
 
-.enviarPropostaPopUp .closeIcon {
+.makeOfferPopUp .closeIcon {
   position: absolute;
   top: 0;
   right: 0;
@@ -775,16 +798,34 @@ hr {
   transition: .5s;
 }
 
-.enviarPropostaPopUp .closeIcon:hover {
+.makeOfferPopUp .closeIcon:hover {
   background-color: #155ebd;
   transition: .3s;
 }
 
-.enviarPropostaPopUp h1 {
+.makeOfferPopUp h1 {
   margin-bottom: 30px;
+  font-size: 45px;
 }
 
-.propostaInputs {
+.makeOfferPopUp.activePopUp {
+  transform: scale(1);
+  transition: .5s;
+}
+
+.makeOfferPopUp input {
+  resize: none;
+  height: 30px;
+  padding: 5px;
+  width: 100%;
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 3%;
+  outline: none;
+  color: white;
+}
+
+.offerInputs {
   margin-bottom: 10px;
 }
 
