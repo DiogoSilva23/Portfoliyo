@@ -203,19 +203,6 @@ function logOnUser(){
     portfolio.classList.remove("hiddenTabs");
     jobOffers.classList.remove("hiddenTabs");
     logoutButton.classList.remove("logoutButton");
-    /*
-    document.querySelector(".portfolio").style.display = "inline-block";
-    document.getElementById("jobOffers").style.display = "inherit";
-    document.getElementById("logoutPopUpButton").style.display = "inline-block";*/
-    /*if (window.innerWidth >= 1600) {
-        document.querySelector(".portfolio").style.display = "inline-block";
-        document.getElementById("jobOffers").style.display = "inline-block";
-        document.getElementById("logoutPopUpButton").style.display = "inline-block";
-    } else {
-        document.querySelector(".portfolio").style.display = "inherit";
-        document.getElementById("jobOffers").style.display = "inherit";
-        document.getElementById("logoutPopUpButton").style.display = "inherit";
-    }*/
     moveHeaderTextClose()
 }
 

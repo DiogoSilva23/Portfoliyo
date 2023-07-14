@@ -55,11 +55,20 @@
 }
 
 .viewProfileButton {
-  position: absolute;
-  right: 15px;
-  color: white;
-  cursor: pointer;
-  background: #0077b6;
+    padding: 2.5px;
+    position: absolute;
+    right: 15px;
+    color: white;
+    cursor: pointer;
+    background: #0077b6;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 100%;
+    transition: .5s ease;
+}
+
+.viewProfileButton:hover {
+    background-color: #023e8a;
+    transition: .5s ease;
 }
 
 .friendActions {
@@ -88,10 +97,12 @@
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
     border-radius: 20px;
     background: #0077b6;
+    transition: .5s ease;
 }
   
 .friendActions button:hover {
     background-color: #023e8a;
+    transition: .5s ease;
 }
 
 /* Media query for screens with a maximum width of 750px */

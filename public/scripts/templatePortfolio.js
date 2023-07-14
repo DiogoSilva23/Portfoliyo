@@ -119,7 +119,7 @@ function templateSidebar(){
             </li>
             </ul>
             <button class="editBTN" onclick='toggleEditMode("sidebar")'>Edit</button>   
-            <button class="offerBTN" onclick='openOfferPopUp()'>Make Offer</button>
+            <button class="offerBTN" id="offerBTN" onclick='openOfferPopUp()'>Make Offer</button>
 
             
 
