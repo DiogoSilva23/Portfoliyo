@@ -31,6 +31,8 @@ router.post('/api/enterprises/accept', usersController.acceptEnterprise)
 router.post('/api/enterprises/reject', usersController.rejectEnterprise)
 router.get('/api/visibleUsers', usersController.getVisibleUsers);
 router.post('/api/user/removeFriend', usersController.removeFriends)
+router.post('/api/enterprises/sendOffer', usersController.sendOffer)
+router.post('/api/user/offers', usersController.getOffers)
 
 
 

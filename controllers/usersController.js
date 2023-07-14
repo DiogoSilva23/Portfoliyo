@@ -705,3 +705,34 @@ async function removeFriend(friend, nick) {
     });
   });
 }
+
+exports.sendOffer = async (req, res) => {
+  idUser = req.body.idUser;
+  description = req.body.description;
+  work_area = req.body.work_area;
+  duration = req.body.duration;
+  value = req.body.value;
+  valid_util = req.body.valid_util;
+  nameEnterprise = req.body.nameEnterprise;
+
+
+  const query = `INSERT INTO offers (idUser, companieName, offerDescription, workspace, offerDuration, offerValue, offerValidDate) 
+  VALUES ('${idUser}', '${nameEnterprise}', '${description}', '${work_area}', '${duration}', '${value}', '${valid_util}')`;
+  return new Promise((resolve, reject) => {
+    connection.query(query, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+exports.getOffers = async (req, res) => {
+  console.log(req.body.id, "TESTEEEEE")
+  connection.query(`SELECT * FROM offers WHERE idUser = "${req.body.id}"`, function (err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    });
+};

@@ -1,3 +1,5 @@
+const { get } = require("request");
+
 function opentab(tabId, link) {
     // Obter o container parent do link clicado
     var container = link.parentNode;
@@ -71,4 +73,66 @@ users = await reply.json();
 return users;
 }
 
+async function insertOffers(){
+  console.log("teste222")
+  document.getElementById("offerContainer").innerHTML = ""
+  const cookie = JSON.parse(readCookie('user'))
+  const id = cookie.id
+  offers = await getOffers(id)
+  for (let i = 0; i < offers.length; i++) {
+    const offer = offers[i];
+    console.log(offer)
+    document.getElementById("offerContainer").innerHTML += `
+    <div class="offer">
+    <div class="companyDetails">
+        <h2 class="companyName">${offer.companieName}</h2>
+    </div>
 
+    <div class="offerDetails">
+        <h3 class="offerHeading">Job Offer</h3>
+        <p class="offerDescription">${offer.offerDescription}</p>
+
+        <div class="offerInfo">
+            <div class="infoItem">
+                <span class="infoLabel">Duration:</span>
+                <span class="infoValue">${offer.offerDuration} days</span>
+            </div>
+
+            <div class="infoItem">
+                <span class="infoLabel">Value:</span>
+                <span class="infoValue">${offer.offerValue}€</span>
+            </div>
+
+            <div class="infoItem">
+                <span class="infoLabel">Valid Until:</span>
+                <span class="infoValue">${offer.offerValidDate}</span>
+            </div>
+
+            <div class="infoItem">
+                <span class="infoLabel">Area of Work:</span>
+                <span class="infoValue">${offer.workspace}</span>
+            </div>
+        </div>
+    </div>
+    <button class="acceptRejectOffer">Accept</button>
+    <button class="acceptRejectOffer">Reject</button>
+</div>
+    `;
+}
+}
+
+
+
+async function getOffers(id) {
+  console.log("+1 teste")
+  const userId = {
+    id: id
+  }
+  const reply = await makeRequest("https://localhost:8000/api/user/offers", {
+    method: "POST",
+    body: JSON.stringify(userId),
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+})
+offers = await reply.json();
+return offers;
+}

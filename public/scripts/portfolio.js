@@ -320,6 +320,27 @@ window.addEventListener('DOMContentLoaded', function() {
     loadText()
 })
 
-function enviarProposta(){
-    console.log("enviar proposta")
+async function enviarProposta(){
+    console.log("Enviou proposta")
+    var url = window.location.href;
+    var parts = url.split("user=");
+    var userId = parts[1];
+    const cookie = JSON.parse(readCookie('user'))
+    const empresa = cookie
+
+    const proposta = {
+        idUser: userId,
+        description: document.getElementById("offerDescription").value,
+        work_area: document.getElementById("offerAreaOfWork").value,
+        duration: document.getElementById("offerDuration").value,
+        value: document.getElementById("offerValue").value,
+        valid_util: document.getElementById("offerValidationDate").value,
+        nameEnterprise: empresa.companieName
+    }
+
+    const reply = makeRequest("https://localhost:8000/api/enterprises/sendOffer", {
+        method: "POST",
+        body: JSON.stringify(proposta),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });  
 }
