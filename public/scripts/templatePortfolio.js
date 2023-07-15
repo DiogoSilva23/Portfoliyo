@@ -16,11 +16,11 @@ function templateSidebar(){
             <div class="sidebar-info">
 
                 <figure class="avatar-box">
-                <img id="sideBarImage" src="/images/te.png" alt="Richard hanrick" width="80">
+                <img id="sideBarImage" src="/images/te.png" width="80">
                 </figure>
 
                 <div class="info-content">
-                <h1 class="name" title="Richard hanrick" id="userSidebarName"></h1>
+                <h1 class="name" id="userSidebarName"></h1>
 
                 <p class="title" id="userSidebarTitle"> </p>
                 </div>

@@ -14,12 +14,12 @@ function editSidebarF() {
 
             <figure class="avatar-box">
             
-            <img id="userSideBarImage" src="/images/te.png" alt="Richard hanrick" width="80">
+            <img id="userSideBarImage" src="../images/te.png" width="80">
             </figure>
             <input type="text" id="userSidebarImageInput" name="userImg" placeholder="Image URL" ></input>
             
             <div class="info-content">
-            <h1 class="name" title="Richard hanrick" id="userSidebarName"></h1>
+            <h1 class="name" id="userSidebarName"></h1>
             <input type="text" id="userSidebarNameInput" name="userTitle" placeholder="title">  </input>
 
             <p class="title" id="userSidebarTitle">

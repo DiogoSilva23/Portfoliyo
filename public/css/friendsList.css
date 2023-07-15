@@ -80,8 +80,8 @@
 }
   
 .friendActions input[type="text"] {
+    margin-top: 10px;
     padding: 8px;
-    margin-right: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
