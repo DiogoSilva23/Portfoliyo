@@ -199,10 +199,8 @@ function logOnUser(){
     document.getElementById("openFriendListResponsive").style.display = "flex";
     var portfolio = document.getElementById("portfolio");
     var jobOffers = document.getElementById("jobOffers");
-    var logoutButton = document.getElementById("logoutPopUpButton");
     portfolio.classList.remove("hiddenTabs");
     jobOffers.classList.remove("hiddenTabs");
-    logoutButton.classList.remove("logoutButton");
     moveHeaderTextClose()
 }
 
@@ -213,9 +211,7 @@ function logOnEnterprise(){
     document.getElementById("loginMessage").style.display = "none";
     document.getElementById("html").style.overflowY = "scroll";
     var searchUser = document.getElementById("searchUser");
-    var logoutButton = document.getElementById("logoutPopUpButton");
     searchUser.classList.remove("hiddenTabs");
-    logoutButton.classList.remove("logoutButton");
     moveHeaderTextClose()
 }
 
@@ -236,11 +232,9 @@ function logOff(){
     var portfolio = document.getElementById("portfolio");
     var jobOffers = document.getElementById("jobOffers");
     var searchUser = document.getElementById("searchUser");
-    var logoutButton = document.getElementById("logoutPopUpButton");
     portfolio.classList.add("hiddenTabs");
     jobOffers.classList.add("hiddenTabs");
     searchUser.classList.add("hiddenTabs");
-    logoutButton.classList.add("logoutButton");
 }
 
 function switchLoginTab(tab) {

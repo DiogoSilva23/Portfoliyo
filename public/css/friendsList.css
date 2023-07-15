@@ -73,7 +73,7 @@
 
 .friendActions {
     position: fixed;
-    bottom: 0;
+    bottom: 10px;
     align-items: center;
     justify-content: center;
     margin-top: 10px;
@@ -92,7 +92,8 @@
     cursor: pointer;
     display: inline;
     justify-content: center;
-    margin-top: 5px;
+    margin-left: 20px;
+    margin-top: 20px;
     border: 3px solid rgba(255, 255, 255, .5);
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
     border-radius: 20px;
