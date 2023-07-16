@@ -197,8 +197,10 @@ function logOnUser(){
     document.getElementById("friendList").style.display = "flex";
     document.getElementById("html").style.overflowY = "scroll";
     document.getElementById("openFriendListResponsive").style.display = "flex";
+    var logoutButton = document.getElementById("logoutPopUpButton");
     var portfolio = document.getElementById("portfolio");
     var jobOffers = document.getElementById("jobOffers");
+    logoutButton.classList.remove("logoutButton");
     portfolio.classList.remove("hiddenTabs");
     jobOffers.classList.remove("hiddenTabs");
     moveHeaderTextClose()
@@ -210,7 +212,9 @@ function logOnEnterprise(){
     document.getElementById("logoutPopUpButton").style.display = "inline-block";
     document.getElementById("loginMessage").style.display = "none";
     document.getElementById("html").style.overflowY = "scroll";
+    var logoutButton = document.getElementById("logoutPopUpButton");
     var searchUser = document.getElementById("searchUser");
+    logoutButton.classList.remove("logoutButton");
     searchUser.classList.remove("hiddenTabs");
     moveHeaderTextClose()
 }
