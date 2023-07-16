@@ -199,7 +199,7 @@ function templateAboutme(){
                     <input type="date" id="offerValidationDate" name="offerValidationDate" placeholder="offerValidationDate"></input>
                 </div>
 
-                <button class="submitOffer" onclick="enviarProposta()">Submit Offer</button>
+                <button class="submitOffer" onclick='enviarProposta()'>Submit Offer</button>
             </div>
             </section>
 

@@ -343,4 +343,5 @@ async function enviarProposta(){
         body: JSON.stringify(proposta),
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });  
+    closeOfferPopUp();
 }
