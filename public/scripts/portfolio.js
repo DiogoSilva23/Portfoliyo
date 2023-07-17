@@ -206,7 +206,7 @@ async function fillExperience(userInfoExperiences){
 
                 <div class="service-icon-box">
                     <img src="${experience.logoUrl}
-                    " alt="../image/te.png" width="40">
+                    <img src="${experience.logoUrl}" onerror="this.onerror=null; this.src='images/te.png'" alt="${experience.localName}" width="40">
                 </div>
 
                 <div class="service-content-box">

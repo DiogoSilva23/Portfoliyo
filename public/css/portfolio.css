@@ -327,7 +327,7 @@ img, ion-icon, a, button, time, span { display: block; }
   border-radius: inherit;
   z-index: -1;
 }
-.service-icon-box { margin-bottom: 10px; border-style: solid; border-color: white; border-width: 3px; border-radius: 5px;}
+.service-icon-box { margin-bottom: 10px; border-style: solid; border-color: white; border-width: 3px; border-radius: 5px; background-color: white; }
 
 .service-icon-box img { margin: auto; }
 
@@ -778,6 +778,7 @@ hr {
   margin-left: -212.5px; 
   transform: scale(0);
   transition: .5s ease;
+  z-index: 5;
 }
 
 .makeOfferPopUp .closeIcon {

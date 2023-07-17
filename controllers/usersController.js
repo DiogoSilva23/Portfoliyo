@@ -735,3 +735,10 @@ exports.getOffers = async (req, res) => {
       res.json(result);
     });
 };
+
+exports.getOffer = async (req, res) => {
+  connection.query(`SELECT * FROM offers WHERE idOffer = "${req.body.id}"`, function (err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    });
+};

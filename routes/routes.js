@@ -33,6 +33,7 @@ router.get('/api/visibleUsers', usersController.getVisibleUsers);
 router.post('/api/user/removeFriend', usersController.removeFriends)
 router.post('/api/enterprises/sendOffer', usersController.sendOffer)
 router.post('/api/user/offers', usersController.getOffers)
+router.post('/api/user/offer', usersController.getOffer)
 
 
 

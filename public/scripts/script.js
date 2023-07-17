@@ -1,4 +1,10 @@
+var arrayOffers = [];
+
 const { get } = require("request");
+const { portfolioSaveSidebar } = require("../../controllers/usersController");
+
+
+
 
 function opentab(tabId, link) {
     // Obter o container parent do link clicado
@@ -86,7 +92,7 @@ async function insertOffers(){
   }else{
     for (let i = 0; i < offers.length; i++) {
       const offer = offers[i];
-      console.log(offer)
+      var data = offer.offerValidDate.split("T")[0];
       document.getElementById("offerContainer").innerHTML += `
       <div class="offer">
       <div class="companyDetails">
@@ -100,17 +106,17 @@ async function insertOffers(){
           <div class="offerInfo">
               <div class="infoItem">
                   <span class="infoLabel">Duration:</span>
-                  <span class="infoValue">${offer.offerDuration} days</span>
+                  <span class="infoValue">${offer.offerDuration} months</span>
               </div>
   
               <div class="infoItem">
-                  <span class="infoLabel">Value:</span>
+                  <span class="infoLabel">Total value:</span>
                   <span class="infoValue">${offer.offerValue}€</span>
               </div>
   
               <div class="infoItem">
                   <span class="infoLabel">Valid Until:</span>
-                  <span class="infoValue">${offer.offerValidDate}</span>
+                  <span class="infoValue">${data}</span>
               </div>
   
               <div class="infoItem">
@@ -121,6 +127,7 @@ async function insertOffers(){
       </div>
       <button class="acceptRejectOffer">Accept</button>
       <button class="acceptRejectOffer">Reject</button>
+      <button class="acceptRejectOffer" style="float:right; background-color:Black" onclick="addToCompare(${offer.idOffer})">Compare</button>
   </div>
       `;
   }
@@ -148,4 +155,79 @@ function backHome() {
 
   // Redireciona o usuário para a página de destino
   window.location.href = url;
+}
+
+function addToCompare(id) {
+  if (arrayOffers.includes(id)) {
+    alert("You already added this offer to compare!")
+  }else if(arrayOffers.length == 3){
+    alert("You can only compare 3 offers at a time!")
+  }else{
+    arrayOffers.push(id);
+    loadCompare();
+  }
+
+}
+
+async function loadCompare(){
+  document.getElementById("compareContainer").innerHTML = ""
+  for (let i = 0; i < arrayOffers.length; i++) {
+    const id = arrayOffers[i];
+    var offer = await getOffer(id)
+    offer = offer[0]
+    console.log(offer);
+    document.getElementById("compareContainer").innerHTML += `
+    <div class="offer">
+    <div class="companyDetails">
+        <h2 class="companyName">${offer.companieName}</h2>
+    </div>
+
+    <div class="offerDetails">
+        <h3 class="offerHeading">Job Offer</h3>
+        <p class="offerDescription">${offer.offerDescription}</p>
+
+        <div class="offerInfo">
+            <div class="infoItem">
+                <span class="infoLabel">Duration:</span>
+                <span class="infoValue">${offer.offerDuration} months</span>  
+            </div>
+
+            <div class="infoItem">
+                <span class="infoLabel">Total value:</span>
+                <span class="infoValue">${offer.offerValue}€</span> 
+            </div>
+
+            <div class="infoItem">
+                <span class="infoLabel">Valid Until:</span>
+                <span class="infoValue">${offer.offerValidDate}</span>
+
+            </div>
+
+            <div class="infoItem">
+                <span class="infoLabel">Area of Work:</span>
+                <span class="infoValue">${offer.workspace}</span>
+            </div>
+        </div>
+    </div>
+</div>
+    `;
+  }
+}
+
+
+async function getOffer(id){
+  const offerId = {
+    id: id
+  }
+  const reply = await makeRequest("https://localhost:8000/api/user/offer", {
+    method: "POST",
+    body: JSON.stringify(offerId),
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+  })  
+
+  //return the offer found
+  offer = await reply.json();
+  return offer;
+
+
 }
