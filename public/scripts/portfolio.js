@@ -129,15 +129,17 @@ async function fillPortfolio(userId){
             editbtns[i].style.display = "none";
         }
     }
-        if (cookie.validated == 1){
-            let probtns = document.getElementsByClassName("propBTN");
-            probtns[0].style.display = "inline";
-            }
-        else{
-            let probtns = document.getElementsByClassName("propBTN");
-            probtns[0].style.display = "none";
-
+    if (cookie.validated == 1){
+        let probtns = document.getElementsByClassName("offerBTN");
+        probtns[0].style.display = "inline";
         }
+    else{
+        console.log("not validated")
+        let probtns = document.getElementsByClassName("offerBTN");
+        console.log('probtns', probtns)
+        probtns[0].style.display = "none";
+
+    }
 
 }
 
@@ -182,6 +184,11 @@ function fillSidebar(userInfoSidebar){
     document.getElementById("userSidebarPhone").innerHTML= userInfoSidebar.phoneNumber;
     document.getElementById("userSidebarBirthday").innerHTML= userInfoSidebar.birthDate;
     document.getElementById("userSidebarLocation").innerHTML= userInfoSidebar.location;
+    console.log(userInfoSidebar.imageURL)
+    if(userInfoSidebar.imageURL == null){
+        userInfoSidebar.imageURL = "../images/te.png"
+    }
+    console.log(userInfoSidebar.imageURL)
     document.getElementById("sideBarImage").src=  userInfoSidebar.imageURL;
 }
 

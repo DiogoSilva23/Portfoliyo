@@ -191,19 +191,25 @@ async function logOut(){
 
 
 function logOnUser(){
+    console.log("ola1")
     document.getElementById("loginPopUp").classList.remove('activePopUp');
     document.getElementById("loginPopUpButton").style.display = "none";
     document.getElementById("loginMessage").style.display = "none";
     document.getElementById("friendList").style.display = "flex";
     document.getElementById("html").style.overflowY = "scroll";
     document.getElementById("openFriendListResponsive").style.display = "flex";
+    console.log("ola2")
     var logoutButton = document.getElementById("logoutPopUpButton");
     var portfolio = document.getElementById("portfolio");
     var jobOffers = document.getElementById("jobOffers");
+    console.log("ola3")
     logoutButton.classList.remove("logoutButton");
     portfolio.classList.remove("hiddenTabs");
     jobOffers.classList.remove("hiddenTabs");
-    moveHeaderTextClose()
+    listFriends();
+    moveHeaderTextClose();
+    
+    
 }
 
 function logOnEnterprise(){
@@ -216,7 +222,7 @@ function logOnEnterprise(){
     var searchUser = document.getElementById("searchUser");
     logoutButton.classList.remove("logoutButton");
     searchUser.classList.remove("hiddenTabs");
-    moveHeaderTextClose()
+    moveHeaderTextClose();
 }
 
 //NAO FUNCIONA BEM
@@ -225,7 +231,7 @@ function logOnAdmin(){
     document.getElementById("loginPopUp").classList.remove('activePopUp');
     var logoutButton = document.getElementById("logoutPopUpButton");
     logoutButton.classList.remove("logoutButton");
-    moveHeaderTextClose()
+    moveHeaderTextClose();
 
 }
 

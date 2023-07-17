@@ -130,7 +130,6 @@ async function insertOffers(){
 
 
 async function getOffers(id) {
-  console.log("+1 teste")
   const userId = {
     id: id
   }
