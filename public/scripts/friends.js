@@ -5,13 +5,11 @@ async function addFriend(){
     var friend = document.getElementById("newFriendInput").value;
     if (friend.trim() === '') {
         pass //MENSAGEM DE ERRO
-        console.log('ERROR')
     }
     const cookie = JSON.parse(readCookie('user'));
     const myNick = cookie.nick;
     if (friend === myNick){
         pass    //MENSAGEM DE ERRO
-        console.log('ERROR')
     }
     
     const friends = {
@@ -27,11 +25,11 @@ async function addFriend(){
     friendss = await reply.json();
 
     if (reply.status === 201){
-        console.log('DEU CERTO')
+        document.getElementById("messageContainer").innerHTML = friendss.msg;
         listFriends()
     }
     else{
-        console.log(friendss.msg); //MENSAGEM DE ERRO
+        document.getElementById("messageContainer").innerHTML = friendss.msg; //MENSAGEM DE ERRO
     }
     document.getElementById("newFriendInput").value = '';
 }
@@ -151,13 +149,11 @@ async function removeFriend(){
     var friend = document.getElementById("newFriendInput").value;
     if (friend.trim() === '') {
         pass //MENSAGEM DE ERRO
-        console.log('ERROR')
     }
     const cookie = JSON.parse(readCookie('user'));
     const myNick = cookie.nick;
     if (friend === myNick){
         pass    //MENSAGEM DE ERRO
-        console.log('ERROR')
     }
     
     const friends = {
@@ -173,11 +169,11 @@ async function removeFriend(){
     friendss = await reply.json();
 
     if (reply.status === 201){
-        console.log('DEU CERTO')
+        document.getElementById("messageContainer").innerHTML = friendss.msg;
         listFriends()
     }
     else{
-        console.log(friendss.msg); //MENSAGEM DE ERRO
+        document.getElementById("messageContainer").innerHTML = friendss.msg; //MENSAGEM DE ERRO
     }
     document.getElementById("newFriendInput").value = '';
 }

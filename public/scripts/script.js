@@ -127,7 +127,7 @@ async function insertOffers(){
       </div>
       <button class="acceptRejectOffer">Accept</button>
       <button class="acceptRejectOffer">Reject</button>
-      <button class="acceptRejectOffer" style="float:right; background-color:Black" onclick="addToCompare(${offer.idOffer})">Compare</button>
+      <button class="acceptRejectOffer" style="float:right; background-color:Black" onclick="addToCompare(${offer.idOffer}); activateComparator()">Compare</button>
   </div>
       `;
   }
@@ -178,6 +178,9 @@ async function loadCompare(){
     var data = offer.offerValidDate.split("T")[0];
     console.log(offer);
     document.getElementById("compareContainer").innerHTML += `
+    <span class="closeIcon">
+      <ion-icon name="close-outline" onclick="turnOffComparator(); removeComparedItems()"></ion-icon>
+    </span>
     <div class="offer">
     <div class="companyDetails">
         <h2 class="companyName">${offer.companieName}</h2>
@@ -214,6 +217,13 @@ async function loadCompare(){
   }
 }
 
+function activateComparator() {
+  document.getElementById("compareContainer").style.display = "block";
+}
+
+async function turnOffComparator() {
+  document.getElementById("compareContainer").style.display = "none";
+}
 
 async function getOffer(id){
   const offerId = {

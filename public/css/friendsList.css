@@ -127,6 +127,7 @@
 
   .friendItems {
       max-height: 750px;
+      min-height: 30px;
       overflow-y: auto;
   }
 

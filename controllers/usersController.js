@@ -26,7 +26,7 @@ exports.registerUser = async (req, res) => {
   //Mudar alguns checks (gender nao pode ser gender)
   if (checkVariables(username, name, password, email, location, description, gender, birtdate)){
     return res.status(500).send({
-      msg: "É necessario preencher todos os campos"
+      msg: "You need to fill all the camps!"
     });
   }
 
@@ -38,13 +38,13 @@ exports.registerUser = async (req, res) => {
   
   if (userExists){
     return res.status(409).send({
-      msg: `Username em uso!`
+      msg: `Username already exists!`
     });
   }
   const emailExists = await existingEmail(email);
   if (emailExists){
     return res.status(409).send({
-      msg: `Email ja registado!`
+      msg: `Email already registered!`
     });
   }
 
@@ -177,29 +177,29 @@ function createPortfolio(id, user){
     const email = req.body.email;
     const pword = req.body.pword;
     if (email.length == 0){
-      return res.status(405).json({ msg: `Email não inserido!` })   //verificar se pode ser 405
+      return res.status(405).json({ msg: `Email not inserted!` })   //verificar se pode ser 405
     }
     if (pword.length == 0){
-      return res.status(405).json({ msg: `Password não inserida!` })  //verificar se pode ser 405
+      return res.status(405).json({ msg: `Password not inserted!` })  //verificar se pode ser 405
     }
     const emailExist = await existingEmail(email)
     if (!emailExist) {
-        return res.status(404).json({ msg: `Email não correspondente a nenhuma conta` })
+        return res.status(404).json({ msg: `An account with this email does not exist.` })
     };
     const query = `SELECT * FROM users WHERE email = '${email}'`;
     connection.query(query, async function (err, result) {
       if (err) {
-          return res.status(500).send({msg: "Erro no Log in"});
+          return res.status(500).send({msg: "Login error."});
       }
       const user = result[0];
       if (pword === user.pword){
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-        return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken, user: user})
+        return res.status(201).json({ msg: `Logged in with sucess.`, token: refreshToken, user: user})
       }
       const samePassword = await bcrypt.compare(pword, user.pword)
       if (!samePassword){
 
-          return res.status(401).json({ msg: `Password invalida!` })
+          return res.status(401).json({ msg: `Invalid password!` })
       }
       //const accessToken = generateAccessToken(user) 
       const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
@@ -227,7 +227,7 @@ exports.registerCompany = async (req, res) => {
 
   if (checkVariables(companyName, email, password, websiteURL, logoURL, description)){
     return res.status(500).send({
-      msg: "É necessario preencher todos os campos"
+      msg: "You need to fill all the camps!"
     });
   }
 
@@ -301,40 +301,40 @@ exports.loginCompany = async (req, res) => {
   const email = req.body.email;
   const pword = req.body.pword;
   if (email.length == 0){
-    return res.status(405).json({ msg: `Email não inserido!` })   //verificar se pode ser 405
+    return res.status(405).json({ msg: `Email not inserted!` })   //verificar se pode ser 405
   }
   if (pword.length == 0){
-    return res.status(405).json({ msg: `Password não inserida!` })  //verificar se pode ser 405
+    return res.status(405).json({ msg: `Password not inserted!` })  //verificar se pode ser 405
   }
   const companyExist = await existingCompany(email)
 
   if (!companyExist) {
-      return res.status(404).json({ msg: `Email não correspondente a nenhuma conta` })
+      return res.status(404).json({ msg: `This email does not correspond to any account!` })
   };
 
   const companyValid = await validatedCompany(email)
   if (!companyValid){
-    return res.status(405).json({ msg: `Empresa ainda nao validada por um Admin! Aguarde por validaçao` })
+    return res.status(405).json({ msg: `Enterprise's register not validated yet! Wait for the Admin's confirmation!` })
   }
 
   const query = `SELECT * FROM companies WHERE email = '${email}'`;
   connection.query(query, async function (err, result) {
     if (err) {
-        return res.status(500).send({msg: "Erro no Log in"});
+        return res.status(500).send({msg: "Login error."});
     }
     const company = result[0];
     if(pword === company.pword){
       const refreshToken = jwt.sign(company, process.env.REFRESH_TOKEN_SECRET)
-      return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken, company: company})
+      return res.status(201).json({ msg: `Logged in with sucess`, token: refreshToken, company: company})
     }
     const samePassword = await bcrypt.compare(pword, company.pword)
     if (!samePassword){
-        return res.status(401).json({ msg: `Password invalida!` })
+        return res.status(401).json({ msg: `Invalid password!` })
     }
     //const accessToken = generateAccessToken(user) 
     const refreshToken = jwt.sign(company, process.env.REFRESH_TOKEN_SECRET)
     //token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-    return res.status(201).json({ msg: `Logado com sucesso`, token: refreshToken, company: company})
+    return res.status(201).json({ msg: `Logged in with sucess`, token: refreshToken, company: company})
 })
 }
 
@@ -361,7 +361,7 @@ exports.portfolioGet = async (req, res) => {
   const query = `SELECT * FROM portfolios WHERE email = '${email}'`;
   connection.query(query, async function (err, result) {
     if (err) {
-        return res.status(500).send({msg: "Erro ao tentar obter o portfolio"});
+        return res.status(500).send({msg: "Could not get the Portfolio."});
     }
     const portfolio = result[0];
     return res.status(201).json({portfolio: portfolio})
@@ -416,12 +416,12 @@ exports.addFriends = async (req, res) => {
   friend = req.body.friend;
   userExists = await existingUser(friend)
   if (!userExists){
-    return res.status(404).json({ msg: `Utilizador não existe` })
+    return res.status(404).json({ msg: `This user does not exist!` })
   }
   
   isFriend = await alredyFriends(friend, myNick)
   if(isFriend){
-    return res.status(404).json({ msg: `Utilizador já é seu amigo` })
+    return res.status(404).json({ msg: `This user is already your friend!` })
   }
 
   try {
@@ -669,19 +669,19 @@ exports.removeFriends = async (req, res) => {
   friend = req.body.friend;
   userExists = await existingUser(friend)
   if (!userExists){
-    return res.status(404).json({ msg: `Utilizador não existe` })
+    return res.status(404).json({ msg: `This user does not exist!` })
   }
   
   isFriend = await alredyFriends(friend, myNick)
   if(!isFriend){
-    return res.status(404).json({ msg: `Utilizador não é seu amigo` })
+    return res.status(404).json({ msg: `This user is not your friend!` })
   }
 
   try {
     await removeFriend(friend, myNick); 
 
     return res.status(201).send({
-      msg: `${friend} request sent successfully!`
+      msg: `${friend} removed successfully!`
     });
   } catch (error) {
     console.log(error);
