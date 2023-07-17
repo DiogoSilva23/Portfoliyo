@@ -4,7 +4,7 @@
 
 .friendList {
     position: fixed;
-    top: 60px;
+    top: 50px;
     right: 0;
     width: 200px;
     height: 100%;
@@ -19,7 +19,7 @@
 }
 
 .friendList h2 {
-    width: 100%;
+    width: 95%;
     color: white;
     text-align: center;
     font-size: 15px;

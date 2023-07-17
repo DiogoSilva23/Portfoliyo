@@ -730,7 +730,6 @@ exports.sendOffer = async (req, res) => {
 }
 
 exports.getOffers = async (req, res) => {
-  console.log(req.body.id, "TESTEEEEE")
   connection.query(`SELECT * FROM offers WHERE idUser = "${req.body.id}"`, function (err, result, fields) {
       if (err) throw err;
       res.json(result);

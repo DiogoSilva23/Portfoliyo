@@ -223,6 +223,8 @@ function logOnEnterprise(){
 function logOnAdmin(){
     window.location.href = "indexAdmin.html";
     document.getElementById("loginPopUp").classList.remove('activePopUp');
+    var logoutButton = document.getElementById("logoutPopUpButton");
+    logoutButton.classList.remove("logoutButton");
     moveHeaderTextClose()
 
 }
