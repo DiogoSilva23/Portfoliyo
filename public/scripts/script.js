@@ -70,7 +70,7 @@ async function insertVisibleUsers(){
 }
 
 async function getVisibleUsers() {
-  const reply = await makeRequest("https://localhost:8000/api/visibleUsers", {
+  const reply = await makeRequest(url+"/api/visibleUsers", {
     method: "GET",
     body: JSON.stringify(),
     headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -140,7 +140,7 @@ async function getOffers(id) {
   const userId = {
     id: id
   }
-  const reply = await makeRequest("https://localhost:8000/api/user/offers", {
+  const reply = await makeRequest(url+"/api/user/offers", {
     method: "POST",
     body: JSON.stringify(userId),
     headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -151,10 +151,10 @@ return offers;
 
 function backHome() {
   // Define o URL da página de destino
-  var url = "https://localhost:8000/index.html";
+  var url2 = url+"/index.html";
 
   // Redireciona o usuário para a página de destino
-  window.location.href = url;
+  window.location.href = url2;
 }
 
 function addToCompare(id) {
@@ -175,6 +175,7 @@ async function loadCompare(){
     const id = arrayOffers[i];
     var offer = await getOffer(id)
     offer = offer[0]
+    var data = offer.offerValidDate.split("T")[0];
     console.log(offer);
     document.getElementById("compareContainer").innerHTML += `
     <div class="offer">
@@ -183,7 +184,6 @@ async function loadCompare(){
     </div>
 
     <div class="offerDetails">
-        <h3 class="offerHeading">Job Offer</h3>
         <p class="offerDescription">${offer.offerDescription}</p>
 
         <div class="offerInfo">
@@ -199,7 +199,7 @@ async function loadCompare(){
 
             <div class="infoItem">
                 <span class="infoLabel">Valid Until:</span>
-                <span class="infoValue">${offer.offerValidDate}</span>
+                <span class="infoValue">${data}</span>
 
             </div>
 
@@ -219,7 +219,7 @@ async function getOffer(id){
   const offerId = {
     id: id
   }
-  const reply = await makeRequest("https://localhost:8000/api/user/offer", {
+  const reply = await makeRequest(url+"/api/user/offer", {
     method: "POST",
     body: JSON.stringify(offerId),
     headers: { "Content-type": "application/json; charset=UTF-8" },

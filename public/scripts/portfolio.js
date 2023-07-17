@@ -1,4 +1,4 @@
-
+//get the ip route of server from url
 
 var editSidebar = false;
 var editAboutme = false;
@@ -16,7 +16,8 @@ const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
 
 async function getPortfolio(user){
-    const reply = await makeRequest("https://localhost:8000/api/user/getPortfolio", {
+
+    const reply = await makeRequest(url+"/api/user/getPortfolio", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -29,7 +30,7 @@ async function getPortfolio(user){
 }
 // get experiences from user
 async function getExperiences(user){
-    const reply = await makeRequest("https://localhost:8000/api/user/getExperiences", {
+    const reply = await makeRequest(url+"/api/user/getExperiences", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -42,7 +43,7 @@ async function getExperiences(user){
 }
 // get educations from user
 async function getEducations(user){
-    const reply = await makeRequest("https://localhost:8000/api/user/getEducations", {
+    const reply = await makeRequest(url+"/api/user/getEducations", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -67,7 +68,7 @@ async function enterPortfolio(){
 // test enterportfolio from different user by redirecting to the url with the id of the user
 
 async function getUserforprofile(userId){
-    const reply = await makeRequest("https://localhost:8000/api/user/getUser/"+userId, {
+    const reply = await makeRequest(url+"/api/user/getUser/"+userId, {
         method: "GET",
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
@@ -235,7 +236,7 @@ async function deleteExperience(id){
     }
     //delete from database
     const user = JSON.parse(readCookie('user'))
-    const reply = makeRequest("https://localhost:8000/api/user/deleteExperience", {
+    const reply = makeRequest(url+"/api/user/deleteExperience", {
         method: "POST",
         body: JSON.stringify({id: id, userId: user.id}),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -261,7 +262,7 @@ async function deleteEducation(id){
     }
     //delete from database
     const user = JSON.parse(readCookie('user'))
-    const reply = makeRequest("https://localhost:8000/api/user/deleteEducation", {
+    const reply = makeRequest(url+"/api/user/deleteEducation", {
         method: "POST",
         body: JSON.stringify({id: id, userId: user.id}),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -345,7 +346,7 @@ async function enviarProposta(){
         nameEnterprise: empresa.companieName
     }
 
-    const reply = makeRequest("https://localhost:8000/api/enterprises/sendOffer", {
+    const reply = makeRequest(url+"/api/enterprises/sendOffer", {
         method: "POST",
         body: JSON.stringify(proposta),
         headers: { "Content-type": "application/json; charset=UTF-8" },

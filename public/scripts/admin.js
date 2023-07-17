@@ -1,7 +1,7 @@
 
 
 async function getUsers() {
-    const reply = await makeRequest("https://localhost:8000/api/users", {
+    const reply = await makeRequest(url+"/api/users", {
         method: "GET",
         body: JSON.stringify(),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -28,7 +28,7 @@ async function insertUsers(){
 }
 
 async function getEnterprises() {
-    const reply = await makeRequest("https://localhost:8000/api/enterprises/Confirmed", {
+    const reply = await makeRequest(url+"/api/enterprises/Confirmed", {
         method: "GET",
         body: JSON.stringify(),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -53,7 +53,7 @@ async function insertEnterprises(){
 }
 
 async function getEnterprisesConfirmations(){
-    const reply = await makeRequest("https://localhost:8000/api/enterprises/NotConfirmed", {
+    const reply = await makeRequest(url+"/api/enterprises/NotConfirmed", {
         method: "GET",
         body: JSON.stringify(),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -85,7 +85,7 @@ async function acceptEnterprise(id){
     const request = {
         id: id,
     }
-    const reply = await makeRequest("https://localhost:8000/api/enterprises/accept", {
+    const reply = await makeRequest(url+"/api/enterprises/accept", {
         method: "POST",
         body: JSON.stringify(request),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -97,7 +97,7 @@ async function rejectEnterprise(id){
     const request = {
         id: id,
     }
-    const reply = await makeRequest("https://localhost:8000/api/enterprises/reject", {
+    const reply = await makeRequest(url+"/api/enterprises/reject", {
         method: "POST",
         body: JSON.stringify(request),
         headers: { "Content-type": "application/json; charset=UTF-8" },

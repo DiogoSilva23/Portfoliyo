@@ -164,7 +164,7 @@ async function saveSideBar(id){
         userSidebarLocation : userSidebarLocation
     }
 
-    const reply = await makeRequest("https://localhost:8000/api/user/savePortfolioSidebar", {
+    const reply = await makeRequest(url+"/api/user/savePortfolioSidebar", {
     method: "POST",
     body: JSON.stringify(userSidebar),
     headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -243,7 +243,7 @@ async function saveExperience(){
         console.log(experienceInitialDate);
         console.log(experienceFinalDate);
 
-    const reply = makeRequest("https://localhost:8000/api/user/addExperience", {
+    const reply = makeRequest(url+"/api/user/addExperience", {
         method: "POST",
         body: JSON.stringify(experience),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -310,7 +310,7 @@ async function saveEducation(){
         media : media
     }
 
-    const reply = makeRequest("https://localhost:8000/api/user/addEducation", {
+    const reply = makeRequest(url+"/api/user/addEducation", {
         method: "POST",
         body: JSON.stringify(education),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -343,7 +343,7 @@ async function saveAboutMe(){
         description: userAboutMe.value
     }
 
-    const reply = await makeRequest("https://localhost:8000/api/user/savePortfolioAboutMe", {
+    const reply = await makeRequest(url+"/api/user/savePortfolioAboutMe", {
         method: "POST",
         body: JSON.stringify(userAboutMe),
         headers: { "Content-type": "application/json; charset=UTF-8" },

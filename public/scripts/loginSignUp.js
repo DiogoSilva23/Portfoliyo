@@ -47,7 +47,7 @@ async function registerUser() {
         visibleProfile: visibleProfile
     }
     
-    const reply = await makeRequest("https://localhost:8000/api/user/registerUser", {
+    const reply = await makeRequest(url+"/api/user/registerUser", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -72,7 +72,7 @@ async function loginUser() {
         email: email,
         pword: pword
     }
-    const reply = await makeRequest("https://localhost:8000/api/user/login", {
+    const reply = await makeRequest(url+"/api/user/login", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -151,7 +151,7 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
     const cookie = JSON.parse(readCookie('user'))
     const user = cookie
     if (typeof(cookie.nick) === "string"){
-        const reply = await makeRequest("https://localhost:8000/api/user/login", {
+        const reply = await makeRequest(url+"/api/user/login", {
             method: "POST",
             body: JSON.stringify(user),
             headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -168,7 +168,7 @@ async function checkSession() { //MUDAR ESTA FUNÇAO -> PASSAR A USAR A FUNÇAO 
             }
         }
     }else{
-        const reply = await makeRequest("https://localhost:8000/api/company/login", {
+        const reply = await makeRequest(url+"/api/company/login", {
             method: "POST",
             body: JSON.stringify(user),
             headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -329,7 +329,7 @@ async function registerCompany() {
         description: description,
     }
     
-    const reply = await makeRequest("https://localhost:8000/api/company/registerCompany", {
+    const reply = await makeRequest(url+"/api/company/registerCompany", {
         method: "POST",
         body: JSON.stringify(company),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -354,7 +354,7 @@ async function loginCompany() {
         email: email,
         pword: pword,
     }
-    const reply = await makeRequest("https://localhost:8000/api/company/login", {
+    const reply = await makeRequest(url+"/api/company/login", {
         method: "POST",
         body: JSON.stringify(company),
         headers: { "Content-type": "application/json; charset=UTF-8" },

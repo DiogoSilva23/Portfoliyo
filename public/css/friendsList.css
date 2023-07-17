@@ -227,3 +227,23 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.accept {
+    border: 1px solid rgba(255, 255, 255, .5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    border-radius: 20px;
+    background: #0077b6;
+    cursor: pointer;
+    margin-left: 5px;
+    width: 30px;
+}
+
+.reject {
+    border: 1px solid rgba(255, 255, 255, .5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    border-radius: 20px;
+    background: #0077b6;
+    cursor: pointer;
+    margin-left: 5px;
+    width: 30px;
+}

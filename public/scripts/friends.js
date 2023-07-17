@@ -19,7 +19,7 @@ async function addFriend(){
         friend: friend
     }
 
-    const reply = await makeRequest("https://localhost:8000/api/user/addFriend", {
+    const reply = await makeRequest(url+"/api/user/addFriend", {
         method: "POST",
         body: JSON.stringify(friends),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -42,7 +42,7 @@ async function listFriends(){
     const nick = {
         nick: myNick
     }
-    const reply = await makeRequest("https://localhost:8000/api/user/listFriends", {
+    const reply = await makeRequest(url+"/api/user/listFriends", {
         method: "POST",
         body: JSON.stringify(nick),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -61,7 +61,7 @@ async function listFriends(){
                 var tempNick = {
                     nick: friends[i].friend2_nick
                 }
-                var user = await makeRequest("https://localhost:8000/api/user/getUserbyNick", {
+                var user = await makeRequest(url+"/api/user/getUserbyNick", {
                     method: "POST", 
                     body: JSON.stringify(tempNick),
                     headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -80,7 +80,7 @@ async function listFriends(){
                 var tempNick = {
                     nick: friends[i].friend1_nick
                 }
-                var user = await makeRequest("https://localhost:8000/api/user/getUserbyNick", {
+                var user = await makeRequest(url+"/api/user/getUserbyNick", {
                     method: "POST", 
                     body: JSON.stringify(tempNick),
                     headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -119,7 +119,7 @@ async function acceptFriendRequest(friend){
         friend: friend
     }
 
-    const reply = await makeRequest("https://localhost:8000/api/user/acceptFriend", {
+    const reply = await makeRequest(url+"/api/user/acceptFriend", {
         method: "POST",
         body: JSON.stringify(request),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -137,7 +137,7 @@ async function rejectFriendRequest(friend){
         friend: friend
     }
 
-    const reply = await makeRequest("https://localhost:8000/api/user/rejectFriend", {
+    const reply = await makeRequest(url+"/api/user/rejectFriend", {
         method: "POST",
         body: JSON.stringify(request),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -165,7 +165,7 @@ async function removeFriend(){
         friend: friend
     }
 
-    const reply = await makeRequest("https://localhost:8000/api/user/removeFriend", {
+    const reply = await makeRequest(url+"/api/user/removeFriend", {
         method: "POST",
         body: JSON.stringify(friends),
         headers: { "Content-type": "application/json; charset=UTF-8" },

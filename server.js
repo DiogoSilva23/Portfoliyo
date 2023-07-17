@@ -32,6 +32,9 @@ const sslServer = {
 // Criar server para ter as conexões http e https na mesma port
 const server = httpolyglot.createServer(sslServer, app)
 
+const serverIp = 'https://localhost:8000';
+console.log(serverIp);
+
 // Verificar se o server está a correr
 server.listen(8000, () => console.log("O servidor está a correr na porta 8000."))
 
