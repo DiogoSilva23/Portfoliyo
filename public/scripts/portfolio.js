@@ -345,6 +345,12 @@ async function enviarProposta(){
         valid_util: document.getElementById("offerValidationDate").value,
         nameEnterprise: empresa.companieName
     }
+    console.log(url)
+    //cut the url string to get only up to ther 3rd / in the string
+    var url = url.substring(0, url.lastIndexOf("/"));
+
+
+
 
     const reply = makeRequest(url+"/api/enterprises/sendOffer", {
         method: "POST",

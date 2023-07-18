@@ -227,7 +227,26 @@ function logOnEnterprise(){
 
 //NAO FUNCIONA BEM
 function logOnAdmin(){
-    window.location.href = "indexAdmin.html";
+    var teste = "https://localhost:8000/portfolio.html"
+    var teste2 = window.location.href
+    //cut the size of teste2 to be the same as teste 
+    teste2 = teste2.substring(0, teste.length);
+    if(teste2 === teste){
+        document.getElementById("loginPopUpButton").style.display = "none";
+        document.getElementById("aboutUs").style.display = "none";
+        document.getElementById("FAQ").style.display = "none";
+        document.getElementById("contacts").style.display = "none";
+    }
+    else{
+        window.location.href = "../indexAdmin.html";
+    }
+
+    
+
+
+
+    
+    
     document.getElementById("loginPopUp").classList.remove('activePopUp');
     var logoutButton = document.getElementById("logoutPopUpButton");
     logoutButton.classList.remove("logoutButton");

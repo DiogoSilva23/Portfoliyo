@@ -141,14 +141,16 @@
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
     justify-content: center;
     align-items: center;
-    overflow-y: none;
+    overflow-y: auto;
     z-index: 5;
     display: none;
+    max-height: 830px;
 }
 
 .compareContainer .offer {
     margin-top: 30px;
     margin-bottom: 20px;
+    position: relative;
 }
 /*
 

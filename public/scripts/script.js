@@ -170,18 +170,41 @@ function addToCompare(id) {
 }
 
 async function loadCompare(){
-  document.getElementById("compareContainer").innerHTML = ""
+  document.getElementById("compareContainer").innerHTML = `    <span class="closeIcon">
+  <ion-icon name="close-outline" onclick="turnOffComparator(); removeComparedItems()"></ion-icon>
+</span>
+  `
+  let sortedArray = [];
   for (let i = 0; i < arrayOffers.length; i++) {
     const id = arrayOffers[i];
+    //get the offer from the id and push it to the sorted array and then sort it by monthly value´
     var offer = await getOffer(id)
     offer = offer[0]
+    sortedArray.push(offer)
+    
+  }
+  sortedArray.sort(function(a, b) {
+    return b.offerValue - a.offerValue;
+  });
+
+
+
+  for (let i = 0; i < sortedArray.length; i++) {
+    const offer = sortedArray[i];
     var data = offer.offerValidDate.split("T")[0];
-    console.log(offer);
+    var monthlyValue = (offer.offerValue/offer.offerDuration).toFixed(2)
+    var color = "initial";
+    if (i == 0) {
+      color = "gold"
+    }else if(i == 1){
+      color = "silver"
+    }else if(i == 2){
+      color = "#cd7f32"
+    }
+
     document.getElementById("compareContainer").innerHTML += `
-    <span class="closeIcon">
-      <ion-icon name="close-outline" onclick="turnOffComparator(); removeComparedItems()"></ion-icon>
-    </span>
-    <div class="offer">
+
+    <div class="offer" style="border: 4px solid ${color}">
     <div class="companyDetails">
         <h2 class="companyName">${offer.companieName}</h2>
     </div>
@@ -210,6 +233,11 @@ async function loadCompare(){
                 <span class="infoLabel">Area of Work:</span>
                 <span class="infoValue">${offer.workspace}</span>
             </div>
+
+            <div class="infoItem">
+            <span class="infoLabel">Monthly value:</span>
+            <span class="infoValue">${monthlyValue}</span>
+        </div>
         </div>
     </div>
 </div>
@@ -240,4 +268,8 @@ async function getOffer(id){
   return offer;
 
 
+}
+
+function removeComparedItems() {
+  arrayOffers = [];
 }
