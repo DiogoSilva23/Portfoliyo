@@ -251,7 +251,7 @@ exports.registerCompany = async (req, res) => {
       await createCompany(newCompany); // Call the newUser function to insert the user into the database
 
       return res.status(201).send({
-        msg: `${companyName} was created with success. Can logIn now`
+        msg: `${companyName} was created with success. Wait for the admin to approve your account.`
       });
     } catch (error) {
       console.log(error);

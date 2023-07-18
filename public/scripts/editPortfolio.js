@@ -268,19 +268,19 @@ function addEducationF() {
                 <div class="service-content-box">
                     <h4 class="h4 service-item-title"> 
                         <div class="birthdate">
-                            <label for="schoolName">schoolName</label>
+                            <label for="schoolName">School Name</label>
                             <input type="text" name="schoolName" id="schoolName" required>
                         </div> 
                         <div class="birthdate">
-                            <label for="CurseName">CurseName</label>
+                            <label for="CurseName">Course Name</label>
                             <input type="text" name="CurseName" id="CurseName" required>
                         </div>
                         <div>
-                            <label for="CurseType">CurseType</label>
+                            <label for="CurseType">Course Type</label>
                             <input type="text" name="CurseType" id="CurseType" required>
                         </div>
                         <div>
-                            <label for="media">media</label>
+                            <label for="media">Final grade</label>
                             <input type="text"  width="1000px" height="200px" name="media" id="media" required>
                         </div>
                     <button class="editBTN" style="display:inline;" onclick='saveEducation()'>Save</button>

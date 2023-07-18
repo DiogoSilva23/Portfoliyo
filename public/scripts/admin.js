@@ -19,7 +19,7 @@ async function insertUsers(){
         document.getElementById("userContainer").innerHTML += `
             <div class="user">
             <p><b>Username: </b>${user.nick}</p>
-            <p><b>Nome: </b>${user.userName}</p>
+            <p><b>Name: </b>${user.userName}</p>
             <p><b>Email: </b>${user.email}</p>
             <button class="viewProfileButton" onclick="window.location.href = '/portfolio.html?user=${user.id}'"><ion-icon name="person-circle" size="large"></ion-icon></button>
         </div>
@@ -44,7 +44,7 @@ async function insertEnterprises(){
         const enterprise = enterprises[i];
         document.getElementById("enterpriseContainer").innerHTML += `
         <div class="user" >
-        <p><b>Nome: </b>${enterprise.companieName}</p>
+        <p><b>Name: </b>${enterprise.companieName}</p>
         <p><b>Email: </b>${enterprise.email}</p>
         <p><b>Website URL: </b>${enterprise.siteUrl}</p>
     </div>
@@ -69,10 +69,10 @@ async function insertEnterprisesConfirmations(){
         const enterprise = enterprises[i];
         document.getElementById("enterpriseConfirmation").innerHTML += `
         <div class="enterpriseConfirm">
-        <p><b>Nome: </b>${enterprise.companieName}</p>
+        <p><b>Name: </b>${enterprise.companieName}</p>
         <p><b>Email: </b>${enterprise.email}</p>
         <p><b>Website URL: </b>${enterprise.siteUrl}</p>
-        <p><b>Descrição: </b>${enterprise.companieDescription}</p><br>
+        <p><b>Description: </b>${enterprise.companieDescription}</p><br>
         <p>Accept Confirmation?</p>
         <button onclick="acceptEnterprise('${enterprise.id}')" type="submit" class="confirmButton">Yes</button>
         <button onclick="rejectEnterprise('${enterprise.id}')" type="submit" class="confirmButton">No</button>

@@ -206,8 +206,7 @@ async function fillExperience(userInfoExperiences){
             <li class="service-item-exp" id="${experience.idExperiences}">
 
                 <div class="service-icon-box">
-                    <img src="${experience.logoUrl}
-                    <img src="${experience.logoUrl}" onerror="this.onerror=null; this.src='images/te.png'" alt="${experience.localName}" width="40">
+                <img src="${experience.logoUrl}" onerror="this.onerror=null; this.src='images/briefcase.png'" alt="${experience.localName}" width="40">
                 </div>
 
                 <div class="service-content-box">
@@ -282,7 +281,7 @@ async function fillEducation(userInfoEducation){
                     <h4 class="h4 service-item-title"> ${education.schoolName}<br> ${education.curseName} - ${education.curseType}</h4>
 
                     <p class="service-item-text">
-                     Media do curso: ${education.media}
+                     Final grade: ${education.media}
 
                     </p>
                 </div>

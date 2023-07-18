@@ -220,7 +220,6 @@ function templateExperience(){
 
 
     </ul>
-        <button class="editBTN" onclick="toggleEditMode("exp")">Edit</edit-button>
         <button class="editBTN" onclick="addExperienceF()">Add new</edit-button>  
     </section>
     </ul>`;
@@ -236,7 +235,6 @@ function templateEducation(){
     <ul class="service-list" id ="EducationsList">
 
     </ul>
-        <button class="editBTN" onclick="toggleEditMode("edu")">Edit</edit-button>  
         <button class="editBTN" onclick="addEducationF()">Add new</edit-button>  
     </section>
     </ul>`;
